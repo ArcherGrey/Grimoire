@@ -5,5 +5,10 @@ module.exports = {
   description: "Magic Book",
   markdown: {
     lineNumbers: true
+  },
+  themeConfig: {
+    sidebar: "auto",
+    nav: [{ text: "编年史", link: "/annals/" }]
+    // sidebar: ["/", "/page-a", ["/page-b", "Explicit link text"]]
   }
 };
