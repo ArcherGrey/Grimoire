@@ -12,6 +12,6 @@
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "deploy-gh": "bash deploy-gh"
+    "deploy-gh": "bash deploy-gh.sh"
   }
 }
