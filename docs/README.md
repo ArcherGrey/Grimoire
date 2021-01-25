@@ -2,6 +2,8 @@
 
 > Magic Book
 
+[[toc]]
+
 ## 目录结构
 
 ```auto
