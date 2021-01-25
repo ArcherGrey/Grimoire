@@ -15,11 +15,14 @@ cd docs/.vuepress/dist
 git init
 git config --global user.email "498792539@qq.com"
 git config --global user.name "ArcherGrey"
+git config --global remote.origin.url "https://github.com/ArcherGrey/Grimoire.git"
 git add -A
 git commit -m 'deploy'
 
 # 如果发布到 https://<USERNAME>.github.io
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
+
+echo $GITHUB_TOKEN
 
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
 git push -f https://$GITHUB_TOKEN@github.com/ArcherGrey/Grimoire.git master:gh-pages
