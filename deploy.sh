@@ -25,6 +25,6 @@ git commit -m 'deploy'
 echo $GITHUB_TOKEN
 
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
-git push -f https://$GITHUB_TOKEN@github.com/ArcherGrey/Grimoire.git master:gh-pages
+git push -f https://ArcherGrey:gr47725812@github.com/ArcherGrey/Grimoire.git master:gh-pages
 
 cd -
