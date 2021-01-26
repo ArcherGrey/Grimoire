@@ -1,3 +1,7 @@
+---
+sidebar: auto
+---
+
 # 编年史
 
 [[toc]]
