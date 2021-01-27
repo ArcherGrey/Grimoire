@@ -12,20 +12,25 @@ sidebar: auto
 
 RIS
 
-- x
-  - 前端功能实现
-  - 后端业务逻辑 （CURD）
-  - 环境配置批处理脚本
-  - bug 修复
-- y
-  - easy ui 控件性能
-  - 页面加载缓慢
-    - 同步请求阻塞
-    - jquery dom 操作耗时
-  - 现场问题
-    - 缺少环境分析问题解决
-  - kind editor
-    - 编辑文档异常问题
+- 前端功能实现 版本迭代
+  - JQuery + easyUI
+  - kind editor 仿 word 在线编辑库
+  - websocket 实时更新状态
+  - 加载缓慢 无模块化 逻辑混乱 迭代时间长
+- UI 更新
+  - bootstrap
+- 后端业务逻辑 （CURD）
+  - 操作服务器 接口
+  - MVC C#
+  - 服务器渲染 IIS
+- 环境配置批处理脚本
+  - 编写网络配置批处理脚本
+- bug 修复
+  - 现场问题 缺少环境分析问题解决
+  - 代码逻辑问题
+  - tfs
+- 编写流程测试用例
+  - selenium
 
 ## 云图
 
