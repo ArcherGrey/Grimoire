@@ -89,8 +89,9 @@ module.exports = {
             { title: "基础", children: ["position", "bfc", "box"] },
             {
               title: "布局",
-              children: ["flex", "holy_wing", "center", "rdad", "postcss_rem"]
-            }
+              children: ["flex", "holy_wing", "center", "rdad"]
+            },
+            { title: "工具", children: ["postcss_rem"] }
           ]
         }
       ],
@@ -179,5 +180,49 @@ module.exports = {
       /* 网络 */
     }
   },
-  plugins: ["@vuepress/back-to-top", "@vuepress/nprogress"]
+  plugins: [
+    "@vuepress/back-to-top",
+    "@vuepress/nprogress",
+    [
+      "demo-code",
+      {
+        /* Js libraries for the demo */
+        // jsLibs: [
+        //   // umd
+        //   "https://unpkg.com/tua-storage/dist/TuaStorage.umd.js"
+        // ],
+        /* Css libraries for the demo. */
+        // cssLibs: ["https://unpkg.com/animate.css@3.7.0/animate.min.css"],
+
+        /* The display text of unfold code button. */
+        showText: "show",
+        /* The display text of fold code button. */
+        hideText: "hide",
+
+        // styleStr: "text-decoration: underline;",
+
+        /* The height of the code when it is folded. */
+        minHeight: 200,
+
+        /* Display online edit buttons. */
+        onlineBtns: {
+          codepen: false,
+          jsfiddle: false,
+          codesandbox: false
+        }
+
+        /* It passes CodeSandbox options. */
+        // codesandbox: {
+        //   deps: { lodash: "latest" },
+        //   json: "",
+        //   query: "",
+        //   embed: ""
+        // },
+        /* The mark of the plugin, follows the tag after ::: */
+        // demoCodeMark: "demo-code"
+        /* It passes vuepress-plugin-code-copy's options, or false to disable it. */
+        // copyOptions: { ... },
+      }
+    ]
+  ]
 };
