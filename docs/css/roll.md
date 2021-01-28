@@ -20,8 +20,8 @@ export default {
       data(){
       return {
         timer:  setInterval(() => {
-        let content = document.getElementsByClassName("roll-content")[0];
-        let test = document.getElementsByClassName("roll-test")[0];
+        let content = window.document.getElementsByClassName("roll-content")[0];
+        let test = window.document.getElementsByClassName("roll-test")[0];
         if (content.scrollTop >= test.offsetHeight) {
           content.scrollTop = 0;
         } else {
@@ -37,8 +37,8 @@ export default {
       begin() {
         clearInterval(this.timer);
         this.timer = setInterval(() => {
-          let content = document.getElementsByClassName("roll-content")[0];
-          let test = document.getElementsByClassName("roll-test")[0];
+          let content = window.document.getElementsByClassName("roll-content")[0];
+          let test = window.document.getElementsByClassName("roll-test")[0];
           if (content.scrollTop >= test.offsetHeight) {
             content.scrollTop = 0;
           } else {
