@@ -34,16 +34,23 @@ export default {
         this.timer = setInterval(() => {
           let content = document.getElementsByClassName("roll-content")[0];
           let test = window.document.getElementsByClassName("roll-test")[0];
-          if (content.scrollTop >= test.offsetHeight) {
-            content.scrollTop = 0;
-          } else {
-            content.scrollTop++;
+          if(content){
+            if (content.scrollTop >= test.offsetHeight) {
+              content.scrollTop = 0;
+            } else {
+              content.scrollTop++;
+            }
           }
         }, 50);
       }
     },
     mounted(){
-      this.init();
+      this.$nextTick(()=>{
+        this.init();
+      })
+    },
+    beforeDestroy(){
+      clearInterval(this.timer);
     }
 }
 </script>
