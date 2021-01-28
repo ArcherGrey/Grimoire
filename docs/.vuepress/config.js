@@ -4,10 +4,9 @@ module.exports = {
   title: "Grimoire", // 标题
   description: "Magic Book",
   markdown: {
-    lineNumbers: true,
+    lineNumbers: true
   },
   themeConfig: {
-    // sidebar: "auto",
     nav: [
       { text: "编年史", link: "/annals/" },
       {
@@ -16,10 +15,11 @@ module.exports = {
           { text: "JavaScript", link: "/js/" },
           { text: "Css", link: "/css/" },
           { text: "框架", items: [{ text: "Vue", link: "/vue/" }] },
-        ],
+          { text: "工程化", link: "/engineering/" }
+        ]
       },
       { text: "网络", link: "/network/" },
-      { text: "算法", items: [{ text: "leetcode", link: "/leetcode/" }] },
+      { text: "算法", items: [{ text: "leetcode", link: "/leetcode/" }] }
     ],
     sidebarDepth: 3,
     sidebar: {
@@ -43,8 +43,8 @@ module.exports = {
                 "this",
                 "hoisting",
                 "promise",
-                "declare",
-              ],
+                "declare"
+              ]
             },
             {
               title: "应用",
@@ -54,12 +54,11 @@ module.exports = {
                 "copy",
                 "typeof",
                 "debounce",
-                "observer",
-              ],
-            },
-          ],
-          // children: ["reactivity"]
-        },
+                "observer"
+              ]
+            }
+          ]
+        }
       ],
 
       "/css/": [
@@ -70,11 +69,34 @@ module.exports = {
             { title: "基础", children: ["position", "bfc", "box"] },
             {
               title: "布局",
-              children: ["flex", "holy_wing", "center", "rdad", "postcss_rem"],
+              children: ["flex", "holy_wing", "center", "rdad", "postcss_rem"]
+            }
+          ]
+        }
+      ],
+
+      "/engineering/": [
+        {
+          title: "工程化",
+          collapsable: false,
+          children: [
+            {
+              title: "基础/原理",
+              children: ["module", "write_module", "minipack"]
             },
-          ],
-          // children: ["reactivity"]
-        },
+            { title: "应用", children: ["automodule", "download"] },
+            {
+              title: "工具",
+              children: [
+                "webpack",
+                "yarnBook",
+                "npx",
+                "semantic_release",
+                "package_axios"
+              ]
+            }
+          ]
+        }
       ],
 
       /* 框架 */
@@ -82,9 +104,8 @@ module.exports = {
         {
           title: "Vue",
           collapsable: false,
-          children: [{ title: "基础", children: ["reactivity"] }],
-          // children: ["reactivity"]
-        },
+          children: [{ title: "基础", children: ["reactivity"] }]
+        }
       ],
       /* 框架 */
 
@@ -95,8 +116,8 @@ module.exports = {
         {
           // title: "sua",
           collapsable: false,
-          children: ["", "1", "2", "3", "4"],
-        },
+          children: ["", "1", "2", "3", "4"]
+        }
       ],
       /* 算法 */
 
@@ -105,11 +126,18 @@ module.exports = {
         {
           title: "网络",
           collapsable: false,
-          children: ["http", "socket"],
-        },
-      ],
+          children: [
+            "http",
+            "socket",
+            "get_post",
+            "cookie",
+            "storage",
+            "crossdomain"
+          ]
+        }
+      ]
       /* 网络 */
-    },
+    }
   },
-  plugins: ["@vuepress/back-to-top", "@vuepress/nprogress"],
+  plugins: ["@vuepress/back-to-top", "@vuepress/nprogress"]
 };
