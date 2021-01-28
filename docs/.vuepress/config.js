@@ -9,13 +9,15 @@ module.exports = {
   themeConfig: {
     nav: [
       { text: "编年史", link: "/annals/" },
+      { text: "代码规范", link: "/lint/" },
+      { text: "Git", link: "/git/" },
       {
         text: "前端",
         items: [
           { text: "JavaScript", link: "/js/" },
           { text: "Css", link: "/css/" },
-          { text: "框架", items: [{ text: "Vue", link: "/vue/" }] },
-          { text: "工程化", link: "/engineering/" }
+          { text: "工程化", link: "/engineering/" },
+          { text: "框架", items: [{ text: "Vue", link: "/vue/" }] }
         ]
       },
       { text: "网络", link: "/network/" },
@@ -23,12 +25,30 @@ module.exports = {
     ],
     sidebarDepth: 3,
     sidebar: {
+      /* 代码规范 */
+      "/lint/": [
+        {
+          collapsable: false,
+          children: ["", "css", "js", "js_colon"]
+        }
+      ],
+      /* 代码规范 */
+
+      /* git */
+      "/git/": [
+        {
+          collapsable: false,
+          children: ["", "githook", "ssh", "commitLint"]
+        }
+      ],
+      /* git */
+
       /* 前端 */
       "/js/": [
         {
-          title: "JavaScript",
           collapsable: false,
           children: [
+            "",
             {
               title: "基础",
               children: [
@@ -63,9 +83,9 @@ module.exports = {
 
       "/css/": [
         {
-          title: "Css",
           collapsable: false,
           children: [
+            "",
             { title: "基础", children: ["position", "bfc", "box"] },
             {
               title: "布局",
@@ -77,9 +97,9 @@ module.exports = {
 
       "/engineering/": [
         {
-          title: "工程化",
           collapsable: false,
           children: [
+            "",
             {
               title: "基础/原理",
               children: ["module", "write_module", "minipack"]
@@ -92,7 +112,10 @@ module.exports = {
                 "yarnBook",
                 "npx",
                 "semantic_release",
-                "package_axios"
+                "package_axios",
+                "html2canvas",
+                "anywhere",
+                "nrm"
               ]
             }
           ]
@@ -102,9 +125,27 @@ module.exports = {
       /* 框架 */
       "/vue/": [
         {
-          title: "Vue",
           collapsable: false,
-          children: [{ title: "基础", children: ["reactivity"] }]
+          children: [
+            "",
+            {
+              title: "基础/原理",
+              children: [
+                "reactivity",
+                "life",
+                "vdom",
+                "functional",
+                "vhook",
+                "filter",
+                "slot",
+                "componentCom"
+              ]
+            },
+            {
+              title: "应用",
+              children: ["devtools", "performance"]
+            }
+          ]
         }
       ],
       /* 框架 */
@@ -114,7 +155,6 @@ module.exports = {
       /* 算法 */
       "/leetcode/": [
         {
-          // title: "sua",
           collapsable: false,
           children: ["", "1", "2", "3", "4"]
         }
