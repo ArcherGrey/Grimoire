@@ -104,3 +104,13 @@ git remote add origin git@github.com:ArcherGrey/UnlimitedDocsWork.git
 ```bash
 git branch --set-upstream-to=origin/<branch> master
 ```
+
+## 资源列表
+
+- [国内镜像](https://github.com/waylau/git-for-win)
+- [Git 的奇技淫巧](https://github.com/521xueweihan/git-tips)
+- [图解 git](https://marklodato.github.io/visual-git-guide/index-zh-cn.html)
+- [git 在线可视化练习](https://learngitbranching.js.org/)
+- github
+  - shields.io ：说明文档中各种小图标 [网址](https://shields.io/)
+  - [github emoji](https://github.com/caiyongji/emoji-list)

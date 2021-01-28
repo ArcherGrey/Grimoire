@@ -70,7 +70,18 @@ img {
 }
 ```
 
-## 工具
+## 资源列表
 
 - 响应式
   - postcss_rem 打包将 `px` 转换 `rem`
+- 切图工具
+  - [pxcook](https://www.fancynode.com.cn/pxcook)
+  - phototshop
+  - pageruler chrome 插件 可以得到页面元素尺寸
+  - [在线生成雪碧图](https://www.toptal.com/developers/css/sprite-generator)
+- 网站
+  - [codepen-前端各种特效，在线实时渲染](https://codepen.io/)
+- 图标
+  - [阿里巴巴矢量图标库](https://www.iconfont.cn/)
+- css
+  - [css 常用图形绘制](https://www.w3cplus.com/css/css-simple-shapes-cheat-sheet)
