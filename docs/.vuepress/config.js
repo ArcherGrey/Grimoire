@@ -4,7 +4,7 @@ module.exports = {
   title: "Grimoire", // 标题
   description: "Magic Book",
   markdown: {
-    lineNumbers: true
+    lineNumbers: true,
   },
   themeConfig: {
     nav: [
@@ -17,18 +17,20 @@ module.exports = {
           { text: "JavaScript", link: "/js/" },
           { text: "Css", link: "/css/" },
           { text: "工程化", link: "/engineering/" },
-          { text: "框架", items: [{ text: "Vue", link: "/vue/" }] }
-        ]
+          { text: "框架", items: [{ text: "Vue", link: "/vue/" }] },
+        ],
       },
       { text: "网络", link: "/network/" },
       {
         text: "算法",
         items: [
           { text: "leetcode", link: "/leetcode/" },
+          { text: "查找", link: "/find/" },
+          { text: "排序", link: "/sort/" },
           { text: "图", link: "/graph/" },
-          { text: "排序", link: "/sort/" }
-        ]
-      }
+          { text: "树", link: "/tree/" },
+        ],
+      },
     ],
     sidebarDepth: 3,
     sidebar: {
@@ -36,8 +38,8 @@ module.exports = {
       "/lint/": [
         {
           collapsable: false,
-          children: ["", "css", "js", "js_colon"]
-        }
+          children: ["", "css", "js", "js_colon"],
+        },
       ],
       /* 代码规范 */
 
@@ -45,8 +47,8 @@ module.exports = {
       "/git/": [
         {
           collapsable: false,
-          children: ["", "githook", "ssh", "commitLint"]
-        }
+          children: ["", "githook", "ssh", "commitLint"],
+        },
       ],
       /* git */
 
@@ -70,8 +72,8 @@ module.exports = {
                 "this",
                 "hoisting",
                 "promise",
-                "declare"
-              ]
+                "declare",
+              ],
             },
             {
               title: "应用",
@@ -81,11 +83,11 @@ module.exports = {
                 "copy",
                 "typeof",
                 "debounce",
-                "observer"
-              ]
-            }
-          ]
-        }
+                "observer",
+              ],
+            },
+          ],
+        },
       ],
 
       "/css/": [
@@ -96,15 +98,15 @@ module.exports = {
             { title: "基础", children: ["position", "bfc", "box"] },
             {
               title: "布局",
-              children: ["flex", "holy_wing", "center", "rdad"]
+              children: ["flex", "holy_wing", "center", "rdad"],
             },
             { title: "工具", children: ["postcss_rem"] },
             {
               title: "应用",
-              children: ["closebutton", "resizediv", "roll", "triangle"]
-            }
-          ]
-        }
+              children: ["closebutton", "resizediv", "roll", "triangle"],
+            },
+          ],
+        },
       ],
 
       "/engineering/": [
@@ -114,7 +116,7 @@ module.exports = {
             "",
             {
               title: "基础/原理",
-              children: ["module", "write_module", "minipack"]
+              children: ["module", "write_module", "minipack"],
             },
             { title: "应用", children: ["automodule", "download"] },
             {
@@ -127,11 +129,11 @@ module.exports = {
                 "package_axios",
                 "html2canvas",
                 "anywhere",
-                "nrm"
-              ]
-            }
-          ]
-        }
+                "nrm",
+              ],
+            },
+          ],
+        },
       ],
 
       /* 框架 */
@@ -150,15 +152,15 @@ module.exports = {
                 "vhook",
                 "filter",
                 "slot",
-                "componentCom"
-              ]
+                "componentCom",
+              ],
             },
             {
               title: "应用",
-              children: ["devtools", "performance"]
-            }
-          ]
-        }
+              children: ["devtools", "performance"],
+            },
+          ],
+        },
       ],
       /* 框架 */
 
@@ -168,20 +170,32 @@ module.exports = {
       "/leetcode/": [
         {
           collapsable: false,
-          children: ["", "1", "2", "3", "4"]
-        }
+          children: ["", "1", "2", "3", "4"],
+        },
       ],
       "/graph/": [
         {
           collapsable: false,
-          children: ["", "euler"]
-        }
+          children: ["", "euler"],
+        },
       ],
       "/sort/": [
         {
           collapsable: false,
-          children: ["", "radix", "quick"]
-        }
+          children: ["", "radix", "quick"],
+        },
+      ],
+      "/find/": [
+        {
+          collapsable: false,
+          children: ["", "bs"],
+        },
+      ],
+      "/tree/": [
+        {
+          collapsable: false,
+          children: ["", "backtrack", "btQs", "btTravers"],
+        },
       ],
       /* 算法 */
 
@@ -196,12 +210,12 @@ module.exports = {
             "get_post",
             "cookie",
             "storage",
-            "crossdomain"
-          ]
-        }
-      ]
+            "crossdomain",
+          ],
+        },
+      ],
       /* 网络 */
-    }
+    },
   },
   plugins: [
     "@vuepress/back-to-top",
@@ -231,8 +245,8 @@ module.exports = {
         onlineBtns: {
           codepen: false,
           jsfiddle: false,
-          codesandbox: false
-        }
+          codesandbox: false,
+        },
 
         /* It passes CodeSandbox options. */
         // codesandbox: {
@@ -245,7 +259,7 @@ module.exports = {
         // demoCodeMark: "demo-code"
         /* It passes vuepress-plugin-code-copy's options, or false to disable it. */
         // copyOptions: { ... },
-      }
-    ]
-  ]
+      },
+    ],
+  ],
 };
