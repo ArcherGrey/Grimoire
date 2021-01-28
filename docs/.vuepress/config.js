@@ -21,7 +21,14 @@ module.exports = {
         ]
       },
       { text: "网络", link: "/network/" },
-      { text: "算法", items: [{ text: "leetcode", link: "/leetcode/" }] }
+      {
+        text: "算法",
+        items: [
+          { text: "leetcode", link: "/leetcode/" },
+          { text: "图", link: "/graph/" },
+          { text: "排序", link: "/sort/" }
+        ]
+      }
     ],
     sidebarDepth: 3,
     sidebar: {
@@ -162,6 +169,18 @@ module.exports = {
         {
           collapsable: false,
           children: ["", "1", "2", "3", "4"]
+        }
+      ],
+      "/graph/": [
+        {
+          collapsable: false,
+          children: ["", "euler"]
+        }
+      ],
+      "/sort/": [
+        {
+          collapsable: false,
+          children: ["", "radix", "quick"]
         }
       ],
       /* 算法 */
