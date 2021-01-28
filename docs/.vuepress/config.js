@@ -92,7 +92,10 @@ module.exports = {
               children: ["flex", "holy_wing", "center", "rdad"]
             },
             { title: "工具", children: ["postcss_rem"] },
-            { title: "应用", children: ["closebutton", "resizediv", "roll"] }
+            {
+              title: "应用",
+              children: ["closebutton", "resizediv", "roll", "triangle"]
+            }
           ]
         }
       ],
