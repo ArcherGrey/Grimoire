@@ -171,7 +171,19 @@ module.exports = {
       "/leetcode/": [
         {
           collapsable: false,
-          children: ["", "1", "2", "3", "4", "42"]
+          children: [
+            "",
+            "1",
+            "2",
+            "3",
+            "4",
+            "20",
+            "21",
+            "42",
+            "53",
+            "121",
+            "206"
+          ]
         }
       ],
       "/graph/": [
