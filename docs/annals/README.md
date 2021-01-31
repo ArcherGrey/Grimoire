@@ -34,44 +34,42 @@ RIS
 
 ## 云图
 
-2019 11 - 2020 2
-qxcm App
+### 物流气象预警系统
 
-- x
-  - 静态页面开发
-  - 接口对接测试功能
-  - 登录授权 获取手机号
-  - 二维码邀请
-  - 添加分享功能
-- y
-  - 快速上手 uni-app
-  - 车牌登记
+面向物流公司，根据气象信息对物流路线进行预警提示
+
+2019 11 - 2020 6
+
+- 小程序 uniapp 管理员和用户登陆
+
+  - 车辆管理
     - 车辆键盘 uni 市场组件
-  - 微信接口
-    - 文档 社区
+  - 人员管理
+  - 用户登陆、注册
+    - 二维码邀请 分享
+    - 登陆引导
+    - 手机号 地理位置获取
+  - 用户设置
+  - 添加分享功能
 
-qxcm pc
+- PC 端 vue + vuex + antd-vue 管理员使用
+  - 车辆管理
+  - 人员管理
+  - 用户登陆
+    - 扫码登录 扫码关注公众号 扫码打开小程序
+    - pc ip 地址定位
 
-- x
-  - 静态页面开发
-  - 接口对接测试功能
-  - echart 图表展示
-  - 扫码登录 扫码关注公众号 扫码打开小程序
-- y
-  - pc ip 地址定位
-  - 双端开发
+### 大数据可视化系统
 
----
+通过配置数据源和设置样式自动生成常用图表组建，拖拽布局快速搭建数据可视化页面
 
 2020 2 - 2020 6
-visual system
 
 - vue
 - vuex
 - axios
 - typescript
 - vue router
-- d3
 - echarts
 - echarts-gl
 - echarts-leaflet
@@ -80,13 +78,11 @@ visual system
 - html2canvas
 - moment
 
-- x
-
-  - echarst 图表包装组件
-  - 散点图 柱状图 折线图常用图表配置
-  - 3D 柱状图 饼图 词云图 矩形树图
-  - 每日天气 动态列表 自定义图表
-  - 多图联动
+* echarst 图表包装组件
+* 散点图 柱状图 折线图常用图表配置
+* 3D 柱状图 饼图 词云图 矩形树图
+* 每日天气 动态列表 自定义图表
+* 多图联动
 
 - 展示图表 编辑图表区域 dsContent
 
@@ -98,7 +94,6 @@ visual system
         - 请求数据然后 触发 setChartData 画出图表
 
 - 编辑图表
-
   - 数据设置
     - 静态数据： 自定义数据 JSON 编辑器
     - 动态数据
@@ -159,9 +154,9 @@ loadSelfPlugin(
   () => {
     axios
       .get("http://119.3.153.232:10070/FalconService/v001/rest/meta/all")
-      .then(res => {
+      .then((res) => {
         let data = {
-          test: JSON.stringify(res.data, null, 2)
+          test: JSON.stringify(res.data, null, 2),
         };
         reload(data);
       });
@@ -191,10 +186,9 @@ loadSelfPlugin(
   - 在设置联动的图表上绑定事件
   - 操作其他图表的时候触发绑定事件
 
----
+### k8s 管理检测系统
 
 2020 6 - 2020 8
-app manage system
 
 - x
   - 静态页面开发
@@ -204,11 +198,9 @@ app manage system
   - k8s 监控
   - 复杂数据结构 ts
 
----
+### k8s 集群监控组件
 
 2020 8 - 2020 11
-
-monitor system + data
 
 - x
   - 监控图表组件
@@ -225,9 +217,9 @@ monitor system + data
     - excel sheetjs canvas-datagrid
       - 数据量大 滑动条卡顿 滑动内存上升
 
-2020 11 - 2021 1
+### 气象水文数据
 
-hh data-fusion
+2020 11 - 2021 1
 
 - x
   - 站点、气象、卫星数据查询
