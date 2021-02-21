@@ -60,6 +60,54 @@ var maxDepth = function(root) {
 };
 ```
 
+## 二叉树最小深度
+
+```js
+// 递归
+var minDepth = function(root) {
+  if (!root) return 0;
+
+  if (!root.left && !root.right) return 1;
+
+  let dp = Infinity;
+
+  if (root.left) dp = Math.min(dp, minDepth(root.left));
+  if (root.right) dp = Math.min(dp, minDepth(root.right));
+  return dp + 1;
+};
+
+// 广度优先
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var minDepth = function(root) {
+  if (!root) return 0;
+  let q = [root];
+  let dp = 1;
+  while (q.length) {
+    let t = [];
+    while (q.length) {
+      let node = q.shift();
+      if (!node.left && !node.right) return dp;
+      if (node.left) t.push(node.left);
+      if (node.right) t.push(node.right);
+    }
+    q = t;
+    dp++;
+  }
+  return dp;
+};
+```
+
 ## 判断二叉树是否对称
 
 递归：
@@ -468,4 +516,53 @@ var deserialize = function(data) {
  * Your functions will be called as such:
  * deserialize(serialize(root));
  */
+```
+
+## 路径总和
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} sum
+ * @return {boolean}
+ */
+var hasPathSum = function(root, sum) {
+  if (!root) return false;
+  sum -= root.val;
+  if (!root.left && !root.right) return sum == 0;
+  return hasPathSum(root.left, sum) || hasPathSum(root.right, sum);
+};
+```
+
+## 翻转二叉树
+
+```js
+// 递归
+var invertTree = function(root) {
+  if (!root) return root;
+  [root.left, root.right] = [root.right, root.left];
+  invertTree(root.left);
+  invertTree(root.right);
+  return root;
+};
+
+// 迭代
+var invertTree = function(root) {
+  if (!root) return root;
+  let s = [root];
+  while (s.length) {
+    const node = s.pop();
+    [node.left, node.right] = [node.right, node.left];
+    if (node.right) s.push(node.right);
+    if (node.left) s.push(node.left);
+  }
+  return root;
+};
 ```
