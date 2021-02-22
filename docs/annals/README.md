@@ -154,9 +154,9 @@ loadSelfPlugin(
   () => {
     axios
       .get("http://119.3.153.232:10070/FalconService/v001/rest/meta/all")
-      .then((res) => {
+      .then(res => {
         let data = {
-          test: JSON.stringify(res.data, null, 2),
+          test: JSON.stringify(res.data, null, 2)
         };
         reload(data);
       });
@@ -202,20 +202,28 @@ loadSelfPlugin(
 
 2020 8 - 2020 11
 
-- x
-  - 监控图表组件
-    - grafana
-  - 业务熟悉
-  - 静态页面
-  - 接口对接
-  - 文件预览
-- y
-  - 监控组件
-  - 文件预览
-    - pdf vue-pdf
-    - csv table
-    - excel sheetjs canvas-datagrid
-      - 数据量大 滑动条卡顿 滑动内存上升
+- 监控图表组件
+  - 私有 npm 库
+  - 组件库发布更新
+  - 基于 grafana 样式
+  - 封装 echarts 折线图 仪表图
+    - 默认配置
+    - 主题配置
+    - 自定义查询
+    - 单位转换
+    - 渲染周期配置
+    - resize 配置
+      ...
+  - 工具栏和图表联动
+    - 时间范围选择
+    - 刷新
+  - 卡片图
+  - 文档
+- 文件预览
+  - pdf vue-pdf
+  - csv table
+  - excel sheetjs canvas-datagrid
+    - 数据量大 滑动条卡顿 滑动内存上升
 
 ### 气象水文数据
 
