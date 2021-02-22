@@ -85,3 +85,4 @@ img {
   - [阿里巴巴矢量图标库](https://www.iconfont.cn/)
 - css
   - [css 常用图形绘制](https://www.w3cplus.com/css/css-simple-shapes-cheat-sheet)
+  - [css 规范](https://www.w3.org/Style/CSS/Overview.en.html#translations)

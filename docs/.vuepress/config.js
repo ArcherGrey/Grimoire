@@ -96,7 +96,7 @@ module.exports = {
           collapsable: false,
           children: [
             "",
-            { title: "基础", children: ["position", "bfc", "box"] },
+            { title: "基础", children: ["position", "bfc", "box", "word"] },
             {
               title: "布局",
               children: ["flex", "holy_wing", "center", "rdad"]
