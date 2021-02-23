@@ -54,7 +54,7 @@ var module = {
   x: 81,
   getX: function() {
     return this.x;
-  },
+  }
 };
 
 module.getX(); // 返回 81
@@ -102,4 +102,80 @@ LateBloomer.prototype.declare = function() {
 
 var flower = new LateBloomer();
 flower.bloom(); // 一秒钟后, 调用'declare'方法
+```
+
+## 代码实现
+
+```js
+// bind
+if (!Function.prototype.bind) {
+  Function.prototype.bind = function(context) {
+    if (typeof this !== "function") {
+      throw new TypeError(
+        "Function.prototype.bind - what is trying to be bound is not callable"
+      );
+    }
+
+    // 第一个参数是 context 获取第二个及以后的参数
+    var args = Array.prototype.slice.call(arguments, 1),
+      self = this,
+      fNOP = function() {},
+      fBound = function() {
+        // this instanceof fBound === true时,说明被当做构造函数调用
+        return self.apply(
+          this instanceof fBound ? this : context,
+          // 绑定完成后还可以继续补充参数
+          args.concat(Array.prototype.slice.call(arguments))
+        );
+      };
+
+    // 通过添加中间函数 fNOP 利用原型链继承
+    // 使得修改 fBound.prototype 不会影响绑定函数原型
+    fNOP.prototype = this.prototype;
+    fBound.prototype = new fNOP();
+
+    return fBound;
+  };
+}
+
+// call
+Function.prototype.call = function(ctx) {
+  // 非严格模式下
+  // 如果第一个参数为null或者undefined，则指向全局对象
+  // ---
+  // 严格模式下
+  // 如果是null则this为null，如果是undefined则this为undefined
+  let context = ctx || window;
+  context.fn = this; // 待执行函数
+
+  // 参数是类数组对象没有slice方法
+  // 需要先转换成数组
+
+  let args = [];
+  for (let i = 1; i < arguments.length; ++i) {
+    args.push(arguments[i]);
+  }
+
+  // es6
+  // let args = [...arguments].slice(1);
+  context.fn(...args);
+  delete context.fn;
+};
+
+// apply
+
+Function.prototype.apply = function(ctx) {
+  // 非严格模式下
+  // 如果第一个参数为null或者undefined，则指向全局对象
+  // ---
+  // 严格模式下
+  // 如果是null则this为null，如果是undefined则this为undefined
+  let context = ctx || window;
+  context.fn = this; // 待执行函数
+
+  let args = [...arguments][1];
+  if (args) return context.fn(...args);
+  else return context.fn();
+  delete context.fn;
+};
 ```

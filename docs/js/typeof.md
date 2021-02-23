@@ -49,6 +49,25 @@ function instance_of(L, R) {    //L 表示左表达式，R 表示右表达式
 
 ![关系图](/js_typeof_1.jpg)
 
+代码实现：
+
+```js
+// 思路：右边变量的原型存在于左边变量的原型链上
+function instanceOf(left, right) {
+  let leftValue = left.__proto__;
+  let rightValue = right.prototype;
+  while (true) {
+    if (leftValue === null) {
+      return false;
+    }
+    if (leftValue === rightValue) {
+      return true;
+    }
+    leftValue = leftValue.__proto__;
+  }
+}
+```
+
 ## Object.prototype.toString
 
 所有的数据类型都可以用 `Object.prototype.toString` 来检测,而且非常的精准。
