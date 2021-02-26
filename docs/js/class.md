@@ -5,7 +5,9 @@
 ```js
 function SuperType() {
   this.property = true;
+  this.obj = [1, 2, 3];
 }
+
 SuperType.prototype.showValue = function() {
   console.log(this.property);
 };
@@ -17,11 +19,22 @@ SubType.prototype = new SuperType();
 SubType.prototype.showSub = function() {
   console.log(this.sub);
 };
+
+var sub1 = new SubType(1);
+var sub2 = new SubType(2);
+
+// 引用类型被所有实例共享
+console.log(sub1.obj); // [1,2,3]
+console.log(sub2.obj); // [1,2,3]
+sub1.obj.pop(); // 修改一个实例的引用属性，其他所有的实例都被修改
+console.log(sub1.obj); // [1,2]
+console.log(sub2.obj); // [1,2]
 ```
 
 问题：
 
 - 引用类型属性被所有实例共享
+  - 因为继承的时候用父类实例初始化子类原型对象也就相当于 `subType.prototype.obj=[1,2,3]` 导致子类实例都会共用一份引用类型属性
 - 创建子类的实例时，不能像超类构造函数中传递参数
 
 ## 构造函数继承
@@ -33,7 +46,10 @@ SubType.prototype.showSub = function() {
 ```js
 function Father(val) {
   this.colors = ["red", "blue", "green"];
-  this.colors.push(val);
+  if (val) this.colors.push(val);
+  this.show1 = () => {
+    console.log(this.colors);
+  };
 }
 Father.prototype.count = 1;
 Father.prototype.show = function() {
@@ -52,6 +68,9 @@ console.log(instance2.colors); //"red,blue,green" 可见引用类型值是独立
 // 无法访问父类的原型对象上的属性和方法
 console.log(instance2.count); // undefined
 console.log(instance2.show); // undefined
+
+// 只有在构造函数内定义的方法可以继承，每次创建实例都会创建一次方法
+console.log(instance2.show1()); // "red,blue,green"
 ```
 
 解决了原型链的两大问题:
@@ -87,6 +106,7 @@ function Son(name, age) {
   this.age = age;
 }
 Son.prototype = new Father(); //继承父类方法,第二次调用Father()
+Son.prototype.constructor = Son;
 Son.prototype.sayAge = function() {
   alert(this.age);
 };
@@ -204,8 +224,8 @@ var Person = /*#__PURE__*/ (function() {
       key: "sayName",
       value: function sayName() {
         console.log(this.name);
-      },
-    },
+      }
+    }
   ]);
 
   return Person;
@@ -231,8 +251,8 @@ var Student = /*#__PURE__*/ (function(_Person) {
       key: "showScore",
       value: function showScore() {
         alert(this.score);
-      },
-    },
+      }
+    }
   ]);
 
   return Student;
@@ -257,8 +277,8 @@ function _inherits(subClass, superClass) {
       value: subClass,
       enumerable: false,
       writable: true,
-      configurable: true,
-    },
+      configurable: true
+    }
   });
 
   // 设置子类的 __proto__ 属性指向父类
