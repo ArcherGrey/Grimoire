@@ -23,6 +23,10 @@
 151.101.113.194 github.global.ssl.fastly.net
 ```
 
+如果是 `mac`:
+
+- `sudo vim /ect/hosts` 打开对应文件进行相同到编辑
+
 ### github 本地文件映射仓库
 
 1. 初始化 `git init`
