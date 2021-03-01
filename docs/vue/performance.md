@@ -87,6 +87,10 @@ Vue.use(Select);
 - `vue-virtual-scroll-list`
 - `vue-virtual-scroller`
 
+### 函数式组件
+
+无状态组件可以使用函数式组件，减少 `js` 执行时间
+
 ## vue-router
 
 ### 路由懒加载
