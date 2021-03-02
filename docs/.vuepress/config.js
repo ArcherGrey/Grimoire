@@ -16,6 +16,7 @@ module.exports = {
         items: [
           { text: "JavaScript", link: "/js/" },
           { text: "Css", link: "/css/" },
+          { text: "浏览器", link: "/explorer/" },
           { text: "工程化", link: "/engineering/" },
           { text: "框架", items: [{ text: "Vue", link: "/vue/" }] }
         ]
@@ -73,7 +74,8 @@ module.exports = {
                 "this",
                 "hoisting",
                 "promise",
-                "declare"
+                "declare",
+                "event"
               ]
             },
             {
@@ -111,6 +113,13 @@ module.exports = {
               children: ["closebutton", "resizediv", "roll", "triangle"]
             }
           ]
+        }
+      ],
+
+      "/explorer/": [
+        {
+          collapsable: false,
+          children: ["", "render"]
         }
       ],
 
@@ -195,6 +204,7 @@ module.exports = {
             "53",
             "66",
             "70",
+            "85",
             "88",
             "98",
             "100",
@@ -215,6 +225,7 @@ module.exports = {
             "139",
             "140",
             "141",
+            "147",
             "169",
             "172",
             "189",
@@ -251,6 +262,7 @@ module.exports = {
             "888",
             "889",
             "896",
+            "912",
             "978",
             "1004",
             "1052",
@@ -269,7 +281,7 @@ module.exports = {
       "/sort/": [
         {
           collapsable: false,
-          children: ["", "radix", "quick"]
+          children: ["", "bubble", "select", "insert", "quick", "radix"]
         }
       ],
       "/find/": [
