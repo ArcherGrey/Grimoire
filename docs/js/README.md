@@ -7,6 +7,10 @@
 
 ## 常见问题
 
+- String
+  - 去除空格
+    - `str.replace(/\s/g, '')`
+    - `str.split(' ').join('')`
 - Array
   - 初始化数组并赋值
     - `[...Array(100)].map(_=>0)`

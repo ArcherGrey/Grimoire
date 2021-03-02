@@ -97,7 +97,10 @@ module.exports = {
           collapsable: false,
           children: [
             "",
-            { title: "基础", children: ["position", "bfc", "box", "word"] },
+            {
+              title: "基础",
+              children: ["position", "bfc", "box", "word", "offset"]
+            },
             {
               title: "布局",
               children: ["flex", "holy_wing", "center", "rdad"]
@@ -227,6 +230,7 @@ module.exports = {
             "242",
             "278",
             "283",
+            "304",
             "344",
             "350",
             "384",
