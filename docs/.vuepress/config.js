@@ -87,7 +87,8 @@ module.exports = {
                 "typeof",
                 "debounce",
                 "observer",
-                "arrayunique"
+                "arrayunique",
+                "tag"
               ]
             }
           ]
@@ -242,6 +243,7 @@ module.exports = {
             "278",
             "283",
             "304",
+            "338",
             "344",
             "350",
             "384",
@@ -250,6 +252,7 @@ module.exports = {
             "448",
             "480",
             "485",
+            "506",
             "561",
             "566",
             "643",
@@ -281,7 +284,15 @@ module.exports = {
       "/sort/": [
         {
           collapsable: false,
-          children: ["", "bubble", "select", "insert", "quick", "radix"]
+          children: [
+            "",
+            "bubble",
+            "select",
+            "insert",
+            "shell",
+            "quick",
+            "radix"
+          ]
         }
       ],
       "/find/": [
@@ -322,7 +333,8 @@ module.exports = {
             "get_post",
             "cookie",
             "storage",
-            "crossdomain"
+            "crossdomain",
+            "dns"
           ]
         }
       ]

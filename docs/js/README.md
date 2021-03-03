@@ -31,3 +31,4 @@
 - [promise](/js/promise.html)
 - [instanceof](/js/typeof.html)
 - [数据绑定](/js/databind.html)
+- [统计页面标签](/js/tag.html)
