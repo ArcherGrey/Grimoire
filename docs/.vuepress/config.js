@@ -111,7 +111,13 @@ module.exports = {
             { title: "工具", children: ["postcss_rem"] },
             {
               title: "应用",
-              children: ["closebutton", "resizediv", "roll", "triangle"]
+              children: [
+                "closebutton",
+                "resizediv",
+                "roll",
+                "triangle",
+                "dragdiv"
+              ]
             }
           ]
         }
@@ -197,6 +203,7 @@ module.exports = {
             "19",
             "20",
             "21",
+            "23",
             "26",
             "28",
             "36",
@@ -290,6 +297,7 @@ module.exports = {
             "select",
             "insert",
             "shell",
+            "heap",
             "quick",
             "radix"
           ]
