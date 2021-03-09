@@ -18,7 +18,13 @@ module.exports = {
           { text: "Css", link: "/css/" },
           { text: "浏览器", link: "/explorer/" },
           { text: "工程化", link: "/engineering/" },
-          { text: "框架", items: [{ text: "Vue", link: "/vue/" }] }
+          {
+            text: "框架",
+            items: [
+              { text: "Vue", link: "/vue/" },
+              { text: "React", link: "/react/" }
+            ]
+          }
         ]
       },
       { text: "网络", link: "/network/" },
@@ -183,6 +189,22 @@ module.exports = {
           ]
         }
       ],
+      "/react/": [
+        {
+          collapsable: false,
+          children: [
+            "",
+            {
+              title: "基础/原理",
+              children: []
+            },
+            {
+              title: "应用",
+              children: []
+            }
+          ]
+        }
+      ],
       /* 框架 */
 
       /* 前端 */
@@ -275,6 +297,7 @@ module.exports = {
             "912",
             "978",
             "1004",
+            "1047",
             "1052",
             "1208",
             "1423",
@@ -299,6 +322,7 @@ module.exports = {
             "shell",
             "heap",
             "quick",
+            "merge",
             "radix"
           ]
         }
