@@ -193,39 +193,63 @@ var isSymmetric = function(root) {
 ```js
 /**
  * Definition for a binary tree node.
- * function TreeNode(val) {
- *     this.val = val;
- *     this.left = this.right = null;
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
  * }
  */
-
 /**
  * @param {number[]} inorder
  * @param {number[]} postorder
  * @return {TreeNode}
  */
 var buildTree = function(inorder, postorder) {
-  // 创建 hash 表存储中序序列 [value,index]
-  let mem = new Map();
-  for (let i = 0; i < inorder.length; ++i) {
-    mem.set(inorder[i], i);
+  if (!postorder.length) return null;
+  let root = new TreeNode(postorder[postorder.length - 1]);
+  let i = 0;
+  for (; i < inorder.length; ++i) {
+    if (inorder[i] == root.val) {
+      break;
+    }
   }
-  // 参数分别是中序后序的左右子树边界
-  const fn = (is, ie, ps, pe) => {
-    //
-    if (ie < is || pe < ps) return null;
-    // 后序遍历的最后一个位置是根节点
-    let root = postorder[pe];
-    // 获取中序遍历中根节点的位置
-    let ri = mem.get(root);
 
-    // 递归构造子树
-    let node = new TreeNode(root);
-    node.left = fn(is, ri - 1, ps, ps + ri - is - 1);
-    node.right = fn(ri + 1, ie, ps + ri - is, pe - 1);
-    return node;
-  };
-  return fn(0, inorder.length - 1, 0, postorder.length - 1);
+  root.left = buildTree(inorder.slice(0, i), postorder.slice(0, i));
+  root.right = buildTree(inorder.slice(i + 1), postorder.slice(i, -1));
+  return root;
+};
+```
+
+迭代：
+
+```js
+var buildTree = function(inorder, postorder) {
+  if (postorder.length == 0) {
+    return null;
+  }
+  const root = new TreeNode(postorder[postorder.length - 1]);
+  const stack = [];
+  stack.push(root);
+  let inorderIndex = inorder.length - 1;
+  for (let i = postorder.length - 2; i >= 0; i--) {
+    let postorderVal = postorder[i];
+    let node = stack[stack.length - 1];
+    if (node.val !== inorder[inorderIndex]) {
+      node.right = new TreeNode(postorderVal);
+      stack.push(node.right);
+    } else {
+      while (
+        stack.length &&
+        stack[stack.length - 1].val === inorder[inorderIndex]
+      ) {
+        node = stack.pop();
+        inorderIndex--;
+      }
+      node.left = new TreeNode(postorderVal);
+      stack.push(node.left);
+    }
+  }
+  return root;
 };
 ```
 

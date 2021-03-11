@@ -21,3 +21,7 @@
 # github token
 
 51c9f0d984b76d72ca8ec50fe6ed2deb8d2045a0
+
+# npm token
+
+6c6d54aa-ba1a-45fe-b455-6f9816ab854c
