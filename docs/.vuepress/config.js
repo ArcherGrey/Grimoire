@@ -55,7 +55,7 @@ module.exports = {
       "/git/": [
         {
           collapsable: false,
-          children: ["", "githook", "ssh", "commitLint"]
+          children: ["", "doc", "githook", "ssh", "commitLint"]
         }
       ],
       /* git */
@@ -274,6 +274,7 @@ module.exports = {
             "278",
             "283",
             "304",
+            "331",
             "338",
             "344",
             "350",
@@ -284,6 +285,7 @@ module.exports = {
             "480",
             "485",
             "506",
+            "509",
             "561",
             "566",
             "643",
@@ -299,6 +301,8 @@ module.exports = {
             "912",
             "978",
             "1004",
+            "1008",
+            "1028",
             "1047",
             "1052",
             "1208",
