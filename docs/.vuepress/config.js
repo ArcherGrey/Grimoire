@@ -81,7 +81,8 @@ module.exports = {
                 "hoisting",
                 "promise",
                 "declare",
-                "event"
+                "event",
+                "encode"
               ]
             },
             {
@@ -94,7 +95,8 @@ module.exports = {
                 "debounce",
                 "observer",
                 "arrayunique",
-                "tag"
+                "tag",
+                "route"
               ]
             }
           ]
@@ -232,6 +234,8 @@ module.exports = {
             "42",
             "48",
             "53",
+            "54",
+            "59",
             "66",
             "70",
             "85",
