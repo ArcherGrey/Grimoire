@@ -23,12 +23,17 @@
 
 ## 手写代码
 
-- [call apply bind](/js/cab.html)
-- [防抖&节流](/js/debounce.html)
-- [浅拷贝&深拷贝](/js/copy.html)
-- [观察者&发布订阅](/js/observer.html)
+- [创建对象](/js/create.html)
+- [new](/js/new.html)
 - [继承](/js/class.html)
+- [call apply bind](/js/cab.html)
+- [浅拷贝&深拷贝](/js/copy.html)
+- [防抖&节流](/js/debounce.html)
+- [观察者&发布订阅](/js/observer.html)
 - [promise](/js/promise.html)
 - [instanceof](/js/typeof.html)
 - [数据绑定](/js/databind.html)
 - [统计页面标签](/js/tag.html)
+- [类型判断](/js/typeof.html)
+- [数组去重](/js/arrayunique.html)
+- [前端路由](/js/route.html)
