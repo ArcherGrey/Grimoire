@@ -294,7 +294,7 @@ function _inherits(subClass, superClass) {
 1. 首先执行 `_inherits(Child, Parent)`，建立 `Child` 和 `Parent` 的原型链关系
 
 - `Object.setPrototypeOf(Child.prototype, Parent.prototype)`
-- `Object.setPrototypeOf(Child, Parent)`
+- `Object.setPrototypeOf(Child, Parent)` 和组合寄生继承的差别
 
 2. 然后调用 `Parent.call(this, name)`，根据 `Parent` 构造函数的返回值类型确定子类构造函数 `this` 的初始值 `_this`
 3. 最终，根据子类构造函数，修改 `_this` 的值，然后返回该值。
