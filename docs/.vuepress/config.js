@@ -145,7 +145,7 @@ module.exports = {
             "",
             {
               title: "基础/原理",
-              children: ["module", "write_module", "minipack"]
+              children: ["module", "write_module", "minipack", "mvx"]
             },
             { title: "应用", children: ["automodule", "download"] },
             {
