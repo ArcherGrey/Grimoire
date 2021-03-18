@@ -28,18 +28,16 @@ function read(filename) {
 }
 
 // 链式调用
-read("./test.txt")
-  .then((data) => {
-    return read(data);
-  })
-  .then(
-    (data) => {
-      console.log(data);
-    },
-    (err) => {
-      console.log(err);
-    }
-  );
+// 这里配置的文件存在就会显示文件内容
+// 不存在就会显示错误信息
+read("./test.txt").then(
+  data => {
+    console.log(data);
+  },
+  err => {
+    console.log(err);
+  }
+);
 ```
 
 ## 业界实现
@@ -87,21 +85,21 @@ class Promise {
     // 存放失败的回调
     this.onRejectedCallbacks = [];
 
-    let resolve = (value) => {
+    let resolve = value => {
       if (this.status === PENDING) {
         this.status = FULFILLED;
         this.value = value;
         // 依次将对应的函数执行
-        this.onResolvedCallbacks.forEach((fn) => fn());
+        this.onResolvedCallbacks.forEach(fn => fn());
       }
     };
 
-    let reject = (reason) => {
+    let reject = reason => {
       if (this.status === PENDING) {
         this.status = REJECTED;
         this.reason = reason;
         // 依次将对应的函数执行
-        this.onRejectedCallbacks.forEach((fn) => fn());
+        this.onRejectedCallbacks.forEach(fn => fn());
       }
     };
 
@@ -141,10 +139,10 @@ const promise = new Promise((resolve, reject) => {
     resolve("成功");
   }, 1000);
 }).then(
-  (data) => {
+  data => {
     console.log("success", data);
   },
-  (err) => {
+  err => {
     console.log("faild", err);
   }
 );
@@ -187,14 +185,14 @@ const resolvePromise = (promise2, x, resolve, reject) => {
         // 不要写成 x.then，直接 then.call 就可以了 因为 x.then 会再次取值，Object.defineProperty  Promise/A+ 2.3.3.3
         then.call(
           x,
-          (y) => {
+          y => {
             // 根据 promise 的状态决定是成功还是失败
             if (called) return;
             called = true;
             // 递归解析的过程（因为可能 promise 中还有 promise） Promise/A+ 2.3.3.3.1
             resolvePromise(promise2, y, resolve, reject);
           },
-          (r) => {
+          r => {
             // 只要失败就失败 Promise/A+ 2.3.3.3.2
             if (called) return;
             called = true;
@@ -225,19 +223,19 @@ class Promise {
     this.onResolvedCallbacks = [];
     this.onRejectedCallbacks = [];
 
-    let resolve = (value) => {
+    let resolve = value => {
       if (this.status === PENDING) {
         this.status = FULFILLED;
         this.value = value;
-        this.onResolvedCallbacks.forEach((fn) => fn());
+        this.onResolvedCallbacks.forEach(fn => fn());
       }
     };
 
-    let reject = (reason) => {
+    let reject = reason => {
       if (this.status === PENDING) {
         this.status = REJECTED;
         this.reason = reason;
-        this.onRejectedCallbacks.forEach((fn) => fn());
+        this.onRejectedCallbacks.forEach(fn => fn());
       }
     };
 
@@ -251,12 +249,12 @@ class Promise {
   then(onFulfilled, onRejected) {
     //解决 onFufilled，onRejected 没有传值的问题
     //Promise/A+ 2.2.1 / Promise/A+ 2.2.5 / Promise/A+ 2.2.7.3 / Promise/A+ 2.2.7.4
-    onFulfilled = typeof onFulfilled === "function" ? onFulfilled : (v) => v;
+    onFulfilled = typeof onFulfilled === "function" ? onFulfilled : v => v;
     //因为错误的值要让后面访问到，所以这里也要跑出个错误，不然会在之后 then 的 resolve 中捕获
     onRejected =
       typeof onRejected === "function"
         ? onRejected
-        : (err) => {
+        : err => {
             throw err;
           };
     // 每次调用 then 都返回一个新的 promise  Promise/A+ 2.2.7
@@ -325,10 +323,10 @@ const promise = new Promise((resolve, reject) => {
   .then()
   .then()
   .then(
-    (data) => {
+    data => {
       console.log(data);
     },
-    (err) => {
+    err => {
       console.log("err", err);
     }
   );
@@ -451,10 +449,10 @@ Promise.prototype.catch = function(errCallback) {
 ```js
 romise.prototype.finally = function(callback) {
   return this.then(
-    (value) => {
+    value => {
       return Promise.resolve(callback()).then(() => value);
     },
-    (reason) => {
+    reason => {
       return Promise.resolve(callback()).then(() => {
         throw reason;
       });
@@ -485,7 +483,7 @@ Promise.all = function(values) {
     for (let i = 0; i < values.length; i++) {
       let value = values[i];
       if (value && typeof value.then === "function") {
-        value.then((value) => {
+        value.then(value => {
           processResultByKey(value, i);
         }, reject);
       } else {
