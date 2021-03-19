@@ -35,6 +35,13 @@
 - 利用 `node` 实现文件同步读取
 - 依靠注入变量的沙箱编译实现模块化
 
+注意：
+
+1. `exports = module.exports`
+2. `require()` 返回的是 `module.exports`
+3. `module.exports` 的初始值为一个空对象{}
+4. 模块导出只有一个使用 `module.exports=xxx`，多个使用 `export.a=a; export.b=b`
+
 参考：
 
 - [CommonJS 规范](http://javascript.ruanyifeng.com/nodejs/module.html)

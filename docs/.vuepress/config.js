@@ -147,7 +147,10 @@ module.exports = {
               title: "基础/原理",
               children: ["module", "write_module", "minipack", "mvx"]
             },
-            { title: "应用", children: ["automodule", "download"] },
+            {
+              title: "应用",
+              children: ["automodule", "download", "eventemitter"]
+            },
             {
               title: "工具",
               children: [
@@ -296,6 +299,8 @@ module.exports = {
             "509",
             "561",
             "566",
+            "589",
+            "590",
             "643",
             "665",
             "697",
