@@ -271,6 +271,7 @@ module.exports = {
             "169",
             "172",
             "189",
+            "191",
             "198",
             "206",
             "208",
@@ -285,6 +286,7 @@ module.exports = {
             "278",
             "283",
             "304",
+            "323",
             "331",
             "338",
             "344",
@@ -303,9 +305,11 @@ module.exports = {
             "590",
             "643",
             "665",
+            "684",
             "697",
             "703",
             "766",
+            "802",
             "832",
             "867",
             "888",
@@ -355,7 +359,7 @@ module.exports = {
       "/tree/": [
         {
           collapsable: false,
-          children: ["", "backtrack", "btQs", "btTravers"]
+          children: ["", "backtrack", "btQs", "btTravers", "dfs"]
         }
       ],
       "/string/": [

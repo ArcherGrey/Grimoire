@@ -20,6 +20,9 @@
 - Object
   - Object.assign() 只能拷贝枚举对象（最外层属性） 所以是浅拷贝
   - JSON.parse(JSON.stringify(obj1)); 对于没有函数的 深拷贝
+- base64
+  - 加密 `btoa`
+  - 解密 `atob`
 
 ## 手写代码
 
