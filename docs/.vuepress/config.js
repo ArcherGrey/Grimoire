@@ -390,7 +390,8 @@ module.exports = {
             "cookie",
             "storage",
             "crossdomain",
-            "dns"
+            "dns",
+            "xss"
           ]
         }
       ]
