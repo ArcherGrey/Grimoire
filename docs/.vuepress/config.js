@@ -9,6 +9,7 @@ module.exports = {
   themeConfig: {
     nav: [
       { text: "编年史", link: "/annals/" },
+      { text: "xxx", link: "/interview/" },
       { text: "代码规范", link: "/lint/" },
       { text: "Git", link: "/git/" },
       {
