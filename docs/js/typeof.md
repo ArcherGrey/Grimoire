@@ -20,6 +20,7 @@
   - 变量没有声明
   - 变量没有初始化
 - 判断一个值不等于 `undefined` 也不等于 `null`：`typeof null=object`（`javascript` 遗留`bug`）
+  - `typeof null=object` 是由于 `javascript` 用 32 位二进制保存，`object` 低 3 位为 0，`null` 所有位都是 0 没有单独判断导致 `bug`
 - 区别对象和原始值
 - 原始值的类型
 - 判断是否是函数

@@ -7,8 +7,8 @@
 3. 通过使用定时器慢慢下拉滑动条实现滚动效果
 
 ::: demo vue
-<template>
 
+<template>
   <div class="roll-content" @mouseover="stop" @mouseout="begin">
     <div class="roll-test">定时器滚动，鼠标移入停止，移出继续</div>
     <div class="roll-test">定时器滚动，鼠标移入停止，移出继续</div>

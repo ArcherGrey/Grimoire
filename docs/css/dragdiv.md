@@ -5,12 +5,10 @@
 ::: demo vue
 
 <template>
-
 <div class='box'>
   <div class='drag-div' :style={top,left} @mousedown="mousedown" @mouseup="mouseup" @mouseleave="mouseleave" @mousemove="mousemove">
   </div>
 </div>
-
 </template>
 
 <script>
@@ -34,7 +32,6 @@ export default {
     },
     mousemove(e){
       if(this.moving){
-        debugger
         this.top=Number(this.top.replace('px',''))+e.movementY+'px';
         this.left=Number(this.left.replace('px',''))+e.movementX+'px';
       }
@@ -42,7 +39,6 @@ export default {
   }
 }
 </script>
-
 <style>
 .box{
   width:200px;
@@ -52,10 +48,10 @@ export default {
 }
 
 .drag-div{
-  width:50px;
-  height:50px;
-  background: red;
-  position: absolute;
+width:50px;
+height:50px;
+background: red;
+position: absolute;
 }
 </style>
 

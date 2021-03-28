@@ -6,7 +6,7 @@
 
 ::: warning 注
 
-网页事件不是 `JavaScript` 语音的核心，而是内置在浏览器环境 `APIs`
+网页事件不是 `JavaScript` 的核心，而是内置在浏览器环境 `APIs`
 
 :::
 
@@ -58,7 +58,7 @@ btn.onclick = function() {
     - 允许给一个事件注册多个监听器
     - 提供了更精细的方式控制监听器触发（可以配置冒泡或者捕获）
     - 对任何 `DOM` 元素都有效
-  - 如果注册多个相同的监听器（`options` 的 `capture` 相同）只会保留一个
+  - 如果注册多个相同的监听器（同一个实例，而且 `options` 的 `capture` 相同）只会保留一个
   - 监听器触发时的 `this` 指向时该元素的引用，和 `event.currentTarget` 一样
 - `removeEventListener`
   - 如果监听器被移除，事件正在执行会立即停止
@@ -77,8 +77,34 @@ btn.onclick = function() {
 
   默认情况下都是在冒泡阶段注册事件（`addEventListener` 第三个参数设置为 true 可以在捕获阶段注册），这样可能导致一些意想不到的问题，可以通过 `stopPropagation` 来阻止继续向外冒泡。
 
-::: tip 事件委托
+### 事件流顺序
+
+1. 捕获阶段：先由文档的根节点 document 往事件触发对象，从外向内捕获事件对象；
+2. 目标阶段：到达目标事件位置（事发地），触发事件；
+3. 冒泡阶段：再从目标事件位置往文档的根节点方向回溯，从内向外冒泡事件对象。
+
+### 事件委托
 
 如果想要在大量子元素中触发事件然后都执行相同的代码，可以将监听器绑定到父元素上，然后让子元素冒泡到父元素上，从而避免在每个子元素上设置事件监听器
 
-:::
+`event.target`属性可以用来实现事件委托
+
+```js
+// Make a list
+var ul = document.createElement("ul");
+document.body.appendChild(ul);
+
+var li1 = document.createElement("li");
+var li2 = document.createElement("li");
+ul.appendChild(li1);
+ul.appendChild(li2);
+
+function hide(e) {
+  // e.target 引用着 <li> 元素
+  // 不像 e.currentTarget 引用着其父级的 <ul> 元素.
+  e.target.style.visibility = "hidden";
+}
+
+// 添加监听事件到列表，当每个 <li> 被点击的时候都会触发。
+ul.addEventListener("click", hide, false);
+```

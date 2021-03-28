@@ -127,4 +127,4 @@ console.log("console");
 6. 第一轮事件循环结束了，我们开始第二轮循环，当然要从宏任务 `Event Queue` 开始。我们发现了宏任务 `Event Queue` 中 `setTimeout` 对应的回调函数，立即执行。
 7. 结束。
 
-![宏任务微任务流程图](/js_run_1.jpg)
+![宏任务微任务流程图](/js_run_2.jpg)
