@@ -125,7 +125,6 @@ class Promise {
         onFulfilled(this.value);
       });
 
-      // 如果promise的状态是 pending，需要将 onFulfilled 和 onRejected 函数存放起来，等待状态确定后，再依次将对应的函数执行
       this.onRejectedCallbacks.push(() => {
         onRejected(this.reason);
       });

@@ -48,11 +48,24 @@ sidebar: auto
     - 原理基于原型链 沿着左边的原型链直到找到和右边的显示原型相等的结果
 - this
 - 闭包
-- for in / for of
-- web worker/ service worker/ shared work
+- for
+  - for of 循环不仅支持数组、大多数伪数组对象，也支持字符串遍历，此外还支持 Map 和 Set 对象遍历。
+  - for in 循环可以遍历字符串、对象、数组，不能遍历 Set/Map
+  - forEach 循环不能遍历字符串、对象,可以遍历 Set/Map
+- web worker 多线程 复杂计算/ service worker 离线存储 / shared work 共享进程
 - 大量 div 渲染 - 虚拟列表 fiber
 - call bind apply
 - es6
+  - 块级作用域
+    - let const
+  - 扩展数组
+  - 箭头函数
+  - 扩展运算符 ...
+  - 解构
+  - 模板字符串
+  - class
+  - promise
+  - module
 
 ## css
 
