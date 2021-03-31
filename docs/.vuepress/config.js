@@ -4,12 +4,12 @@ module.exports = {
   title: "Grimoire", // 标题
   description: "Magic Book",
   markdown: {
-    lineNumbers: true,
+    lineNumbers: true
   },
   themeConfig: {
     nav: [
       { text: "编年史", link: "/annals/" },
-      { text: "xxx", link: "/interview/" },
+      { text: "总结", link: "/summary/" },
       { text: "代码规范", link: "/lint/" },
       { text: "Git", link: "/git/" },
       {
@@ -23,10 +23,10 @@ module.exports = {
             text: "框架",
             items: [
               { text: "Vue", link: "/vue/" },
-              { text: "React", link: "/react/" },
-            ],
-          },
-        ],
+              { text: "React", link: "/react/" }
+            ]
+          }
+        ]
       },
       { text: "网络", link: "/network/" },
       {
@@ -37,18 +37,27 @@ module.exports = {
           { text: "排序", link: "/sort/" },
           { text: "图", link: "/graph/" },
           { text: "树", link: "/tree/" },
-          { text: "字符串", link: "/string/" },
-        ],
-      },
+          { text: "字符串", link: "/string/" }
+        ]
+      }
     ],
     sidebarDepth: 3,
     sidebar: {
+      /* 总结 */
+      "/summary/": [
+        {
+          collapsable: false,
+          children: ["", "interview", "project"]
+        }
+      ],
+      /* 总结 */
+
       /* 代码规范 */
       "/lint/": [
         {
           collapsable: false,
-          children: ["", "css", "js", "js_colon"],
-        },
+          children: ["", "css", "js", "js_colon"]
+        }
       ],
       /* 代码规范 */
 
@@ -56,8 +65,8 @@ module.exports = {
       "/git/": [
         {
           collapsable: false,
-          children: ["", "doc", "githook", "ssh", "commitLint"],
-        },
+          children: ["", "doc", "githook", "ssh", "commitLint"]
+        }
       ],
       /* git */
 
@@ -83,8 +92,8 @@ module.exports = {
                 "promise",
                 "declare",
                 "event",
-                "encode",
-              ],
+                "encode"
+              ]
             },
             {
               title: "应用",
@@ -98,11 +107,11 @@ module.exports = {
                 "arrayunique",
                 "tag",
                 "route",
-                "flat",
-              ],
-            },
-          ],
-        },
+                "flat"
+              ]
+            }
+          ]
+        }
       ],
 
       "/css/": [
@@ -112,11 +121,11 @@ module.exports = {
             "",
             {
               title: "基础",
-              children: ["position", "bfc", "box", "word", "offset"],
+              children: ["position", "bfc", "box", "word", "offset"]
             },
             {
               title: "布局",
-              children: ["flex", "holy_wing", "center", "rdad"],
+              children: ["flex", "holy_wing", "center", "rdad"]
             },
             { title: "工具", children: ["postcss_rem"] },
             {
@@ -126,18 +135,18 @@ module.exports = {
                 "resizediv",
                 "roll",
                 "triangle",
-                "dragdiv",
-              ],
-            },
-          ],
-        },
+                "dragdiv"
+              ]
+            }
+          ]
+        }
       ],
 
       "/explorer/": [
         {
           collapsable: false,
-          children: ["", "render"],
-        },
+          children: ["", "render", "document_fragment"]
+        }
       ],
 
       "/engineering/": [
@@ -147,11 +156,11 @@ module.exports = {
             "",
             {
               title: "基础/原理",
-              children: ["module", "write_module", "minipack", "mvx"],
+              children: ["module", "write_module", "minipack", "mvx"]
             },
             {
               title: "应用",
-              children: ["automodule", "download", "eventemitter"],
+              children: ["automodule", "download", "eventemitter"]
             },
             {
               title: "工具",
@@ -163,11 +172,11 @@ module.exports = {
                 "package_axios",
                 "html2canvas",
                 "anywhere",
-                "nrm",
-              ],
-            },
-          ],
-        },
+                "nrm"
+              ]
+            }
+          ]
+        }
       ],
 
       /* 框架 */
@@ -186,15 +195,15 @@ module.exports = {
                 "vhook",
                 "filter",
                 "slot",
-                "componentCom",
-              ],
+                "componentCom"
+              ]
             },
             {
               title: "应用",
-              children: ["devtools", "performance"],
-            },
-          ],
-        },
+              children: ["devtools", "performance"]
+            }
+          ]
+        }
       ],
       "/react/": [
         {
@@ -203,14 +212,14 @@ module.exports = {
             "",
             {
               title: "基础/原理",
-              children: ["fiber"],
+              children: ["fiber"]
             },
             {
               title: "应用",
-              children: [],
-            },
-          ],
-        },
+              children: []
+            }
+          ]
+        }
       ],
       /* 框架 */
 
@@ -330,15 +339,15 @@ module.exports = {
             "1052",
             "1208",
             "1423",
-            "1438",
-          ],
-        },
+            "1438"
+          ]
+        }
       ],
       "/graph/": [
         {
           collapsable: false,
-          children: ["", "euler"],
-        },
+          children: ["", "euler"]
+        }
       ],
       "/sort/": [
         {
@@ -352,33 +361,33 @@ module.exports = {
             "heap",
             "quick",
             "merge",
-            "radix",
-          ],
-        },
+            "radix"
+          ]
+        }
       ],
       "/find/": [
         {
           collapsable: false,
-          children: ["", "bs"],
-        },
+          children: ["", "bs"]
+        }
       ],
       "/tree/": [
         {
           collapsable: false,
-          children: ["", "backtrack", "btQs", "btTravers", "dfs"],
-        },
+          children: ["", "backtrack", "btQs", "btTravers", "dfs"]
+        }
       ],
       "/string/": [
         {
           collapsable: false,
-          children: ["", "kmp"],
-        },
+          children: ["", "kmp"]
+        }
       ],
       "/linkedlist/": [
         {
           collapsable: false,
-          children: [""],
-        },
+          children: [""]
+        }
       ],
 
       /* 算法 */
@@ -396,16 +405,55 @@ module.exports = {
             "storage",
             "crossdomain",
             "dns",
-            "xss",
-          ],
-        },
-      ],
+            "xss"
+          ]
+        }
+      ]
       /* 网络 */
-    },
+    }
   },
+  head: [
+    ["link", { rel: "icon", href: "/logo.png" }],
+    ["link", { rel: "manifest", href: "/manifest.json" }],
+    ["meta", { name: "theme-color", content: "#3eaf7c" }],
+    ["meta", { name: "apple-mobile-web-app-capable", content: "yes" }],
+    [
+      "meta",
+      { name: "apple-mobile-web-app-status-bar-style", content: "black" }
+    ],
+    [
+      // 苹果桌面图标
+      "link",
+      { rel: "apple-touch-icon", href: "/icons/apple-touch-icon-152x152.png" }
+    ],
+    [
+      // safari 标签图标
+      "link",
+      {
+        rel: "mask-icon",
+        href: "/icons/safari-pinned-tab.svg",
+        color: "#3eaf7c"
+      }
+    ]
+    // [
+    //   "meta",
+    //   {
+    //     name: "msapplication-TileImage",
+    //     content: "/icons/msapplication-icon-144x144.png"
+    //   }
+    // ],
+    // ["meta", { name: "msapplication-TileColor", content: "#000000" }]
+  ],
   plugins: [
     "@vuepress/back-to-top",
     "@vuepress/nprogress",
+    [
+      "@vuepress/pwa",
+      {
+        serviceWorker: true,
+        updatePopup: true
+      }
+    ],
     [
       "demo-code",
       {
@@ -431,8 +479,8 @@ module.exports = {
         onlineBtns: {
           codepen: false,
           jsfiddle: false,
-          codesandbox: false,
-        },
+          codesandbox: false
+        }
 
         /* It passes CodeSandbox options. */
         // codesandbox: {
@@ -445,7 +493,7 @@ module.exports = {
         // demoCodeMark: "demo-code"
         /* It passes vuepress-plugin-code-copy's options, or false to disable it. */
         // copyOptions: { ... },
-      },
-    ],
-  ],
+      }
+    ]
+  ]
 };

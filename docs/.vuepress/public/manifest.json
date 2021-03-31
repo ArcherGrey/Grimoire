@@ -1,0 +1,7 @@
+{
+  "name": "Grimoire",
+  "short_name": "GR",
+  "start_url": ".",
+  "display": "standalone",
+  "description": "Grey's book."
+}
