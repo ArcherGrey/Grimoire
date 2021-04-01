@@ -163,6 +163,10 @@ module.exports = {
               children: ["automodule", "download", "eventemitter"]
             },
             {
+              title: "性能优化",
+              children: ["preload", "async"]
+            },
+            {
               title: "工具",
               children: [
                 "webpack",
