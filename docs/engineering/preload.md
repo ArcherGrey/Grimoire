@@ -25,7 +25,7 @@
 
 ## 优先级
 
-![优先级](./eng_preload_1.png)
+<img :src="$withBase('/eng_preload_1.png')" alt="优先级">
 
 `preload` 使用 `as` 属性加载的资源将会获得与资源 `type` 属性所拥有的相同的优先级。比如说，`preload as="style"` 将会获得比 `as="script"` 更高的优先级。这些资源同样会受内容安全策略的影响（比如说，脚本会受到其 `src` 属性的影响）。
 

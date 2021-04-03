@@ -10,7 +10,7 @@
 Vue 会遍历 data 选项中所有 `property`，然后使用 `Object.defineProperty` 设置所有 `property` 的自定义 `getter/setter`，触发 `setter` 会通知 `watcher` 使得相关联的组件重新渲染
 :::
 
-![追踪变化](/vue_responsive_1.png)
+<img :src="$withBase('/vue_responsive_1.jpg')" alt="追踪变化">
 
 ## 检测变化的特殊情况
 
@@ -23,8 +23,8 @@ Vue 会遍历 data 选项中所有 `property`，然后使用 `Object.definePrope
 ```js
 var vm = new Vue({
   data: {
-    a: 1
-  }
+    a: 1,
+  },
 });
 
 // `vm.a` 是响应式的

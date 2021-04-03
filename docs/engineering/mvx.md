@@ -12,7 +12,7 @@
 
 各部分的通信方式：
 
-![mvc](/eng_mvx_1.png)
+<img :src="$withBase('/eng_mvx_1.png')" alt="mvc">
 
 基于 `MVC` 理念的简易实现：
 
@@ -26,7 +26,7 @@ var M = {},
 M.data = "hello world";
 
 /** View 负责将资料输出给用户 */
-V.render = M => {
+V.render = (M) => {
   alert(M.data);
 };
 
@@ -59,7 +59,7 @@ window.onload = C.handleOnload;
 
 ## MVVM
 
-![MVVM](/eng_mvx_2.png)
+<img :src="$withBase('/eng_mvx_2.png')" alt="mvvm">
 
 - 模型 `Model`：数据访问层
 - 视图 `View`：用户界面

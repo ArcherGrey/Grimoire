@@ -12,7 +12,7 @@
 - `git commit` 暂存区 -> 版本库
 - `git push` 版本库 -> 远程仓库
 
-![分区转换](/git_doc_1.png)
+<img :src="$withBase('/git_doc_1.png')" alt="分区转换">
 
 ### 分区对比指令
 
@@ -20,7 +20,7 @@
 - `git diff head` 工作区 -> 版本库
 - `git diff --cached` 暂存区 -> 版本库
 
-![分区对比](/git_doc_2.png)
+<img :src="$withBase('/git_doc_2.png')" alt="分区对比">
 
 ## 原理
 
@@ -61,7 +61,7 @@
 - `Tree`: 文件夹
 - `Commit`: 提交节点
 
-![映射关系](git_doc_3.png)
+<img :src="$withBase('/git_doc_3.png')" alt="映射关系">
 
 ## 分支
 

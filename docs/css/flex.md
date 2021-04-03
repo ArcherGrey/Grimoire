@@ -23,7 +23,7 @@
 
 ## 基本概念
 
-![模型图](/css_flex_1.png)
+<img :src="$withBase('/css_flex_1.png')" alt="模型图">
 
 - 默认存在两条轴：
 

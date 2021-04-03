@@ -2,7 +2,7 @@
 
 ## offset
 
-![offset](/css_offset_1.png)
+<img :src="$withBase('/css_offset_1.png')" alt="offset">
 
 - 定位父级(`offsetParent`):与当前元素最近的绝对定位( `position` 不等于 `static` )的父级元素
 - 偏移量
@@ -13,7 +13,7 @@
 
 ## client
 
-![client](/css_offset_2.png)
+<img :src="$withBase('/css_offset_2.png')" alt="client">
 
 - `clientHeight = padding-top + height + padding-bottom - 水平滚动条高度（如果存在）`
 - `clientWidth = padding-left + width + padding-right - 垂直滚动条宽度（如果存在）`

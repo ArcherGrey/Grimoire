@@ -10,7 +10,7 @@
 使用一个 `subject` 对象维持一系列依赖于它的 `oberver` 观察者对象，将有关状态的任何变更自动通知给这一系列观察者对象。当 `subject` 目标对象需要告诉观察者发生了什么事情时，它会向观察者对象们广播一个通知
 :::
 
-![观察者模式](/js_observer_1.jpg)
+<img :src="$withBase('/js_observer_1.jpg')" alt="观察者模式">
 
 如上图所示：
 
@@ -73,7 +73,7 @@ sub.notify(); //my name is ttsy1、my name is ttsy2
 使用一个事件通道，这个通道介于订阅者和发布者之间，该设计模式允许代码定义应用程序的特定事件，这些事件可以传递自定义参数，自定义参数包含订阅者需要的信息，采用事件通道可以避免发布者和订阅者之间产生依赖关系。
 :::
 
-![发布订阅模式](/js_observer_2.jpg)
+<img :src="$withBase('/js_observer_2.jpg')" alt="发布订阅模式">
 
 ```js
 let pubSub = {

@@ -28,7 +28,7 @@
 2. 实现解析器 `Compile` 解析模板中的 `Directive`(指令)，收集指令所依赖的方法和数据,等待数据变化然后进行渲染
 3. 实现 `Watcher` 作为 `Observer` 和 `Compile` 桥梁,接收到的 `Observer` 产生的数据变化,并根据 `Compile` 提供的指令进行视图渲染,使得数据变化促使视图变化
 
-![流程图](/js_databind_1.png)
+<img :src="$withBase('/js_databind_1.png')" alt="流程图">
 
 ### 实现 `Observer`
 
@@ -76,9 +76,9 @@ Observer.prototype = {
         childObj = observe(newVal);
         // 通知订阅者
         dep.notify();
-      }
+      },
     });
-  }
+  },
 };
 
 function observe(value, vm) {
@@ -116,7 +116,7 @@ Dep.prototype = {
     this.subs.forEach(function(sub) {
       sub.update();
     });
-  }
+  },
 };
 
 Dep.target = null;
@@ -128,7 +128,7 @@ Dep.target = null;
 
 主要做的事情是解析模板指令，将模板中的变量替换成数据，然后初始化渲染页面视图，并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，更新视图，如图所示
 
-![compile](/js_databind_2.png)
+<img :src="$withBase('/js_databind_2.png')" alt="compile">
 
 ::: details 点击查看代码
 
@@ -222,7 +222,7 @@ Compile.prototype = {
 
   isTextNode: function(node) {
     return node.nodeType == 3;
-  }
+  },
 };
 
 // 指令处理集合
@@ -295,7 +295,7 @@ var compileUtil = {
         val[k] = value;
       }
     });
-  }
+  },
 };
 
 var updater = {
@@ -318,7 +318,7 @@ var updater = {
 
   modelUpdater: function(node, value, oldValue) {
     node.value = typeof value == "undefined" ? "" : value;
-  }
+  },
 };
 ```
 
@@ -402,7 +402,7 @@ Watcher.prototype = {
       }
       return obj;
     };
-  }
+  },
 };
 ```
 
@@ -421,7 +421,7 @@ Object.defineProperty(obj, "text", {
     console.log("set val:" + newVal);
     document.getElementById("input").value = newVal;
     document.getElementById("span").innerHTML = newVal;
-  }
+  },
 });
 
 const input = document.getElementById("input");
@@ -448,7 +448,7 @@ const newObj = new Proxy(obj, {
       p.innerHTML = value;
     }
     return Reflect.set(target, key, value, receiver);
-  }
+  },
 });
 
 input.addEventListener("keyup", function(e) {

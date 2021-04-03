@@ -48,7 +48,7 @@ function instance_of(L, R) {    //L 表示左表达式，R 表示右表达式
 `instanceof` 的局限性就是不能检测基本数据类型。通过对 `instanceof` 的原理进行分析，我们可以得知，只要左边的对象的对象能够通过原型链 `__proto__` 是指向右边的构造函数就可以
 `instanceof` 右边必须是对象或构造函数，否则会抛出 `TypeError` 的错误。
 
-![关系图](/js_typeof_1.jpg)
+<img :src="$withBase('/js_typeof_1.jpg')" alt="关系图">
 
 代码实现：
 

@@ -8,13 +8,13 @@
 
 ## `W3C`盒子模型(标准盒模型)
 
-![标准盒](/css_box_1.png)
+<img :src="$withBase('/css_box_1.png')" alt="标准盒">
 
 根据 `W3C` 的规范，元素内容占据的空间是由 width 属性设置的，而内容周围的 padding 和 border 值是另外计算的。
 
 ## `IE`盒子模型(怪异盒模型)
 
-![怪异盒](/css_box_2.png)
+<img :src="$withBase('/css_box_2.png')" alt="怪异盒">
 
 在该模式下，浏览器的 `width` 属性不是内容的宽度，而是内容、内边距和边框的宽度的总和。
 

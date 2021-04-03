@@ -9,11 +9,11 @@
 3. 布局 `render` 树：构建好了以后，将会执行布局过程，将确定每个节点在屏幕上的确切坐标
 4. 绘制 `render` 树：最后就是绘制，遍历 `render` 树，并使用 `UI` 后端层绘制每一个节点
 
-![基本流程](/explorer_render_1.png)
+<img :src="$withBase('/explorer_render_1.png')" alt="基本流程">
 
 为了更好的用户体验，渲染引擎将会尽可能早的将内容呈现到屏幕上，并不会等所有 `html` 都解析完成之后再去构建和布局 `render` 树，它是解析一部分内容就显示一部分内容，同时可能还在通过网络下载其余内容。
 
-![不同引擎流程](/explorer_render_2.png)
+<img :src="$withBase('/explorer_render_2.png')" alt="不同引擎流程">
 
 可以看到，尽管 `webkit` 和 `Gecko` 使用的术语稍有不同，但是主要流程基本相同，`Gecko` 称可见的格式化元素组成的树为 `frame` 树，每个元素都是一个 `frame` ，`webkit` 则使用 `render` 树来命名由渲染对象组成的树，`webkit` 中元素的定位称为布局，而 `Gecko` 中称为回流，`webkit` 称利用 `dom` 节点和样式去构建 `render` 树的过程为 `attachment` ，`Gecko` 在 `html` 和 `dom` 树之间附加了一层，称为内容接收器，相当于制造 `dom` 元素的工厂。
 
@@ -23,7 +23,7 @@
 
 例如，解析 `2 + 3 - 1`，可能返回这样一棵树：
 
-![数学表达书1](/explorer_render_3.png)
+<img :src="$withBase('/explorer_render_3.png')" alt="数学表达书1">
 
 ::: tip 文法（Grammars）
 
@@ -40,7 +40,7 @@
 
 解析器一般先把输入分解为合法的符号，在根据语言的语法规则分析文档结构，从而构建解析树：
 
-![从源文档到解析树](/explorer_render_4.png)
+<img :src="$withBase('/explorer_render_4.png')" alt="从源文档到解析树">
 
 解析过程是迭代的，解析器取到一个新的符号，用这个符号去匹配一条语法规则，如果匹配了将对应的节点添加到解析树上，然后解析树继续请求下一个符号，如果没有匹配，解析器将在内部保存该符号，然后取下一个符号，直到所有内部保存的符号能够匹配一项语法规则，如果最终没有找到匹配的规则，解析器将抛出一个异常，这意味着文档无效或者包含语法错误。
 
@@ -48,7 +48,7 @@
 
 很多时候，解析树不是最终结果，解析一般在转换中使用，例如编译过程就是先将源码解析为解析树然后将解析树转换为机器码文档：
 
-![编译流程](/explorer_render_5.png)
+<img :src="$withBase('/explorer_render_5.png')" alt="编译流程">
 
 :::
 
@@ -93,7 +93,7 @@
 
 将会被转换为下面的 `DOM` 树：
 
-![DOM树](/explorer_render_6.png)
+<img :src="$withBase('/explorer_render_6.png')" alt="DOM树">
 
 `html` 不能被一般的自顶向下或自底向上的解析器所解析，因为：
 
@@ -106,7 +106,7 @@
 - 符号化：词法分析的过程，将输入解析为符号，包含开始标签、结束标签、属性名和属性值
 - 构建树：符号识别器识别出符号后，将其传递给构建器，然后读取下一个字符，直到所有输入都处理完
 
-![html解析流程](/explorer_render_7.png)
+<img :src="$withBase('/explorer_render_7.png')" alt="html解析流程">
 
 ### 处理脚本和样式表的顺序
 

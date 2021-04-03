@@ -50,7 +50,7 @@ abaabac
 
 因为 `p(0,i)` 子串中 前`next[i]`和后`next[i]` 字符一样，所以如果在`p[r]` 匹配失败，可以拿 `next[r-1]` 来作为前缀继续匹配
 
-![kmp1](/string_kmp_1.jpg)
+<img :src="$withBase('/string_kmp_1.jpg')" alt="kmp1">
 
 ## 快速求 `next` 数组
 
