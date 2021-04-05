@@ -1,11 +1,15 @@
 # React
 
+## 资源
+
+- [react hook](https://overreacted.io/zh-hans/a-complete-guide-to-useeffect/)
+
 ## 常见问题
 
 ### 图片批量导入
 
 ```js
-items.map(i => {
+items.map((i) => {
   i.icon = require(`../../../../assets/images/point-${i.icon}.png`).default;
   return i;
 });
