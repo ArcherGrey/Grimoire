@@ -41,6 +41,8 @@
       - onchange 执行操作
     - 上传需要附带除了图片以外的参数
       - 不能使用默认的 action
+        - antd upload 继承 rc-upload
+          - rc-upload 内部实现是用 formData + ajax
       - 上传图片方式
         - 表单
           - 需要 form 组件包裹配置 麻烦
