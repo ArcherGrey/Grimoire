@@ -49,7 +49,7 @@
 - onmessage 接收消息 发送心跳
 - onopen 发送心跳
 
-- antd 上传组件 上传图片
+* antd 上传组件 上传图片
   - 需求：
     - 拖拽排序
       - react-dnd

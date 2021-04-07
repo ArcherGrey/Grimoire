@@ -165,6 +165,7 @@ module.exports = {
                 "observer",
                 "route",
                 "upload",
+                "vdrag",
               ],
             },
             {
