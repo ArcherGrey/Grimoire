@@ -64,51 +64,183 @@
 1. `dragstart` 开始拖拽将组件信息缓存
 2. `drop` 拖拽结束将缓存信息加入到 `componentData`
 
-左侧组件列表：
-
-```vue
-<div @dragstart="handleDragStart" class="component-list">
-  <div
-    v-for="(item, index) in componentList"
-    :key="index"
-    class="list"
-    draggable
-    :data-index="index"
-  >
-    <i :class="item.icon"></i>
-    <span>{{ item.label }}</span>
-  </div>
-</div>
-```
-
-```js
-handleDragStart(e) {
-    e.dataTransfer.setData('index', e.target.dataset.index)
-}
-```
-
-画布区域：
-
-```vue
-<div
-  class="content"
-  @drop="handleDrop"
-  @dragover="handleDragOver"
-  @click="deselectCurComponent"
->
-  <Editor />
-</div>
-```
-
-```js
-handleDrop(e) {
-    e.preventDefault()
-    e.stopPropagation()
-    const component = deepCopy(componentList[e.dataTransfer.getData('index')])
-    this.$store.commit('addComponent', component)
-}
-```
-
 触发 `drop` 事件时，使用 `dataTransfer.getData()` 接收传输过来的索引数据，然后根据索引找到对应的组件数据，再添加到画布，从而渲染组件。
 
 ### 组件在画布中移动
+
+首先需要将画布设为相对定位 `position: relative`，然后将每个组件设为绝对定位 `position: absolute`。除了这一点外，还要通过监听三个事件来进行移动：
+
+1. `mousedown` 事件，在组件上按下鼠标时，记录组件当前的位置，即 `xy` 坐标
+2. `mousemove` 事件，每次鼠标移动时，都用当前最新的 `xy` 坐标减去最开始的 `xy` 坐标，从而计算出移动距离，再改变组件位置
+3. `mouseup` 事件，鼠标抬起时结束移动。
+
+::: demo vue
+
+<template>
+  <div class="content-wrap">
+    <!-- 组件列表 -->
+    <div @dragstart="handleDragStart" class="component-list">
+      <div
+        v-for="(item, index) in componentList"
+        :key="index"
+        class="list"
+        draggable
+        :data-index="index"
+      >
+        <!-- 自定义组件 -->
+        <span>{{ item.label }}</span>
+      </div>
+    </div>
+    <!-- 画板 -->
+    <div
+      class="content"
+      @drop="handleDrop"
+      @dragover="handleDragOver"
+      @mousedown="handleMouseDown"
+      ref="content"
+    >
+      <div
+        v-for="(item, index) in componentData"
+        :key="index"
+        class="list"
+        :data-index="index"
+        :style="item.style"
+      >
+        <!-- 自定义组件 -->
+        <span>{{ item.label }}</span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      componentList: [
+        {
+          label: "文本1"
+        },
+        {
+          label: "文本2"
+        },
+        {
+          label: "文本3"
+        }
+      ],
+      componentData: [],
+      operation: ""
+    };
+  },
+  methods: {
+    handleDragStart(e) {
+      e.dataTransfer.setData("index", e.target.dataset.index);
+      this.operation = "drag";
+    },
+    handleDrop(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // 拖拽的组件
+      let selected = this.componentList[e.dataTransfer.getData("index")];
+      if (!selected) return false;
+      const component = JSON.parse(JSON.stringify(selected));
+      component.style = {
+        top: e.offsetY + "px",
+        left: e.offsetX + "px"
+      };
+      const tmp = [...this.componentData, component];
+      // 把组件信息加入到画布组件信息队列中
+      this.$set(this, "componentData", tmp);
+    },
+    handleDragOver(e) {
+      // 需要这样设置才能触发 drop
+      // 1. 屏蔽默认事件
+      // 2. 设置 dropEffect = copy
+      e.preventDefault();
+      if (this.operation === "drag") e.dataTransfer.dropEffect = "copy";
+      if (this.operation === "move") {
+        return false;
+      }
+    },
+    handleMouseDown(e) {
+      e.stopPropagation();
+      this.operation = "move";
+      // 移动选中的组件
+      let selected = this.componentData[e.target.parentNode.dataset.index];
+      if (!selected) return false;
+      const component = JSON.parse(JSON.stringify(selected));
+      const pos = component.style;
+      const startY = e.clientY;
+      const startX = e.clientX;
+      const startTop = Number(pos.top.replace("px", ""));
+      const startLeft = Number(pos.left.replace("px", ""));
+
+      // mousemove 修改位置
+      const move = moveEvent => {
+        const currX = moveEvent.clientX;
+        const currY = moveEvent.clientY;
+        pos.top = currY - startY + startTop;
+        pos.left = currX - startX + startLeft;
+        // 修改当前组件样式
+        selected.style = {
+          top: pos.top + "px",
+          left: pos.left + "px"
+        };
+      };
+
+      // mouseup 解除事件绑定
+      const up = () => {
+        document.removeEventListener("mousemove", move);
+        document.removeEventListener("mouseup", up);
+      };
+
+      document.addEventListener("mousemove", move);
+      document.addEventListener("mouseup", up);
+    }
+  }
+};
+</script>
+
+<style scoped>
+.content-wrap {
+  display: flex;
+  flex-direction: row;
+}
+.component-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 10px;
+  height: 200px;
+  width: 100px;
+  border: 1px solid lightblue;
+}
+.content {
+  height: 200px;
+  flex: 1;
+  border: 1px solid lightblue;
+  padding: 10px;
+  margin-left: 10px;
+  position: relative;
+}
+.list {
+  height: fit-content;
+  width: fit-content;
+  border: 1px solid grey;
+  cursor: grab;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #333;
+  padding: 2px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content .list{
+  position: absolute;
+}
+</style>
+
+:::
