@@ -6,8 +6,9 @@
 2. 包裹滚动内容的 div 大小和一个滚动内容区一样
 3. 通过使用定时器慢慢下拉滑动条实现滚动效果
 
-::: demo vue
+::: demo
 
+```html
 <template>
   <div class="roll-content" @mouseover="stop" @mouseout="begin">
     <div class="roll-test">定时器滚动，鼠标移入停止，移出继续</div>
@@ -16,11 +17,11 @@
 </template>
 
 <script>
-export default {
-      data(){
+  export default {
+    data() {
       return {
-        timer:null
-      }
+        timer: null,
+      };
     },
     methods: {
       stop() {
@@ -30,11 +31,11 @@ export default {
         clearInterval(this.timer);
         this.init();
       },
-      init(){
+      init() {
         this.timer = setInterval(() => {
           let content = document.getElementsByClassName("roll-content")[0];
           let test = window.document.getElementsByClassName("roll-test")[0];
-          if(content){
+          if (content) {
             if (content.scrollTop >= test.offsetHeight) {
               content.scrollTop = 0;
             } else {
@@ -42,29 +43,30 @@ export default {
             }
           }
         }, 50);
-      }
+      },
     },
-    mounted(){
-      this.$nextTick(()=>{
+    mounted() {
+      this.$nextTick(() => {
         this.init();
-      })
+      });
     },
-    beforeDestroy(){
+    beforeDestroy() {
       clearInterval(this.timer);
-    }
-}
+    },
+  };
 </script>
 
 <style>
-.roll-content {
-  width: 100%;
-  height: 20px;
-  overflow-y: hidden;
-}
-.roll-test {
-  font-size: 20px;
-  line-height: 20px;
-}
+  .roll-content {
+    width: 100%;
+    height: 20px;
+    overflow-y: hidden;
+  }
+  .roll-test {
+    font-size: 20px;
+    line-height: 20px;
+  }
 </style>
+```
 
 :::

@@ -7,47 +7,50 @@
 通过 `hover` 实现鼠标移动上去变色
 
 ::: demo
+
+```html
 <template>
-<span class="close"></span>
+  <span class="close"></span>
 </template>
 
 <style>
-.close {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  overflow: hidden;
-}
-.close:hover::before,
-.close:hover::after {
-  background: #1ebcc5;
-}
-.close::before,
-.close::after {
-  content: "";
-  position: absolute;
-  height: 2px;
-  width: 100%;
-  top: 50%;
-  left: 0;
-  margin-top: -1px;
-  background: #000;
-}
-.close::before {
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-.close::after {
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-}
+  .close {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+  }
+  .close:hover::before,
+  .close:hover::after {
+    background: #1ebcc5;
+  }
+  .close::before,
+  .close::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    margin-top: -1px;
+    background: #000;
+  }
+  .close::before {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  .close::after {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
 </style>
+```
 
 :::

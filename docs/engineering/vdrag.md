@@ -74,8 +74,9 @@
 2. `mousemove` 事件，每次鼠标移动时，都用当前最新的 `xy` 坐标减去最开始的 `xy` 坐标，从而计算出移动距离，再改变组件位置
 3. `mouseup` 事件，鼠标抬起时结束移动。
 
-::: demo vue
+::: demo
 
+```html
 <template>
   <div class="content-wrap">
     <!-- 组件列表 -->
@@ -114,55 +115,223 @@
 </template>
 
 <script>
+  export default {
+    data() {
+      return {
+        componentList: [
+          {
+            label: "文本1",
+          },
+          {
+            label: "文本2",
+          },
+          {
+            label: "文本3",
+          },
+        ],
+        componentData: [],
+        operation: "",
+      };
+    },
+    methods: {
+      handleDragStart(e) {
+        e.dataTransfer.setData("index", e.target.dataset.index);
+        this.operation = "drag";
+      },
+      handleDrop(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // 拖拽的组件
+        let selected = this.componentList[e.dataTransfer.getData("index")];
+        if (!selected) return false;
+        const component = JSON.parse(JSON.stringify(selected));
+        component.style = {
+          top: e.offsetY + "px",
+          left: e.offsetX + "px",
+        };
+        const tmp = [...this.componentData, component];
+        // 把组件信息加入到画布组件信息队列中
+        this.$set(this, "componentData", tmp);
+      },
+      handleDragOver(e) {
+        // 需要这样设置才能触发 drop
+        // 1. 屏蔽默认事件
+        // 2. 设置 dropEffect = copy
+        e.preventDefault();
+        if (this.operation === "drag") e.dataTransfer.dropEffect = "copy";
+        if (this.operation === "move") {
+          return false;
+        }
+      },
+      handleMouseDown(e) {
+        e.stopPropagation();
+        this.operation = "move";
+        // 移动选中的组件
+        let selected = this.componentData[e.target.parentNode.dataset.index];
+        if (!selected) return false;
+        const component = JSON.parse(JSON.stringify(selected));
+        const pos = component.style;
+        const startY = e.clientY;
+        const startX = e.clientX;
+        const startTop = Number(pos.top.replace("px", ""));
+        const startLeft = Number(pos.left.replace("px", ""));
+
+        // mousemove 修改位置
+        const move = (moveEvent) => {
+          const currX = moveEvent.clientX;
+          const currY = moveEvent.clientY;
+          pos.top = currY - startY + startTop;
+          pos.left = currX - startX + startLeft;
+          // 修改当前组件样式
+          selected.style = {
+            top: pos.top + "px",
+            left: pos.left + "px",
+          };
+        };
+
+        // mouseup 解除事件绑定
+        const up = () => {
+          document.removeEventListener("mousemove", move);
+          document.removeEventListener("mouseup", up);
+        };
+
+        document.addEventListener("mousemove", move);
+        document.addEventListener("mouseup", up);
+      },
+    },
+  };
+</script>
+
+<style>
+  .content-wrap {
+    display: flex;
+    flex-direction: row;
+  }
+  .component-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px;
+    height: 200px;
+    width: 100px;
+    border: 1px solid lightblue;
+  }
+  .content {
+    height: 200px;
+    flex: 1;
+    border: 1px solid lightblue;
+    padding: 10px;
+    margin-left: 10px;
+    position: relative;
+  }
+  .list {
+    height: fit-content;
+    width: fit-content;
+    border: 1px solid grey;
+    cursor: grab;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #333;
+    padding: 2px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .content .list {
+    position: absolute;
+  }
+</style>
+```
+
+:::
+
+## 删除组件，调整图层
+
+由于拖拽组件到画布中是有先后顺序的，所以可以按照数据顺序来分配图层层级。
+例如画布新增了五个组件 `abcde`，那它们在画布数据中的顺序为 `[a, b, c, d, e]`，图层层级和索引一一对应，即它们的 `z-index` 属性值是 `01234`（后来居上）：
+
+```vue
+<div v-for="(item, index) in componentData" :zIndex="index"></div>
+```
+
+改变图层层级，即是改变组件数据在 `componentData` 数组中的顺序。例如有 `[a, b, c]` 三个组件，它们的图层层级从低到高顺序为 `abc`（索引越大，层级越高）。
+
+删除组件也是把组件信息从组件队列中删除：
+
+```js
+componentData.splice(index, 1);
+```
+
+::: demo
+
+```vue
+<template>
+  <!-- 画板 -->
+  <div
+    class="content"
+    @mousedown="handleMouseDown"
+    ref="content"
+    @click="showMenu = false"
+  >
+    <div
+      v-for="(item, index) in componentData"
+      :key="index"
+      class="list"
+      :data-index="index"
+      :style="Object.assign(item.style, { zIndex: index })"
+      @contextmenu="handleMenu"
+    >
+      <!-- 自定义组件 -->
+      <span>{{ item.label }}</span>
+    </div>
+    <div class="menu" v-show="showMenu" :style="menuPos" @click="handleCommand">
+      <div data-command="up">上移</div>
+      <div data-command="down">下移</div>
+      <div data-command="bottom">置底</div>
+      <div data-command="top">置顶</div>
+      <div data-command="delete">删除</div>
+    </div>
+  </div>
+</template>
+
+<script>
 export default {
   data() {
     return {
-      componentList: [
+      componentData: [
         {
-          label: "文本1"
+          style: {
+            top: "0",
+            left: "0",
+            background: "lightblue",
+          },
+          label: "文本1",
         },
         {
-          label: "文本2"
+          style: {
+            top: "20px",
+            left: "10px",
+            background: "lightgrey",
+          },
+          label: "文本2",
         },
         {
-          label: "文本3"
-        }
+          style: {
+            top: "40px",
+            left: "20px",
+            background: "lightgreen",
+          },
+          label: "文本3",
+        },
       ],
-      componentData: [],
-      operation: ""
+      showMenu: false,
+      menuPos: {},
+      currentComponent: null,
     };
   },
   methods: {
-    handleDragStart(e) {
-      e.dataTransfer.setData("index", e.target.dataset.index);
-      this.operation = "drag";
-    },
-    handleDrop(e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      // 拖拽的组件
-      let selected = this.componentList[e.dataTransfer.getData("index")];
-      if (!selected) return false;
-      const component = JSON.parse(JSON.stringify(selected));
-      component.style = {
-        top: e.offsetY + "px",
-        left: e.offsetX + "px"
-      };
-      const tmp = [...this.componentData, component];
-      // 把组件信息加入到画布组件信息队列中
-      this.$set(this, "componentData", tmp);
-    },
-    handleDragOver(e) {
-      // 需要这样设置才能触发 drop
-      // 1. 屏蔽默认事件
-      // 2. 设置 dropEffect = copy
-      e.preventDefault();
-      if (this.operation === "drag") e.dataTransfer.dropEffect = "copy";
-      if (this.operation === "move") {
-        return false;
-      }
-    },
     handleMouseDown(e) {
       e.stopPropagation();
       this.operation = "move";
@@ -177,7 +346,7 @@ export default {
       const startLeft = Number(pos.left.replace("px", ""));
 
       // mousemove 修改位置
-      const move = moveEvent => {
+      const move = (moveEvent) => {
         const currX = moveEvent.clientX;
         const currY = moveEvent.clientY;
         pos.top = currY - startY + startTop;
@@ -185,7 +354,8 @@ export default {
         // 修改当前组件样式
         selected.style = {
           top: pos.top + "px",
-          left: pos.left + "px"
+          left: pos.left + "px",
+          background: pos.background,
         };
       };
 
@@ -197,28 +367,66 @@ export default {
 
       document.addEventListener("mousemove", move);
       document.addEventListener("mouseup", up);
-    }
-  }
+    },
+    handleMenu(e) {
+      e.preventDefault();
+      this.currentComponent = e.currentTarget.dataset.index;
+      this.menuPos = {
+        top: e.offsetY + "px",
+        left: e.offsetX + "px",
+      };
+      this.showMenu = true;
+    },
+    handleCommand(e) {
+      const command = e.target.dataset.command;
+      const len = this.componentData.length - 1;
+      const tmp = [...this.componentData];
+      const curIndex = +this.currentComponent;
+      switch (command) {
+        case "up":
+          if (curIndex != len) {
+            [tmp[curIndex + 1], tmp[curIndex]] = [
+              tmp[curIndex],
+              tmp[curIndex + 1],
+            ];
+            this.$set(this, "componentData", tmp);
+          }
+          break;
+        case "down":
+          if (curIndex != 0) {
+            [tmp[curIndex - 1], tmp[curIndex]] = [
+              tmp[curIndex],
+              tmp[curIndex - 1],
+            ];
+            this.$set(this, "componentData", tmp);
+          }
+          break;
+        case "bottom":
+          if (curIndex != 0) {
+            tmp.unshift(...tmp.splice(curIndex, 1));
+            this.$set(this, "componentData", tmp);
+          }
+          break;
+        case "top":
+          if (curIndex != len) {
+            tmp.push(...tmp.splice(curIndex, 1));
+            this.$set(this, "componentData", tmp);
+          }
+          break;
+        case "delete":
+          tmp.splice(curIndex, 1);
+          this.$set(this, "componentData", tmp);
+          break;
+      }
+      console.log(tmp);
+    },
+  },
 };
 </script>
 
-<style scoped>
-.content-wrap {
-  display: flex;
-  flex-direction: row;
-}
-.component-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 10px;
-  height: 200px;
-  width: 100px;
-  border: 1px solid lightblue;
-}
+<style>
 .content {
   height: 200px;
-  flex: 1;
   border: 1px solid lightblue;
   padding: 10px;
   margin-left: 10px;
@@ -238,9 +446,25 @@ export default {
   justify-content: center;
 }
 
-.content .list{
+.content .list {
   position: absolute;
 }
+.menu {
+  border: 1px solid #000;
+  width: fit-content;
+  z-index: 999;
+  position: absolute;
+  background: lightcyan;
+}
+.menu div {
+  border: 1px solid #000;
+  cursor: pointer;
+  padding: 0 3px;
+}
+.menu div:hover {
+  background: lightblue;
+}
 </style>
+```
 
 :::
