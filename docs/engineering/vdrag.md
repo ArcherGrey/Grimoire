@@ -120,17 +120,17 @@
       return {
         componentList: [
           {
-            label: "文本1",
+            label: "文本1"
           },
           {
-            label: "文本2",
+            label: "文本2"
           },
           {
-            label: "文本3",
-          },
+            label: "文本3"
+          }
         ],
         componentData: [],
-        operation: "",
+        operation: ""
       };
     },
     methods: {
@@ -148,7 +148,7 @@
         const component = JSON.parse(JSON.stringify(selected));
         component.style = {
           top: e.offsetY + "px",
-          left: e.offsetX + "px",
+          left: e.offsetX + "px"
         };
         const tmp = [...this.componentData, component];
         // 把组件信息加入到画布组件信息队列中
@@ -178,7 +178,7 @@
         const startLeft = Number(pos.left.replace("px", ""));
 
         // mousemove 修改位置
-        const move = (moveEvent) => {
+        const move = moveEvent => {
           const currX = moveEvent.clientX;
           const currY = moveEvent.clientY;
           pos.top = currY - startY + startTop;
@@ -186,7 +186,7 @@
           // 修改当前组件样式
           selected.style = {
             top: pos.top + "px",
-            left: pos.left + "px",
+            left: pos.left + "px"
           };
         };
 
@@ -198,8 +198,8 @@
 
         document.addEventListener("mousemove", move);
         document.addEventListener("mouseup", up);
-      },
-    },
+      }
+    }
   };
 </script>
 
@@ -305,30 +305,30 @@ export default {
           style: {
             top: "0",
             left: "0",
-            background: "lightblue",
+            background: "lightblue"
           },
-          label: "文本1",
+          label: "文本1"
         },
         {
           style: {
             top: "20px",
             left: "10px",
-            background: "lightgrey",
+            background: "lightgrey"
           },
-          label: "文本2",
+          label: "文本2"
         },
         {
           style: {
             top: "40px",
             left: "20px",
-            background: "lightgreen",
+            background: "lightgreen"
           },
-          label: "文本3",
-        },
+          label: "文本3"
+        }
       ],
       showMenu: false,
       menuPos: {},
-      currentComponent: null,
+      currentComponent: null
     };
   },
   methods: {
@@ -346,7 +346,7 @@ export default {
       const startLeft = Number(pos.left.replace("px", ""));
 
       // mousemove 修改位置
-      const move = (moveEvent) => {
+      const move = moveEvent => {
         const currX = moveEvent.clientX;
         const currY = moveEvent.clientY;
         pos.top = currY - startY + startTop;
@@ -355,7 +355,7 @@ export default {
         selected.style = {
           top: pos.top + "px",
           left: pos.left + "px",
-          background: pos.background,
+          background: pos.background
         };
       };
 
@@ -373,7 +373,7 @@ export default {
       this.currentComponent = e.currentTarget.dataset.index;
       this.menuPos = {
         top: e.offsetY + "px",
-        left: e.offsetX + "px",
+        left: e.offsetX + "px"
       };
       this.showMenu = true;
     },
@@ -387,7 +387,7 @@ export default {
           if (curIndex != len) {
             [tmp[curIndex + 1], tmp[curIndex]] = [
               tmp[curIndex],
-              tmp[curIndex + 1],
+              tmp[curIndex + 1]
             ];
             this.$set(this, "componentData", tmp);
           }
@@ -396,7 +396,7 @@ export default {
           if (curIndex != 0) {
             [tmp[curIndex - 1], tmp[curIndex]] = [
               tmp[curIndex],
-              tmp[curIndex - 1],
+              tmp[curIndex - 1]
             ];
             this.$set(this, "componentData", tmp);
           }
@@ -418,9 +418,8 @@ export default {
           this.$set(this, "componentData", tmp);
           break;
       }
-      console.log(tmp);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -463,6 +462,505 @@ export default {
 }
 .menu div:hover {
   background: lightblue;
+}
+</style>
+```
+
+:::
+
+## 放大缩小
+
+选中画布上的组件，组件外圈会出现 8 个小圆点可以拖动进行放大缩小。
+
+思路：
+
+1. 每个组件外层包裹一层组件，包裹组件包含 8 个小圆点和插槽，插槽用来放置组件
+
+```vue
+<!--页面组件列表展示-->
+<Shape
+  v-for="(item, index) in componentData"
+  :defaultStyle="item.style"
+  :style="getShapeStyle(item.style, index)"
+  :key="item.id"
+  :active="item === curComponent"
+  :element="item"
+  :zIndex="index"
+>
+    <component
+        class="component"
+        :is="item.component"
+        :style="getComponentStyle(item.style)"
+        :propValue="item.propValue"
+    />
+</Shape>
+```
+
+组件内部：
+
+```vue
+<template>
+  <div
+    class="shape"
+    :class="{ active: this.active }"
+    @click="selectCurComponent"
+    @mousedown="handleMouseDown"
+    @contextmenu="handleContextMenu"
+  >
+    <div
+      class="shape-point"
+      v-for="(item, index) in active ? pointList : []"
+      @mousedown="handleMouseDownOnPoint(item)"
+      :key="index"
+      :style="getPointStyle(item)"
+    ></div>
+    <slot></slot>
+  </div>
+</template>
+```
+
+2. 点击组件通过样式控制显示小圆点
+3. 计算每个小圆点的位置（要显示在组件外层，还需要计算小圆点的大小，记小圆点长宽都为 `w`）：
+
+- 左上 `left:0-w top:0-w`
+- 右上 `left:width top:0-w`
+- 左下 `left:0-w top:height`
+- 右下 `left:width top:height`
+- 中间的点 `width/2 height/2` 同理计算
+
+4. 点击小圆点可以进行缩放操作
+
+- 点击小圆点，记录初始坐标
+- 向下拖动就用新的 y 坐标减去初始坐标可以得到移动距离，再把距离加上组件的高度计算得到新的高度(用 `movement` 鼠标移动距离也可以计算)
+- 上下只能修改高度 左右只能修改宽度，西北方向特殊处理,需要限制对应圆点的功能
+
+::: demo
+
+```vue
+<template>
+  <!-- 画板 -->
+  <div class="content" @click="selected = null">
+    <!-- 模拟外层包裹组件 -->
+    <div
+      v-for="(item, index) in componentData"
+      :key="index"
+      class="component"
+      :style="item.style"
+      :data-index="index"
+      @click="
+        e => {
+          e.stopPropagation();
+          selected = index;
+        }
+      "
+    >
+      <!-- 自定义组件 -->
+      <div>自定义组件</div>
+      <div
+        class="dots"
+        v-for="(dot, i) in dots"
+        :key="i"
+        :style="{
+          left: dot[0] + 'px',
+          top: dot[1] + 'px',
+          width: dotSize + 'px',
+          height: dotSize + 'px',
+          cursor: dot[2]
+        }"
+        @mousedown="handleMouseDown"
+        :data-type="dot[2].split('-')[0]"
+      ></div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      componentData: [
+        {
+          style: {
+            top: "30px",
+            left: "30px",
+            height: "100px",
+            width: "100px",
+            background: "lightblue"
+          }
+        }
+      ],
+      selected: null,
+      dotSize: 4
+    };
+  },
+  methods: {
+    handleMouseDown(e) {
+      const component = this.componentData[this.selected];
+      const type = e.target.dataset.type;
+      const move = me => {
+        let t = { ...component.style };
+        // 东西方向能修改宽度
+        if (type.indexOf("e") > -1)
+          t.width = Number(t.width.replace("px", "")) + me.movementX + "px";
+        // 南北方向能修改高度
+        if (type.indexOf("s") > -1)
+          t.height = Number(t.height.replace("px", "")) + me.movementY + "px";
+        // 西北方向需要修改 left top 宽高修改相反
+        if (type.indexOf("w") > -1) {
+          t.left = Number(t.left.replace("px", "")) + me.movementX + "px";
+          t.width = Number(t.width.replace("px", "")) - me.movementX + "px";
+        }
+        if (type.indexOf("n") > -1) {
+          t.top = Number(t.top.replace("px", "")) + me.movementY + "px";
+          t.height = Number(t.height.replace("px", "")) - me.movementY + "px";
+        }
+        this.$set(this.componentData[this.selected], "style", t);
+      };
+      const up = () => {
+        document.removeEventListener("mousemove", move);
+        document.removeEventListener("mouseup", up);
+      };
+      document.addEventListener("mousemove", move);
+      document.addEventListener("mouseup", up);
+    }
+  },
+  computed: {
+    dots() {
+      if (this.selected !== null) {
+        const component = this.componentData[this.selected];
+        const width = +component.style.width.replace("px", "");
+        const height = +component.style.height.replace("px", "");
+        return [
+          [0 - this.dotSize, 0 - this.dotSize, "nw-resize"],
+          [0 - this.dotSize, height, "sw-resize"],
+          [width, 0 - this.dotSize, "ne-resize"],
+          [width, height, "se-resize"],
+          [width / 2, 0 - this.dotSize, "n-resize"],
+          [width / 2, height, "s-resize"],
+          [0 - this.dotSize, height / 2, "w-resize"],
+          [width, height / 2, "e-resize"]
+        ];
+      }
+      return [];
+    }
+  }
+};
+</script>
+
+<style>
+.content {
+  height: 200px;
+  flex: 1;
+  border: 1px solid lightblue;
+  padding: 10px;
+  margin-left: 10px;
+  position: relative;
+}
+
+.component {
+  position: absolute;
+  height: fit-content;
+  width: fit-content;
+  text-align: center;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dots {
+  border: 1px solid lightblue;
+  position: absolute;
+}
+</style>
+```
+
+:::
+
+## 撤销 重做
+
+用一个数组来保存编辑器的快照数据。保存快照就是将当前的编辑器数据推入 `snapshotData` 数组，并增加快照索引 `snapshotIndex`。目前以下几个动作会触发保存快照操作：
+
+- 新增组件
+- 删除组件
+- 改变图层层级
+- 拖动组件结束时
+
+```js
+// snapshotData: [], // 编辑器快照数据
+// snapshotIndex: -1, // 快照索引
+
+undo(state) {
+    if (state.snapshotIndex >= 0) {
+        state.snapshotIndex--
+        store.commit('setComponentData', deepCopy(state.snapshotData[state.snapshotIndex]))
+    }
+},
+
+redo(state) {
+    if (state.snapshotIndex < state.snapshotData.length - 1) {
+        state.snapshotIndex++
+        store.commit('setComponentData', deepCopy(state.snapshotData[state.snapshotIndex]))
+    }
+},
+
+setComponentData(state, componentData = []) {
+    Vue.set(state, 'componentData', componentData)
+},
+
+recordSnapshot(state) {
+    // 添加新的快照
+    state.snapshotData[++state.snapshotIndex] = deepCopy(state.componentData)
+    // 在 undo 过程中，添加新的快照时，要将它后面的快照清理掉
+    if (state.snapshotIndex < state.snapshotData.length - 1) {
+        state.snapshotData = state.snapshotData.slice(0, state.snapshotIndex + 1)
+    }
+},
+
+```
+
+- 撤销 就是将快照索引减一，更新索引指向数据给画布
+  - 撤销后做了新的操作就把新的快照数据加入数组，更新索引
+- 重做 就是快照索引加一，更新索引指向数据给画布
+
+## 吸附 标线
+
+吸附就是在拖拽组件时，如果它和另一个组件的距离比较接近，就会自动吸附在一起。
+
+思路：
+
+- 标线：在页面上创建 6 条线，分别是三横三竖，这 6 条线的作用是对齐
+  - 上下方向的两个组件左边、中间、右边对齐时会出现竖线
+  - 左右方向的两个组件上边、中间、下边对齐时会出现横线
+- 吸附
+  - 吸附有个距离，如果两个组件距离小于这个吸附距离就吸附在一起
+
+例如
+
+- 组件 1 坐标 `x:0 y:0` 宽高 100
+- 组件 2 坐标 `x:0 y:103`
+- 吸附距离 3
+
+满足吸附条件，就将组件 2 的 `y` 设置为 100，这样就吸附在一起
+
+::: demo
+
+```vue
+<template>
+  <!-- 画板 -->
+  <div class="content" @click="selected = null">
+    <!-- 模拟外层包裹组件 -->
+    <div
+      v-for="(item, index) in componentData"
+      :key="index"
+      class="component"
+      :style="item.style"
+      :data-index="index"
+      @mousedown="handleMouseDown"
+    >
+      <!-- 自定义组件 -->
+      <div>自定义组件</div>
+    </div>
+
+    <!-- 标线 -->
+    <div class="mark-line">
+      <div
+        v-for="line in lines"
+        :key="line"
+        class="line"
+        :class="line.includes('x') ? 'xline' : 'yline'"
+        :ref="line"
+        v-show="lineStatus[line] || false"
+      ></div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      componentData: [
+        {
+          style: {
+            top: "0",
+            left: "0",
+            width: "100px",
+            height: "100px",
+            background: "lightblue"
+          }
+        },
+        {
+          style: {
+            top: "100px",
+            left: "100px",
+            width: "100px",
+            height: "100px",
+            background: "lightgrey"
+          }
+        }
+      ],
+      currentComponent: null,
+      lines: ["xt", "xc", "xb", "yl", "yc", "yr"], // 分别对应三条横线和三条竖线
+      diff: 5, // 相距 dff 像素将自动吸附
+      lineStatus: {
+        xt: false, // 水平顶部
+        xc: false, // 水平中间
+        xb: false, // 水平底部
+        yl: false, // 垂直左边
+        yc: false, // 垂直中间
+        yr: false // 垂直右边
+      }
+    };
+  },
+  methods: {
+    hideLine() {
+      Object.keys(this.lineStatus).forEach(line => {
+        this.lineStatus[line] = false;
+      });
+    },
+    showLine(currentComponent, index, top, left) {
+      const rest = this.componentData.filter(c => c != currentComponent)[0];
+      const rwidth = +rest.style.width.replace("px", "");
+      const rheight = +rest.style.height.replace("px", "");
+      const rtop = +rest.style.top.replace("px", "");
+      const rleft = +rest.style.left.replace("px", "");
+      const width = +currentComponent.style.width.replace("px", "");
+      const height = +currentComponent.style.height.replace("px", "");
+      this.hideLine();
+      const lines = this.$refs;
+      let changeLeft, changeTop;
+      if (Math.abs(left - rleft) <= this.diff) {
+        this.lineStatus.yl = true;
+        lines.yl[0].style.left = left + "px";
+        lines.yl[0].style.top = 0;
+        changeLeft = rleft;
+      } else if (Math.abs(left + width - (rleft + rwidth)) <= this.diff) {
+        this.lineStatus.yr = true;
+        lines.yr[0].style.left = left + width + "px";
+        lines.yr[0].style.top = 0;
+        changeLeft = rleft;
+      } else if (
+        Math.abs(left + width / 2 - (rleft + rwidth / 2)) <= this.diff
+      ) {
+        this.lineStatus.yc = true;
+        lines.yc[0].style.left = left + width / 2 + "px";
+        lines.yc[0].style.top = 0;
+        changeLeft = rleft;
+      }
+      if (Math.abs(top - rtop) <= this.diff) {
+        this.lineStatus.xt = true;
+        lines.xt[0].style.left = 0;
+        lines.xt[0].style.top = top + "px";
+        changeTop = rtop;
+      } else if (Math.abs(top + height - (rtop + rheight)) <= this.diff) {
+        this.lineStatus.xb = true;
+        lines.xb[0].style.left = 0;
+        lines.xb[0].style.top = top + height + "px";
+        changeTop = rtop;
+      } else if (
+        Math.abs(top + height / 2 - (rtop + rheight / 2)) <= this.diff
+      ) {
+        this.lineStatus.xc = true;
+        lines.xc[0].style.left = 0;
+        lines.xc[0].style.top = top + height / 2 + "px";
+        changeTop = rtop;
+      }
+      const style = currentComponent.style;
+      if (changeLeft != undefined) {
+        this.$set(this.componentData, index, {
+          style: Object.assign(style, {
+            left: changeLeft + "px"
+          })
+        });
+      }
+      if (changeTop != undefined) {
+        this.$set(this.componentData, index, {
+          style: Object.assign(style, {
+            top: changeTop + "px"
+          })
+        });
+      }
+    },
+    handleMouseDown(e) {
+      e.stopPropagation();
+      // 移动选中的组件
+      let selected = this.componentData[e.target.dataset.index];
+      if (!selected) return false;
+      const component = JSON.parse(JSON.stringify(selected));
+      const pos = component.style;
+      const startY = e.clientY;
+      const startX = e.clientX;
+      const startTop = Number(pos.top.replace("px", ""));
+      const startLeft = Number(pos.left.replace("px", ""));
+
+      // mousemove 修改位置
+      const move = moveEvent => {
+        const currX = moveEvent.clientX;
+        const currY = moveEvent.clientY;
+
+        pos.top = currY - startY + startTop;
+        pos.left = currX - startX + startLeft;
+
+        this.showLine(selected, e.target.dataset.index, pos.top, pos.left);
+        // 修改当前组件样式
+        selected.style = {
+          top: pos.top + "px",
+          left: pos.left + "px",
+          background: pos.background,
+          width: pos.width,
+          height: pos.height
+        };
+      };
+
+      // mouseup 解除事件绑定
+      const up = () => {
+        document.removeEventListener("mousemove", move);
+        document.removeEventListener("mouseup", up);
+        this.hideLine();
+      };
+
+      document.addEventListener("mousemove", move);
+      document.addEventListener("mouseup", up);
+    }
+  }
+};
+</script>
+
+<style>
+.content {
+  height: 200px;
+  flex: 1;
+  border: 1px solid lightblue;
+  margin-left: 10px;
+  position: relative;
+}
+
+.component {
+  position: absolute;
+  height: fit-content;
+  width: fit-content;
+  text-align: center;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.mark-line {
+  height: 100%;
+}
+.line {
+  background: #59c7f9;
+  position: absolute;
+  z-index: 1000;
+}
+.xline {
+  width: 100%;
+  height: 1px;
+}
+.yline {
+  width: 1px;
+  height: 100%;
 }
 </style>
 ```
