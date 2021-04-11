@@ -120,17 +120,17 @@
       return {
         componentList: [
           {
-            label: "文本1"
+            label: "文本1",
           },
           {
-            label: "文本2"
+            label: "文本2",
           },
           {
-            label: "文本3"
-          }
+            label: "文本3",
+          },
         ],
         componentData: [],
-        operation: ""
+        operation: "",
       };
     },
     methods: {
@@ -148,7 +148,7 @@
         const component = JSON.parse(JSON.stringify(selected));
         component.style = {
           top: e.offsetY + "px",
-          left: e.offsetX + "px"
+          left: e.offsetX + "px",
         };
         const tmp = [...this.componentData, component];
         // 把组件信息加入到画布组件信息队列中
@@ -178,7 +178,7 @@
         const startLeft = Number(pos.left.replace("px", ""));
 
         // mousemove 修改位置
-        const move = moveEvent => {
+        const move = (moveEvent) => {
           const currX = moveEvent.clientX;
           const currY = moveEvent.clientY;
           pos.top = currY - startY + startTop;
@@ -186,7 +186,7 @@
           // 修改当前组件样式
           selected.style = {
             top: pos.top + "px",
-            left: pos.left + "px"
+            left: pos.left + "px",
           };
         };
 
@@ -198,8 +198,8 @@
 
         document.addEventListener("mousemove", move);
         document.addEventListener("mouseup", up);
-      }
-    }
+      },
+    },
   };
 </script>
 
@@ -305,30 +305,30 @@ export default {
           style: {
             top: "0",
             left: "0",
-            background: "lightblue"
+            background: "lightblue",
           },
-          label: "文本1"
+          label: "文本1",
         },
         {
           style: {
             top: "20px",
             left: "10px",
-            background: "lightgrey"
+            background: "lightgrey",
           },
-          label: "文本2"
+          label: "文本2",
         },
         {
           style: {
             top: "40px",
             left: "20px",
-            background: "lightgreen"
+            background: "lightgreen",
           },
-          label: "文本3"
-        }
+          label: "文本3",
+        },
       ],
       showMenu: false,
       menuPos: {},
-      currentComponent: null
+      currentComponent: null,
     };
   },
   methods: {
@@ -346,7 +346,7 @@ export default {
       const startLeft = Number(pos.left.replace("px", ""));
 
       // mousemove 修改位置
-      const move = moveEvent => {
+      const move = (moveEvent) => {
         const currX = moveEvent.clientX;
         const currY = moveEvent.clientY;
         pos.top = currY - startY + startTop;
@@ -355,7 +355,7 @@ export default {
         selected.style = {
           top: pos.top + "px",
           left: pos.left + "px",
-          background: pos.background
+          background: pos.background,
         };
       };
 
@@ -373,7 +373,7 @@ export default {
       this.currentComponent = e.currentTarget.dataset.index;
       this.menuPos = {
         top: e.offsetY + "px",
-        left: e.offsetX + "px"
+        left: e.offsetX + "px",
       };
       this.showMenu = true;
     },
@@ -387,7 +387,7 @@ export default {
           if (curIndex != len) {
             [tmp[curIndex + 1], tmp[curIndex]] = [
               tmp[curIndex],
-              tmp[curIndex + 1]
+              tmp[curIndex + 1],
             ];
             this.$set(this, "componentData", tmp);
           }
@@ -396,7 +396,7 @@ export default {
           if (curIndex != 0) {
             [tmp[curIndex - 1], tmp[curIndex]] = [
               tmp[curIndex],
-              tmp[curIndex - 1]
+              tmp[curIndex - 1],
             ];
             this.$set(this, "componentData", tmp);
           }
@@ -418,8 +418,8 @@ export default {
           this.$set(this, "componentData", tmp);
           break;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -548,7 +548,7 @@ export default {
       :style="item.style"
       :data-index="index"
       @click="
-        e => {
+        (e) => {
           e.stopPropagation();
           selected = index;
         }
@@ -565,7 +565,7 @@ export default {
           top: dot[1] + 'px',
           width: dotSize + 'px',
           height: dotSize + 'px',
-          cursor: dot[2]
+          cursor: dot[2],
         }"
         @mousedown="handleMouseDown"
         :data-type="dot[2].split('-')[0]"
@@ -585,19 +585,19 @@ export default {
             left: "30px",
             height: "100px",
             width: "100px",
-            background: "lightblue"
-          }
-        }
+            background: "lightblue",
+          },
+        },
       ],
       selected: null,
-      dotSize: 4
+      dotSize: 4,
     };
   },
   methods: {
     handleMouseDown(e) {
       const component = this.componentData[this.selected];
       const type = e.target.dataset.type;
-      const move = me => {
+      const move = (me) => {
         let t = { ...component.style };
         // 东西方向能修改宽度
         if (type.indexOf("e") > -1)
@@ -622,7 +622,7 @@ export default {
       };
       document.addEventListener("mousemove", move);
       document.addEventListener("mouseup", up);
-    }
+    },
   },
   computed: {
     dots() {
@@ -638,12 +638,12 @@ export default {
           [width / 2, 0 - this.dotSize, "n-resize"],
           [width / 2, height, "s-resize"],
           [0 - this.dotSize, height / 2, "w-resize"],
-          [width, height / 2, "e-resize"]
+          [width, height / 2, "e-resize"],
         ];
       }
       return [];
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -786,8 +786,8 @@ export default {
             left: "0",
             width: "100px",
             height: "100px",
-            background: "lightblue"
-          }
+            background: "lightblue",
+          },
         },
         {
           style: {
@@ -795,9 +795,9 @@ export default {
             left: "100px",
             width: "100px",
             height: "100px",
-            background: "lightgrey"
-          }
-        }
+            background: "lightgrey",
+          },
+        },
       ],
       currentComponent: null,
       lines: ["xt", "xc", "xb", "yl", "yc", "yr"], // 分别对应三条横线和三条竖线
@@ -808,18 +808,18 @@ export default {
         xb: false, // 水平底部
         yl: false, // 垂直左边
         yc: false, // 垂直中间
-        yr: false // 垂直右边
-      }
+        yr: false, // 垂直右边
+      },
     };
   },
   methods: {
     hideLine() {
-      Object.keys(this.lineStatus).forEach(line => {
+      Object.keys(this.lineStatus).forEach((line) => {
         this.lineStatus[line] = false;
       });
     },
     showLine(currentComponent, index, top, left) {
-      const rest = this.componentData.filter(c => c != currentComponent)[0];
+      const rest = this.componentData.filter((c) => c != currentComponent)[0];
       const rwidth = +rest.style.width.replace("px", "");
       const rheight = +rest.style.height.replace("px", "");
       const rtop = +rest.style.top.replace("px", "");
@@ -869,15 +869,15 @@ export default {
       if (changeLeft != undefined) {
         this.$set(this.componentData, index, {
           style: Object.assign(style, {
-            left: changeLeft + "px"
-          })
+            left: changeLeft + "px",
+          }),
         });
       }
       if (changeTop != undefined) {
         this.$set(this.componentData, index, {
           style: Object.assign(style, {
-            top: changeTop + "px"
-          })
+            top: changeTop + "px",
+          }),
         });
       }
     },
@@ -894,7 +894,7 @@ export default {
       const startLeft = Number(pos.left.replace("px", ""));
 
       // mousemove 修改位置
-      const move = moveEvent => {
+      const move = (moveEvent) => {
         const currX = moveEvent.clientX;
         const currY = moveEvent.clientY;
 
@@ -908,7 +908,7 @@ export default {
           left: pos.left + "px",
           background: pos.background,
           width: pos.width,
-          height: pos.height
+          height: pos.height,
         };
       };
 
@@ -921,8 +921,8 @@ export default {
 
       document.addEventListener("mousemove", move);
       document.addEventListener("mouseup", up);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -966,3 +966,143 @@ export default {
 ```
 
 :::
+
+## 属性设置
+
+点击组件显示对应的属性设置，修改属性组件样式应用修改。
+
+思路：
+
+1. 点击组件把组件的样式对象绑定到属性设置上
+2. 利用双向绑定在修改属性的时候修改对应样式
+
+::: demo
+
+```vue
+<template>
+  <div class="prop-wrapper">
+    <!-- 画板 -->
+    <div class="prop-content" ref="content" @click="currentComponent = null">
+      <div
+        v-for="(item, index) in componentData"
+        :key="index"
+        class="list"
+        :data-index="index"
+        :style="Object.assign(item.style)"
+        @click="handleClick"
+      >
+        <!-- 自定义组件 -->
+      </div>
+    </div>
+    <div class="prop-div">
+      属性设置
+      <div
+        v-show="currentComponent"
+        v-for="(key, index) in Object.keys(
+          currentComponent ? currentComponent.style : {}
+        )"
+        :key="index"
+      >
+        <label> {{ key }}：</label>
+        <!-- 这里使用 v-model 实现双向绑定 -->
+        <input v-model="currentComponent.style[key]" />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      componentData: [
+        {
+          style: {
+            top: "20px",
+            left: "20px",
+            background: "lightblue",
+            height: "100px",
+            width: "100px",
+          },
+        },
+        {
+          style: {
+            top: "20px",
+            left: "110px",
+            background: "lightgrey",
+            height: "100px",
+            width: "100px",
+          },
+        },
+      ],
+      currentComponent: null,
+    };
+  },
+  methods: {
+    handleClick(e) {
+      e.stopPropagation();
+      console.log(e.target);
+      this.currentComponent = this.componentData[e.target.dataset.index];
+    },
+  },
+};
+</script>
+
+<style>
+.prop-wrapper {
+  border: 1px solid lightblue;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+.prop-div {
+  margin: auto;
+  width: 300px;
+  height: 200px;
+  border: 1px solid lightblue;
+}
+.prop-div div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.prop-div div label {
+  width: 120px;
+}
+.prop-content {
+  height: 200px;
+  border: 1px solid lightblue;
+  margin: 0 20px;
+  flex: 1;
+  position: relative;
+}
+
+.prop-content .list {
+  position: absolute;
+  height: fit-content;
+  width: fit-content;
+  border: 1px solid grey;
+  cursor: grab;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #333;
+  padding: 2px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
+```
+
+:::
+
+## 预览 保存
+
+预览原理和编辑一样，只是不能编辑，加上一个状态控制是否可以编辑即可
+
+保存就是把画布上的 `componentData` 存储即可，保存有两种选择：
+
+- 服务器
+- 客户端 `localStorage`
