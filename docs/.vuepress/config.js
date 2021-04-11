@@ -166,6 +166,7 @@ module.exports = {
                 "route",
                 "upload",
                 "vdrag",
+                "loader_plugin",
               ],
             },
             {
@@ -464,9 +465,7 @@ module.exports = {
         updatePopup: true,
       },
     ],
-    [
-      "demo-container",
-    ],
+    ["demo-container"],
     // [
     //   "demo-code",
     //   {
