@@ -109,7 +109,14 @@ module.exports = {
             "",
             {
               title: "基础",
-              children: ["position", "bfc", "box", "word", "offset"]
+              children: [
+                "position",
+                "bfc",
+                "box",
+                "word",
+                "offset",
+                "border_radius"
+              ]
             },
             {
               title: "布局",

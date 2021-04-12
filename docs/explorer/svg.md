@@ -205,3 +205,5 @@
   - 绘制水平线和垂直线
 - `Z or z`
   - 闭合路径
+
+https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial/Paths
