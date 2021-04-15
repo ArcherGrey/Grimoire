@@ -40,13 +40,71 @@
 1. `exports = module.exports`
 2. `require()` 返回的是 `module.exports`
 3. `module.exports` 的初始值为一个空对象{}
-4. 模块导出只有一个使用 `module.exports=xxx`，多个使用 `export.a=a; export.b=b`
+4. 模块只有一个导出使用 `module.exports=xxx`，多个使用 `export.a=a; export.b=b`
 
 参考：
 
 - [CommonJS 规范](http://javascript.ruanyifeng.com/nodejs/module.html)
 - [require()源码解读](http://www.ruanyifeng.com/blog/2015/05/require.html)
 - [Node 中的 Module 源码分析](https://segmentfault.com/a/1190000015139548)
+
+原理 :
+
+```js
+// 闭包 + 匿名立即执行函数
+(function(module, exports, require) {
+  // b.js
+  var a = require("a.js");
+  console.log("a.name=", a.name);
+  console.log("a.age=", a.getAge());
+
+  var name = "lilei";
+  var age = 15;
+  exports.name = name;
+  exports.getAge = function() {
+    return age;
+  };
+  return module.exports;
+})(module, module.exports, require);
+
+// bundle.js
+(function(modules) {
+  // 模块管理的实现
+  var installedModules = {};
+  /**
+   * 加载模块的业务逻辑实现
+   * @param {String} moduleName 要加载的模块名
+   */
+  var require = function(moduleName) {
+    // 如果已经加载过，就直接返回
+    if (installedModules[moduleName])
+      return installedModules[moduleName].exports;
+
+    // 如果没有加载，就生成一个 module，并放到 installedModules
+    var module = (installedModules[moduleName] = {
+      moduleName: moduleName,
+      exports: {}
+    });
+
+    // 执行要加载的模块
+    modules[moduleName].call(modules.exports, module, module.exports, require);
+
+    return module.exports;
+  };
+
+  return require("index.js");
+})({
+  "a.js": function(module, exports, require) {
+    // a.js 文件内容
+  },
+  "b.js": function(module, exports, require) {
+    // b.js 文件内容
+  },
+  "index.js": function(module, exports, require) {
+    // index.js 文件内容
+  }
+});
+```
 
 ## 浏览器端
 

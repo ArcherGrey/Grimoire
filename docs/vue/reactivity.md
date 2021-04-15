@@ -10,7 +10,7 @@
 Vue 会遍历 data 选项中所有 `property`，然后使用 `Object.defineProperty` 设置所有 `property` 的自定义 `getter/setter`，触发 `setter` 会通知 `watcher` 使得相关联的组件重新渲染
 :::
 
-<img :src="$withBase('/vue_responsive_1.jpg')" alt="追踪变化">
+<img :src="$withBase('/vue_responsive_1.png')" alt="追踪变化">
 
 ## 检测变化的特殊情况
 
@@ -23,8 +23,8 @@ Vue 会遍历 data 选项中所有 `property`，然后使用 `Object.definePrope
 ```js
 var vm = new Vue({
   data: {
-    a: 1,
-  },
+    a: 1
+  }
 });
 
 // `vm.a` 是响应式的
@@ -70,3 +70,8 @@ this.someObject = Object.assign({}, this.someObject, { a: 1, b: 2 });
 :::
 
 如果想要基于更新后的 `DOM` 状态来做点什么，可以在数据变化之后立即使用 `Vue.nextTick(callback)`，这样回调函数将在 `DOM` 更新完成后被调用
+
+(2.6 之前的版本)
+`Vue.nextTick` 一般情况下是微任务,在处理事件绑定的时候是宏任务(事件冒泡可能导致顺序错误)
+
+最新的冒泡做了特殊处理,所有都是微任务

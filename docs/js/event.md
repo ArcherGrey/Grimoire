@@ -100,8 +100,8 @@ ul.appendChild(li1);
 ul.appendChild(li2);
 
 function hide(e) {
-  // e.target 引用着 <li> 元素
-  // 不像 e.currentTarget 引用着其父级的 <ul> 元素.
+  // e.target 引用着 <li> 元素 实际触发事件的元素
+  // e.currentTarget 引用着其父级的 <ul> 元素. 事件绑定的元素
   e.target.style.visibility = "hidden";
 }
 

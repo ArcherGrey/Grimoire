@@ -61,5 +61,5 @@ NodeJS 会给每个文件包上这样一层函数，引入模块使用 require�
 ```js
 (funciton(exports, require, module, __filename, __dirname) {
 	/* 自己写的代码  */
-})();
+})(/* NodeJS 全局变量参数 */);
 ```
