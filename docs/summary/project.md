@@ -49,20 +49,6 @@
 - onmessage 接收消息 发送心跳
 - onopen 发送心跳
 
-* antd 上传组件 上传图片
-  - 需求：
-    - 拖拽排序
-      - react-dnd
-    - 图片列表变化 执行上传
-      - onchange 执行操作
-    - 上传需要附带除了图片以外的参数
-      - 不能使用默认的 action
-        - antd upload 继承 rc-upload
-          - rc-upload 内部实现是用 formData + ajax
-      - 上传图片方式
-        - 表单
-          - 需要 form 组件包裹配置 麻烦
-        - formData
-          - 额外参数和文件数据通过 formData.append 添加
-            - 如果 axios 封装默认 contenttype 不是 multipart/form-data 需要修改
-          - 图片数据还可以转化 base64 可能会过大
+## 可视化系统
+
+[详见](/engineering/visual.html)
