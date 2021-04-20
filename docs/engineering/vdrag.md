@@ -120,17 +120,17 @@
       return {
         componentList: [
           {
-            label: "文本1",
+            label: "文本1"
           },
           {
-            label: "文本2",
+            label: "文本2"
           },
           {
-            label: "文本3",
-          },
+            label: "文本3"
+          }
         ],
         componentData: [],
-        operation: "",
+        operation: ""
       };
     },
     methods: {
@@ -148,7 +148,7 @@
         const component = JSON.parse(JSON.stringify(selected));
         component.style = {
           top: e.offsetY + "px",
-          left: e.offsetX + "px",
+          left: e.offsetX + "px"
         };
         const tmp = [...this.componentData, component];
         // 把组件信息加入到画布组件信息队列中
@@ -178,7 +178,7 @@
         const startLeft = Number(pos.left.replace("px", ""));
 
         // mousemove 修改位置
-        const move = (moveEvent) => {
+        const move = moveEvent => {
           const currX = moveEvent.clientX;
           const currY = moveEvent.clientY;
           pos.top = currY - startY + startTop;
@@ -186,7 +186,7 @@
           // 修改当前组件样式
           selected.style = {
             top: pos.top + "px",
-            left: pos.left + "px",
+            left: pos.left + "px"
           };
         };
 
@@ -198,8 +198,8 @@
 
         document.addEventListener("mousemove", move);
         document.addEventListener("mouseup", up);
-      },
-    },
+      }
+    }
   };
 </script>
 
@@ -305,30 +305,30 @@ export default {
           style: {
             top: "0",
             left: "0",
-            background: "lightblue",
+            background: "lightblue"
           },
-          label: "文本1",
+          label: "文本1"
         },
         {
           style: {
             top: "20px",
             left: "10px",
-            background: "lightgrey",
+            background: "lightgrey"
           },
-          label: "文本2",
+          label: "文本2"
         },
         {
           style: {
             top: "40px",
             left: "20px",
-            background: "lightgreen",
+            background: "lightgreen"
           },
-          label: "文本3",
-        },
+          label: "文本3"
+        }
       ],
       showMenu: false,
       menuPos: {},
-      currentComponent: null,
+      currentComponent: null
     };
   },
   methods: {
@@ -346,7 +346,7 @@ export default {
       const startLeft = Number(pos.left.replace("px", ""));
 
       // mousemove 修改位置
-      const move = (moveEvent) => {
+      const move = moveEvent => {
         const currX = moveEvent.clientX;
         const currY = moveEvent.clientY;
         pos.top = currY - startY + startTop;
@@ -355,7 +355,7 @@ export default {
         selected.style = {
           top: pos.top + "px",
           left: pos.left + "px",
-          background: pos.background,
+          background: pos.background
         };
       };
 
@@ -373,7 +373,7 @@ export default {
       this.currentComponent = e.currentTarget.dataset.index;
       this.menuPos = {
         top: e.offsetY + "px",
-        left: e.offsetX + "px",
+        left: e.offsetX + "px"
       };
       this.showMenu = true;
     },
@@ -387,7 +387,7 @@ export default {
           if (curIndex != len) {
             [tmp[curIndex + 1], tmp[curIndex]] = [
               tmp[curIndex],
-              tmp[curIndex + 1],
+              tmp[curIndex + 1]
             ];
             this.$set(this, "componentData", tmp);
           }
@@ -396,7 +396,7 @@ export default {
           if (curIndex != 0) {
             [tmp[curIndex - 1], tmp[curIndex]] = [
               tmp[curIndex],
-              tmp[curIndex - 1],
+              tmp[curIndex - 1]
             ];
             this.$set(this, "componentData", tmp);
           }
@@ -418,8 +418,8 @@ export default {
           this.$set(this, "componentData", tmp);
           break;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -548,7 +548,7 @@ export default {
       :style="item.style"
       :data-index="index"
       @click="
-        (e) => {
+        e => {
           e.stopPropagation();
           selected = index;
         }
@@ -565,7 +565,7 @@ export default {
           top: dot[1] + 'px',
           width: dotSize + 'px',
           height: dotSize + 'px',
-          cursor: dot[2],
+          cursor: dot[2]
         }"
         @mousedown="handleMouseDown"
         :data-type="dot[2].split('-')[0]"
@@ -585,19 +585,19 @@ export default {
             left: "30px",
             height: "100px",
             width: "100px",
-            background: "lightblue",
-          },
-        },
+            background: "lightblue"
+          }
+        }
       ],
       selected: null,
-      dotSize: 4,
+      dotSize: 4
     };
   },
   methods: {
     handleMouseDown(e) {
       const component = this.componentData[this.selected];
       const type = e.target.dataset.type;
-      const move = (me) => {
+      const move = me => {
         let t = { ...component.style };
         // 东西方向能修改宽度
         if (type.indexOf("e") > -1)
@@ -622,7 +622,7 @@ export default {
       };
       document.addEventListener("mousemove", move);
       document.addEventListener("mouseup", up);
-    },
+    }
   },
   computed: {
     dots() {
@@ -638,12 +638,12 @@ export default {
           [width / 2, 0 - this.dotSize, "n-resize"],
           [width / 2, height, "s-resize"],
           [0 - this.dotSize, height / 2, "w-resize"],
-          [width, height / 2, "e-resize"],
+          [width, height / 2, "e-resize"]
         ];
       }
       return [];
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -722,25 +722,26 @@ recordSnapshot(state) {
   - 撤销后做了新的操作就把新的快照数据加入数组，更新索引
 - 重做 就是快照索引加一，更新索引指向数据给画布
 
-## 吸附 标线
+## 吸附 对齐
 
-吸附就是在拖拽组件时，如果它和另一个组件的距离比较接近，就会自动吸附在一起。
+参考 `Sketch` 墨刀
 
-思路：
+<img :src="$withBase('/eng_vdrag_2.png')" alt="标线">
 
-- 标线：在页面上创建 6 条线，分别是三横三竖，这 6 条线的作用是对齐
-  - 上下方向的两个组件左边、中间、右边对齐时会出现竖线
-  - 左右方向的两个组件上边、中间、下边对齐时会出现横线
-- 吸附
-  - 吸附有个距离，如果两个组件距离小于这个吸附距离就吸附在一起
+可以看到，一个组件在画布中可以由 6 条线 `(vt / vm / vb | hl / hm / hr)` 来表示，组件移动过程中的对齐其实就是组件的 6 条线到其它组件线的集合中寻找临近线，找到后考虑 吸附 + 对齐 的过程。
 
-例如
+对齐吸附：横向左移动为例，它的 `hl / hm / hr` 会不断的去查找与这 3 条线相邻最近的线。
 
-- 组件 1 坐标 `x:0 y:0` 宽高 100
-- 组件 2 坐标 `x:0 y:103`
-- 吸附距离 3
+- 当没有找到相邻线时，组件跟随鼠标移动
+- 当初次找到时，组件便移动一个较大距离吸附过去
+- 当在吸附线上再次移动时，继续查找相邻线，看是否有下一条吸附线
+  - 如果有，则移动到下一条吸附线上
+  - 如果没有，则在鼠标移动一定距离后，组件离开
 
-满足吸附条件，就将组件 2 的 `y` 设置为 100，这样就吸附在一起
+具体：
+
+- 向下移动
+  - 显示水平线
 
 ::: demo
 
@@ -786,8 +787,8 @@ export default {
             left: "0",
             width: "100px",
             height: "100px",
-            background: "lightblue",
-          },
+            background: "lightblue"
+          }
         },
         {
           style: {
@@ -795,9 +796,9 @@ export default {
             left: "100px",
             width: "100px",
             height: "100px",
-            background: "lightgrey",
-          },
-        },
+            background: "lightgrey"
+          }
+        }
       ],
       currentComponent: null,
       lines: ["xt", "xc", "xb", "yl", "yc", "yr"], // 分别对应三条横线和三条竖线
@@ -808,18 +809,20 @@ export default {
         xb: false, // 水平底部
         yl: false, // 垂直左边
         yc: false, // 垂直中间
-        yr: false, // 垂直右边
-      },
+        yr: false // 垂直右边
+      }
     };
   },
   methods: {
     hideLine() {
-      Object.keys(this.lineStatus).forEach((line) => {
+      Object.keys(this.lineStatus).forEach(line => {
         this.lineStatus[line] = false;
       });
     },
-    showLine(currentComponent, index, top, left) {
-      const rest = this.componentData.filter((c) => c != currentComponent)[0];
+    showLine(currentComponent, index, top, left, toDown, toLeft) {
+      console.log("left:" + left);
+      console.log("top:" + top);
+      const rest = this.componentData.filter(c => c != currentComponent)[0];
       const rwidth = +rest.style.width.replace("px", "");
       const rheight = +rest.style.height.replace("px", "");
       const rtop = +rest.style.top.replace("px", "");
@@ -829,55 +832,63 @@ export default {
       this.hideLine();
       const lines = this.$refs;
       let changeLeft, changeTop;
-      if (Math.abs(left - rleft) <= this.diff) {
-        this.lineStatus.yl = true;
-        lines.yl[0].style.left = left + "px";
-        lines.yl[0].style.top = 0;
-        changeLeft = rleft;
-      } else if (Math.abs(left + width - (rleft + rwidth)) <= this.diff) {
-        this.lineStatus.yr = true;
-        lines.yr[0].style.left = left + width + "px";
-        lines.yr[0].style.top = 0;
-        changeLeft = rleft;
-      } else if (
-        Math.abs(left + width / 2 - (rleft + rwidth / 2)) <= this.diff
-      ) {
-        this.lineStatus.yc = true;
-        lines.yc[0].style.left = left + width / 2 + "px";
-        lines.yc[0].style.top = 0;
-        changeLeft = rleft;
+
+      // 上下移动
+      if (toDown) {
+        if (Math.abs(top - rtop) <= this.diff) {
+          this.lineStatus.xt = true;
+          lines.xt[0].style.left = 0;
+          lines.xt[0].style.top = top + "px";
+          changeTop = rtop;
+        }
+        if (Math.abs(top + height - (rtop + rheight)) <= this.diff) {
+          this.lineStatus.xb = true;
+          lines.xb[0].style.left = 0;
+          lines.xb[0].style.top = top + height + "px";
+          changeTop = rtop;
+        }
+        if (Math.abs(top + height / 2 - (rtop + rheight / 2)) <= this.diff) {
+          this.lineStatus.xc = true;
+          lines.xc[0].style.left = 0;
+          lines.xc[0].style.top = top + height / 2 + "px";
+          changeTop = rtop;
+        }
       }
-      if (Math.abs(top - rtop) <= this.diff) {
-        this.lineStatus.xt = true;
-        lines.xt[0].style.left = 0;
-        lines.xt[0].style.top = top + "px";
-        changeTop = rtop;
-      } else if (Math.abs(top + height - (rtop + rheight)) <= this.diff) {
-        this.lineStatus.xb = true;
-        lines.xb[0].style.left = 0;
-        lines.xb[0].style.top = top + height + "px";
-        changeTop = rtop;
-      } else if (
-        Math.abs(top + height / 2 - (rtop + rheight / 2)) <= this.diff
-      ) {
-        this.lineStatus.xc = true;
-        lines.xc[0].style.left = 0;
-        lines.xc[0].style.top = top + height / 2 + "px";
-        changeTop = rtop;
+      // 左右移动
+      if (toLeft) {
+        if (Math.abs(left - rleft) <= this.diff) {
+          this.lineStatus.yl = true;
+          lines.yl[0].style.left = left + "px";
+          lines.yl[0].style.top = 0;
+          changeLeft = rleft;
+        } else if (Math.abs(left + width - (rleft + rwidth)) <= this.diff) {
+          this.lineStatus.yr = true;
+          lines.yr[0].style.left = left + width + "px";
+          lines.yr[0].style.top = 0;
+          changeLeft = rleft;
+        } else if (
+          Math.abs(left + width / 2 - (rleft + rwidth / 2)) <= this.diff
+        ) {
+          this.lineStatus.yc = true;
+          lines.yc[0].style.left = left + width / 2 + "px";
+          lines.yc[0].style.top = 0;
+          changeLeft = rleft;
+        }
       }
+
       const style = currentComponent.style;
       if (changeLeft != undefined) {
         this.$set(this.componentData, index, {
           style: Object.assign(style, {
-            left: changeLeft + "px",
-          }),
+            left: changeLeft + "px"
+          })
         });
       }
       if (changeTop != undefined) {
         this.$set(this.componentData, index, {
           style: Object.assign(style, {
-            top: changeTop + "px",
-          }),
+            top: changeTop + "px"
+          })
         });
       }
     },
@@ -894,21 +905,29 @@ export default {
       const startLeft = Number(pos.left.replace("px", ""));
 
       // mousemove 修改位置
-      const move = (moveEvent) => {
+      const move = moveEvent => {
         const currX = moveEvent.clientX;
         const currY = moveEvent.clientY;
-
+        const toDown = currY - startY > 0 ? true : false;
+        const toLeft = currX - startX > 0 ? true : false;
         pos.top = currY - startY + startTop;
         pos.left = currX - startX + startLeft;
 
-        this.showLine(selected, e.target.dataset.index, pos.top, pos.left);
+        this.showLine(
+          selected,
+          e.target.dataset.index,
+          pos.top,
+          pos.left,
+          toDown,
+          toLeft
+        );
         // 修改当前组件样式
         selected.style = {
           top: pos.top + "px",
           left: pos.left + "px",
           background: pos.background,
           width: pos.width,
-          height: pos.height,
+          height: pos.height
         };
       };
 
@@ -921,8 +940,8 @@ export default {
 
       document.addEventListener("mousemove", move);
       document.addEventListener("mouseup", up);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -1022,8 +1041,8 @@ export default {
             left: "20px",
             background: "lightblue",
             height: "100px",
-            width: "100px",
-          },
+            width: "100px"
+          }
         },
         {
           style: {
@@ -1031,11 +1050,11 @@ export default {
             left: "110px",
             background: "lightgrey",
             height: "100px",
-            width: "100px",
-          },
-        },
+            width: "100px"
+          }
+        }
       ],
-      currentComponent: null,
+      currentComponent: null
     };
   },
   methods: {
@@ -1043,8 +1062,8 @@ export default {
       e.stopPropagation();
       console.log(e.target);
       this.currentComponent = this.componentData[e.target.dataset.index];
-    },
-  },
+    }
+  }
 };
 </script>
 

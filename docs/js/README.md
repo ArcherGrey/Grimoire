@@ -17,6 +17,8 @@
       - Array(100) 返回的是一个指向 100 个元素数组的指针，所以这里要解构
     - `Array(100).fill(0)`
   - 判断数组中是否存在元素 可以使用 `includes` (类数组对象也可以使用)
+  - `var a= new Array(3); a.map(e=>console.log(e))` 这里 `map` 不会执行
+    - 因为 `map` 只会在有值的索引上被调用
 - Object
   - Object.assign() 只能拷贝枚举对象（最外层属性） 所以是浅拷贝
   - JSON.parse(JSON.stringify(obj1)); 对于没有函数的 深拷贝
