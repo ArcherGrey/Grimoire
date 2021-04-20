@@ -120,17 +120,17 @@
       return {
         componentList: [
           {
-            label: "文本1"
+            label: "文本1",
           },
           {
-            label: "文本2"
+            label: "文本2",
           },
           {
-            label: "文本3"
-          }
+            label: "文本3",
+          },
         ],
         componentData: [],
-        operation: ""
+        operation: "",
       };
     },
     methods: {
@@ -148,7 +148,7 @@
         const component = JSON.parse(JSON.stringify(selected));
         component.style = {
           top: e.offsetY + "px",
-          left: e.offsetX + "px"
+          left: e.offsetX + "px",
         };
         const tmp = [...this.componentData, component];
         // 把组件信息加入到画布组件信息队列中
@@ -178,7 +178,7 @@
         const startLeft = Number(pos.left.replace("px", ""));
 
         // mousemove 修改位置
-        const move = moveEvent => {
+        const move = (moveEvent) => {
           const currX = moveEvent.clientX;
           const currY = moveEvent.clientY;
           pos.top = currY - startY + startTop;
@@ -186,7 +186,7 @@
           // 修改当前组件样式
           selected.style = {
             top: pos.top + "px",
-            left: pos.left + "px"
+            left: pos.left + "px",
           };
         };
 
@@ -198,8 +198,8 @@
 
         document.addEventListener("mousemove", move);
         document.addEventListener("mouseup", up);
-      }
-    }
+      },
+    },
   };
 </script>
 
@@ -305,30 +305,30 @@ export default {
           style: {
             top: "0",
             left: "0",
-            background: "lightblue"
+            background: "lightblue",
           },
-          label: "文本1"
+          label: "文本1",
         },
         {
           style: {
             top: "20px",
             left: "10px",
-            background: "lightgrey"
+            background: "lightgrey",
           },
-          label: "文本2"
+          label: "文本2",
         },
         {
           style: {
             top: "40px",
             left: "20px",
-            background: "lightgreen"
+            background: "lightgreen",
           },
-          label: "文本3"
-        }
+          label: "文本3",
+        },
       ],
       showMenu: false,
       menuPos: {},
-      currentComponent: null
+      currentComponent: null,
     };
   },
   methods: {
@@ -346,7 +346,7 @@ export default {
       const startLeft = Number(pos.left.replace("px", ""));
 
       // mousemove 修改位置
-      const move = moveEvent => {
+      const move = (moveEvent) => {
         const currX = moveEvent.clientX;
         const currY = moveEvent.clientY;
         pos.top = currY - startY + startTop;
@@ -355,7 +355,7 @@ export default {
         selected.style = {
           top: pos.top + "px",
           left: pos.left + "px",
-          background: pos.background
+          background: pos.background,
         };
       };
 
@@ -373,7 +373,7 @@ export default {
       this.currentComponent = e.currentTarget.dataset.index;
       this.menuPos = {
         top: e.offsetY + "px",
-        left: e.offsetX + "px"
+        left: e.offsetX + "px",
       };
       this.showMenu = true;
     },
@@ -387,7 +387,7 @@ export default {
           if (curIndex != len) {
             [tmp[curIndex + 1], tmp[curIndex]] = [
               tmp[curIndex],
-              tmp[curIndex + 1]
+              tmp[curIndex + 1],
             ];
             this.$set(this, "componentData", tmp);
           }
@@ -396,7 +396,7 @@ export default {
           if (curIndex != 0) {
             [tmp[curIndex - 1], tmp[curIndex]] = [
               tmp[curIndex],
-              tmp[curIndex - 1]
+              tmp[curIndex - 1],
             ];
             this.$set(this, "componentData", tmp);
           }
@@ -418,8 +418,8 @@ export default {
           this.$set(this, "componentData", tmp);
           break;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -548,7 +548,7 @@ export default {
       :style="item.style"
       :data-index="index"
       @click="
-        e => {
+        (e) => {
           e.stopPropagation();
           selected = index;
         }
@@ -565,7 +565,7 @@ export default {
           top: dot[1] + 'px',
           width: dotSize + 'px',
           height: dotSize + 'px',
-          cursor: dot[2]
+          cursor: dot[2],
         }"
         @mousedown="handleMouseDown"
         :data-type="dot[2].split('-')[0]"
@@ -585,19 +585,19 @@ export default {
             left: "30px",
             height: "100px",
             width: "100px",
-            background: "lightblue"
-          }
-        }
+            background: "lightblue",
+          },
+        },
       ],
       selected: null,
-      dotSize: 4
+      dotSize: 4,
     };
   },
   methods: {
     handleMouseDown(e) {
       const component = this.componentData[this.selected];
       const type = e.target.dataset.type;
-      const move = me => {
+      const move = (me) => {
         let t = { ...component.style };
         // 东西方向能修改宽度
         if (type.indexOf("e") > -1)
@@ -622,7 +622,7 @@ export default {
       };
       document.addEventListener("mousemove", move);
       document.addEventListener("mouseup", up);
-    }
+    },
   },
   computed: {
     dots() {
@@ -638,12 +638,12 @@ export default {
           [width / 2, 0 - this.dotSize, "n-resize"],
           [width / 2, height, "s-resize"],
           [0 - this.dotSize, height / 2, "w-resize"],
-          [width, height / 2, "e-resize"]
+          [width, height / 2, "e-resize"],
         ];
       }
       return [];
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -741,7 +741,11 @@ recordSnapshot(state) {
 具体：
 
 - 向下移动
-  - 显示水平线
+  - 顶部到顶部
+  - 顶部到底部
+  - 底部到底部
+  - 底部到顶部
+  - 中间到中间
 
 ::: demo
 
@@ -759,7 +763,7 @@ recordSnapshot(state) {
       @mousedown="handleMouseDown"
     >
       <!-- 自定义组件 -->
-      <div>自定义组件</div>
+      <!-- <div>自定义组件</div> -->
     </div>
 
     <!-- 标线 -->
@@ -785,10 +789,10 @@ export default {
           style: {
             top: "0",
             left: "0",
-            width: "100px",
-            height: "100px",
-            background: "lightblue"
-          }
+            width: "75px",
+            height: "75px",
+            background: "lightblue",
+          },
         },
         {
           style: {
@@ -796,9 +800,9 @@ export default {
             left: "100px",
             width: "100px",
             height: "100px",
-            background: "lightgrey"
-          }
-        }
+            background: "lightgrey",
+          },
+        },
       ],
       currentComponent: null,
       lines: ["xt", "xc", "xb", "yl", "yc", "yr"], // 分别对应三条横线和三条竖线
@@ -809,20 +813,18 @@ export default {
         xb: false, // 水平底部
         yl: false, // 垂直左边
         yc: false, // 垂直中间
-        yr: false // 垂直右边
-      }
+        yr: false, // 垂直右边
+      },
     };
   },
   methods: {
     hideLine() {
-      Object.keys(this.lineStatus).forEach(line => {
+      Object.keys(this.lineStatus).forEach((line) => {
         this.lineStatus[line] = false;
       });
     },
     showLine(currentComponent, index, top, left, toDown, toLeft) {
-      console.log("left:" + left);
-      console.log("top:" + top);
-      const rest = this.componentData.filter(c => c != currentComponent)[0];
+      const rest = this.componentData.filter((c, i) => i != index)[0];
       const rwidth = +rest.style.width.replace("px", "");
       const rheight = +rest.style.height.replace("px", "");
       const rtop = +rest.style.top.replace("px", "");
@@ -835,23 +837,37 @@ export default {
 
       // 上下移动
       if (toDown) {
-        if (Math.abs(top - rtop) <= this.diff) {
+        if (top < rtop && top + this.diff >= rtop) {
           this.lineStatus.xt = true;
           lines.xt[0].style.left = 0;
-          lines.xt[0].style.top = top + "px";
+          lines.xt[0].style.top = rtop + "px";
           changeTop = rtop;
-        }
-        if (Math.abs(top + height - (rtop + rheight)) <= this.diff) {
+        } else if (top < rtop + rheight && top + this.diff >= rtop + rheight) {
+          this.lineStatus.xt = true;
+          lines.xt[0].style.left = 0;
+          lines.xt[0].style.top = rtop + rheight + "px";
+          changeTop = rtop + rheight;
+        } else if (
+          top + height < rtop + rheight &&
+          top + height + this.diff >= rtop + rheight
+        ) {
           this.lineStatus.xb = true;
           lines.xb[0].style.left = 0;
-          lines.xb[0].style.top = top + height + "px";
-          changeTop = rtop;
-        }
-        if (Math.abs(top + height / 2 - (rtop + rheight / 2)) <= this.diff) {
+          lines.xb[0].style.top = rtop + rheight + "px";
+          changeTop = rtop + rheight;
+        } else if (top + height < rtop && top + height + this.diff >= rtop) {
+          this.lineStatus.xb = true;
+          lines.xb[0].style.left = 0;
+          lines.xb[0].style.top = rtop + "px";
+          changeTop = rtop - height;
+        } else if (
+          top + height / 2 < rtop + rheight / 2 &&
+          top + height / 2 + this.diff >= rtop + rheight / 2
+        ) {
           this.lineStatus.xc = true;
           lines.xc[0].style.left = 0;
-          lines.xc[0].style.top = top + height / 2 + "px";
-          changeTop = rtop;
+          lines.xc[0].style.top = rtop + rheight / 2 + "px";
+          changeTop = rtop + rheight / 2 - height / 2;
         }
       }
       // 左右移动
@@ -880,15 +896,15 @@ export default {
       if (changeLeft != undefined) {
         this.$set(this.componentData, index, {
           style: Object.assign(style, {
-            left: changeLeft + "px"
-          })
+            left: changeLeft + "px",
+          }),
         });
       }
       if (changeTop != undefined) {
         this.$set(this.componentData, index, {
           style: Object.assign(style, {
-            top: changeTop + "px"
-          })
+            top: changeTop + "px",
+          }),
         });
       }
     },
@@ -905,7 +921,7 @@ export default {
       const startLeft = Number(pos.left.replace("px", ""));
 
       // mousemove 修改位置
-      const move = moveEvent => {
+      const move = (moveEvent) => {
         const currX = moveEvent.clientX;
         const currY = moveEvent.clientY;
         const toDown = currY - startY > 0 ? true : false;
@@ -927,7 +943,7 @@ export default {
           left: pos.left + "px",
           background: pos.background,
           width: pos.width,
-          height: pos.height
+          height: pos.height,
         };
       };
 
@@ -940,8 +956,8 @@ export default {
 
       document.addEventListener("mousemove", move);
       document.addEventListener("mouseup", up);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -1041,8 +1057,8 @@ export default {
             left: "20px",
             background: "lightblue",
             height: "100px",
-            width: "100px"
-          }
+            width: "100px",
+          },
         },
         {
           style: {
@@ -1050,11 +1066,11 @@ export default {
             left: "110px",
             background: "lightgrey",
             height: "100px",
-            width: "100px"
-          }
-        }
+            width: "100px",
+          },
+        },
       ],
-      currentComponent: null
+      currentComponent: null,
     };
   },
   methods: {
@@ -1062,8 +1078,8 @@ export default {
       e.stopPropagation();
       console.log(e.target);
       this.currentComponent = this.componentData[e.target.dataset.index];
-    }
-  }
+    },
+  },
 };
 </script>
 
