@@ -2,6 +2,48 @@
 
 基于 `vue`
 
+## 业务痛点
+
+- 固定类型的气象数据展示页面重复开发 （活动页面重复开发）
+- 需求改变频繁
+- 开发时间短
+- 开发人力不足
+- 开发工作零碎 维护成本高
+- 开发流程涉及产品/运营 沟通成本高
+
+解决：
+
+- 组件复用
+- 拖拽生成
+- 配置修改
+
+类似游戏引擎
+
+## 要点
+
+- 组件化
+  - 动态组件 根据组件信息生成对应类型组件
+- dashboard 画布
+  - 数组保存每个组件
+  - 拖拽 缩放 删除 图层 放大缩小 吸附 标线 配置
+  - 配置表单 JSON Schema
+- 组件交互
+  - eventbus 发布订阅
+  - 固定类型 固定事件
+  - 初始化时绑定
+- 组件数据
+  - 配置请求 api
+- 页面预览
+  - 修改页面状态 读取缓存页面数据
+  - 页面挂载
+    - 实时渲染快
+    - 可能污染编辑器页面
+- 后台渲染
+- 页面分享
+  - 页面数据保存 得到数据 ID 根据 id 生成分享页面
+- 实时数据更新
+  - websocket 对应 id 请求
+
 ## 布局
 
 整体页面布局：
@@ -120,17 +162,17 @@
       return {
         componentList: [
           {
-            label: "文本1",
+            label: "文本1"
           },
           {
-            label: "文本2",
+            label: "文本2"
           },
           {
-            label: "文本3",
-          },
+            label: "文本3"
+          }
         ],
         componentData: [],
-        operation: "",
+        operation: ""
       };
     },
     methods: {
@@ -148,7 +190,7 @@
         const component = JSON.parse(JSON.stringify(selected));
         component.style = {
           top: e.offsetY + "px",
-          left: e.offsetX + "px",
+          left: e.offsetX + "px"
         };
         const tmp = [...this.componentData, component];
         // 把组件信息加入到画布组件信息队列中
@@ -178,7 +220,7 @@
         const startLeft = Number(pos.left.replace("px", ""));
 
         // mousemove 修改位置
-        const move = (moveEvent) => {
+        const move = moveEvent => {
           const currX = moveEvent.clientX;
           const currY = moveEvent.clientY;
           pos.top = currY - startY + startTop;
@@ -186,7 +228,7 @@
           // 修改当前组件样式
           selected.style = {
             top: pos.top + "px",
-            left: pos.left + "px",
+            left: pos.left + "px"
           };
         };
 
@@ -198,8 +240,8 @@
 
         document.addEventListener("mousemove", move);
         document.addEventListener("mouseup", up);
-      },
-    },
+      }
+    }
   };
 </script>
 
@@ -305,30 +347,30 @@ export default {
           style: {
             top: "0",
             left: "0",
-            background: "lightblue",
+            background: "lightblue"
           },
-          label: "文本1",
+          label: "文本1"
         },
         {
           style: {
             top: "20px",
             left: "10px",
-            background: "lightgrey",
+            background: "lightgrey"
           },
-          label: "文本2",
+          label: "文本2"
         },
         {
           style: {
             top: "40px",
             left: "20px",
-            background: "lightgreen",
+            background: "lightgreen"
           },
-          label: "文本3",
-        },
+          label: "文本3"
+        }
       ],
       showMenu: false,
       menuPos: {},
-      currentComponent: null,
+      currentComponent: null
     };
   },
   methods: {
@@ -346,7 +388,7 @@ export default {
       const startLeft = Number(pos.left.replace("px", ""));
 
       // mousemove 修改位置
-      const move = (moveEvent) => {
+      const move = moveEvent => {
         const currX = moveEvent.clientX;
         const currY = moveEvent.clientY;
         pos.top = currY - startY + startTop;
@@ -355,7 +397,7 @@ export default {
         selected.style = {
           top: pos.top + "px",
           left: pos.left + "px",
-          background: pos.background,
+          background: pos.background
         };
       };
 
@@ -373,7 +415,7 @@ export default {
       this.currentComponent = e.currentTarget.dataset.index;
       this.menuPos = {
         top: e.offsetY + "px",
-        left: e.offsetX + "px",
+        left: e.offsetX + "px"
       };
       this.showMenu = true;
     },
@@ -387,7 +429,7 @@ export default {
           if (curIndex != len) {
             [tmp[curIndex + 1], tmp[curIndex]] = [
               tmp[curIndex],
-              tmp[curIndex + 1],
+              tmp[curIndex + 1]
             ];
             this.$set(this, "componentData", tmp);
           }
@@ -396,7 +438,7 @@ export default {
           if (curIndex != 0) {
             [tmp[curIndex - 1], tmp[curIndex]] = [
               tmp[curIndex],
-              tmp[curIndex - 1],
+              tmp[curIndex - 1]
             ];
             this.$set(this, "componentData", tmp);
           }
@@ -418,8 +460,8 @@ export default {
           this.$set(this, "componentData", tmp);
           break;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -548,7 +590,7 @@ export default {
       :style="item.style"
       :data-index="index"
       @click="
-        (e) => {
+        e => {
           e.stopPropagation();
           selected = index;
         }
@@ -565,7 +607,7 @@ export default {
           top: dot[1] + 'px',
           width: dotSize + 'px',
           height: dotSize + 'px',
-          cursor: dot[2],
+          cursor: dot[2]
         }"
         @mousedown="handleMouseDown"
         :data-type="dot[2].split('-')[0]"
@@ -585,19 +627,19 @@ export default {
             left: "30px",
             height: "100px",
             width: "100px",
-            background: "lightblue",
-          },
-        },
+            background: "lightblue"
+          }
+        }
       ],
       selected: null,
-      dotSize: 4,
+      dotSize: 4
     };
   },
   methods: {
     handleMouseDown(e) {
       const component = this.componentData[this.selected];
       const type = e.target.dataset.type;
-      const move = (me) => {
+      const move = me => {
         let t = { ...component.style };
         // 东西方向能修改宽度
         if (type.indexOf("e") > -1)
@@ -622,7 +664,7 @@ export default {
       };
       document.addEventListener("mousemove", move);
       document.addEventListener("mouseup", up);
-    },
+    }
   },
   computed: {
     dots() {
@@ -638,12 +680,12 @@ export default {
           [width / 2, 0 - this.dotSize, "n-resize"],
           [width / 2, height, "s-resize"],
           [0 - this.dotSize, height / 2, "w-resize"],
-          [width, height / 2, "e-resize"],
+          [width, height / 2, "e-resize"]
         ];
       }
       return [];
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -738,14 +780,25 @@ recordSnapshot(state) {
   - 如果有，则移动到下一条吸附线上
   - 如果没有，则在鼠标移动一定距离后，组件离开
 
-具体：
+具体（a 是移动组件 b 是固定组件）：
 
-- 向下移动
-  - 顶部到顶部
-  - 顶部到底部
-  - 底部到底部
-  - 底部到顶部
-  - 中间到中间
+- 向下移动 依次会出现下面情况
+  - a 底部 = b 顶部 显示 水平底部线
+  - a 顶部 = b 顶部 显示 水平顶部线
+  - a 中间 = b 中间 显示 水平中线
+  - a 底部 = b 底部 显示 水平底部线
+  - a 顶部 = b 底部 显示 水平顶部线
+- 向左向右同理
+- 向上移动和向下出现顺序相反
+
+上下和左右分别构造两个数组来保存：
+
+- 判断条件 是否满足吸附
+- 显示的线的类型
+- 吸附后 线的位置
+- 吸附后 组件的位置
+
+按照顺序遍历数组，只要满足条件就退出，同时一个方向只会显示一条线
 
 ::: demo
 
@@ -791,8 +844,8 @@ export default {
             left: "0",
             width: "75px",
             height: "75px",
-            background: "lightblue",
-          },
+            background: "lightblue"
+          }
         },
         {
           style: {
@@ -800,9 +853,9 @@ export default {
             left: "100px",
             width: "100px",
             height: "100px",
-            background: "lightgrey",
-          },
-        },
+            background: "lightgrey"
+          }
+        }
       ],
       currentComponent: null,
       lines: ["xt", "xc", "xb", "yl", "yc", "yr"], // 分别对应三条横线和三条竖线
@@ -813,17 +866,17 @@ export default {
         xb: false, // 水平底部
         yl: false, // 垂直左边
         yc: false, // 垂直中间
-        yr: false, // 垂直右边
-      },
+        yr: false // 垂直右边
+      }
     };
   },
   methods: {
     hideLine() {
-      Object.keys(this.lineStatus).forEach((line) => {
+      Object.keys(this.lineStatus).forEach(line => {
         this.lineStatus[line] = false;
       });
     },
-    showLine(currentComponent, index, top, left, toDown, toLeft) {
+    showLine(currentComponent, index, top, left, toDown, toRight) {
       const rest = this.componentData.filter((c, i) => i != index)[0];
       const rwidth = +rest.style.width.replace("px", "");
       const rheight = +rest.style.height.replace("px", "");
@@ -833,80 +886,127 @@ export default {
       const height = +currentComponent.style.height.replace("px", "");
       this.hideLine();
       const lines = this.$refs;
-      let changeLeft, changeTop;
+      let changeLeft = left,
+        changeTop = top;
 
-      // 上下移动
-      if (toDown) {
-        if (top < rtop && top + this.diff >= rtop) {
-          this.lineStatus.xt = true;
-          lines.xt[0].style.left = 0;
-          lines.xt[0].style.top = rtop + "px";
-          changeTop = rtop;
-        } else if (top < rtop + rheight && top + this.diff >= rtop + rheight) {
-          this.lineStatus.xt = true;
-          lines.xt[0].style.left = 0;
-          lines.xt[0].style.top = rtop + rheight + "px";
-          changeTop = rtop + rheight;
-        } else if (
-          top + height < rtop + rheight &&
-          top + height + this.diff >= rtop + rheight
-        ) {
-          this.lineStatus.xb = true;
-          lines.xb[0].style.left = 0;
-          lines.xb[0].style.top = rtop + rheight + "px";
-          changeTop = rtop + rheight;
-        } else if (top + height < rtop && top + height + this.diff >= rtop) {
-          this.lineStatus.xb = true;
-          lines.xb[0].style.left = 0;
-          lines.xb[0].style.top = rtop + "px";
-          changeTop = rtop - height;
-        } else if (
-          top + height / 2 < rtop + rheight / 2 &&
-          top + height / 2 + this.diff >= rtop + rheight / 2
-        ) {
-          this.lineStatus.xc = true;
-          lines.xc[0].style.left = 0;
-          lines.xc[0].style.top = rtop + rheight / 2 + "px";
-          changeTop = rtop + rheight / 2 - height / 2;
+      const rules = {
+        updown: [
+          {
+            condition: top + height < rtop && top + height + this.diff >= rtop,
+            line: "xb",
+            ltop: rtop,
+            top: rtop - height
+          },
+          {
+            condition: top < rtop && top + this.diff >= rtop,
+            line: "xt",
+            ltop: rtop,
+            top: rtop
+          },
+          {
+            condition:
+              top + height / 2 < rtop + rheight / 2 &&
+              top + height / 2 + this.diff >= rtop + rheight / 2,
+            line: "xc",
+            ltop: rtop + rheight / 2,
+            top: rtop + rheight / 2 - height / 2
+          },
+          {
+            condition:
+              top + height < rtop + rheight &&
+              top + height + this.diff >= rtop + rheight,
+            line: "xb",
+            ltop: rtop + rheight,
+            top: rtop + rheight - height
+          },
+          {
+            condition:
+              top < rtop + rheight && top + this.diff >= rtop + rheight,
+            line: "xt",
+            ltop: rtop + rheight,
+            top: rtop + rheight
+          }
+        ],
+        leftright: [
+          {
+            condition:
+              left + width < rleft && left + width + this.diff >= rleft,
+            line: "yr",
+            lleft: rleft,
+            left: rleft - width
+          },
+          {
+            condition: left < rleft && left + this.diff >= rleft,
+            line: "yl",
+            lleft: rleft,
+            left: rleft
+          },
+          {
+            condition:
+              left + width / 2 < rleft + rwidth / 2 &&
+              left + width / 2 + this.diff >= rleft + rwidth / 2,
+            line: "yc",
+            lleft: rleft + rwidth / 2,
+            left: rleft + rwidth / 2 - width / 2
+          },
+          {
+            condition:
+              left + width < rleft + rwidth &&
+              left + width + this.diff >= rleft + rwidth,
+            line: "yr",
+            lleft: rleft + rwidth,
+            left: rleft + rwidth - width
+          },
+          {
+            condition:
+              left < rleft + rwidth && left + this.diff >= rleft + rwidth,
+            line: "yl",
+            lleft: rleft + rwidth,
+            left: rleft + rwidth
+          }
+        ]
+      };
+
+      // 向上顺序相反
+      if (!toDown) {
+        rules.updown.reverse();
+      }
+      for (let t of rules.updown) {
+        if (t.condition) {
+          this.lineStatus[t.line] = true;
+          lines[t.line][0].style.left = 0;
+          lines[t.line][0].style.top = t.ltop + "px";
+          changeTop = t.top;
+          break;
         }
       }
-      // 左右移动
-      if (toLeft) {
-        if (Math.abs(left - rleft) <= this.diff) {
-          this.lineStatus.yl = true;
-          lines.yl[0].style.left = left + "px";
-          lines.yl[0].style.top = 0;
-          changeLeft = rleft;
-        } else if (Math.abs(left + width - (rleft + rwidth)) <= this.diff) {
-          this.lineStatus.yr = true;
-          lines.yr[0].style.left = left + width + "px";
-          lines.yr[0].style.top = 0;
-          changeLeft = rleft;
-        } else if (
-          Math.abs(left + width / 2 - (rleft + rwidth / 2)) <= this.diff
-        ) {
-          this.lineStatus.yc = true;
-          lines.yc[0].style.left = left + width / 2 + "px";
-          lines.yc[0].style.top = 0;
-          changeLeft = rleft;
+      // 向左相反
+      if (!toRight) {
+        rules.leftright.reverse();
+      }
+      for (let t of rules.leftright) {
+        if (t.condition) {
+          this.lineStatus[t.line] = true;
+          lines[t.line][0].style.left = t.lleft + "px";
+          lines[t.line][0].style.top = 0;
+          changeLeft = t.left;
+          break;
         }
       }
 
       const style = currentComponent.style;
-      if (changeLeft != undefined) {
-        this.$set(this.componentData, index, {
-          style: Object.assign(style, {
-            left: changeLeft + "px",
-          }),
-        });
-      }
-      if (changeTop != undefined) {
-        this.$set(this.componentData, index, {
-          style: Object.assign(style, {
-            top: changeTop + "px",
-          }),
-        });
-      }
+
+      this.$set(this.componentData, index, {
+        style: Object.assign(style, {
+          left: changeLeft + "px"
+        })
+      });
+
+      this.$set(this.componentData, index, {
+        style: Object.assign(style, {
+          top: changeTop + "px"
+        })
+      });
     },
     handleMouseDown(e) {
       e.stopPropagation();
@@ -921,21 +1021,20 @@ export default {
       const startLeft = Number(pos.left.replace("px", ""));
 
       // mousemove 修改位置
-      const move = (moveEvent) => {
+      const move = moveEvent => {
         const currX = moveEvent.clientX;
         const currY = moveEvent.clientY;
         const toDown = currY - startY > 0 ? true : false;
-        const toLeft = currX - startX > 0 ? true : false;
+        const toRight = currX - startX > 0 ? true : false;
         pos.top = currY - startY + startTop;
         pos.left = currX - startX + startLeft;
-
         this.showLine(
           selected,
           e.target.dataset.index,
           pos.top,
           pos.left,
           toDown,
-          toLeft
+          toRight
         );
         // 修改当前组件样式
         selected.style = {
@@ -943,7 +1042,7 @@ export default {
           left: pos.left + "px",
           background: pos.background,
           width: pos.width,
-          height: pos.height,
+          height: pos.height
         };
       };
 
@@ -956,8 +1055,8 @@ export default {
 
       document.addEventListener("mousemove", move);
       document.addEventListener("mouseup", up);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -1057,8 +1156,8 @@ export default {
             left: "20px",
             background: "lightblue",
             height: "100px",
-            width: "100px",
-          },
+            width: "100px"
+          }
         },
         {
           style: {
@@ -1066,11 +1165,11 @@ export default {
             left: "110px",
             background: "lightgrey",
             height: "100px",
-            width: "100px",
-          },
-        },
+            width: "100px"
+          }
+        }
       ],
-      currentComponent: null,
+      currentComponent: null
     };
   },
   methods: {
@@ -1078,8 +1177,8 @@ export default {
       e.stopPropagation();
       console.log(e.target);
       this.currentComponent = this.componentData[e.target.dataset.index];
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -1151,3 +1250,225 @@ export default {
 默认自定义数据可以添加在 `componentData` 里面的一个属性
 
 远程数据可以配置一个 `url` 属性利用 `websocket` 根据组件 `id` 订阅更新
+
+## 组合 拆分
+
+技术点：
+
+- 选中区域
+  - 一个加边框 `div` 来显示
+  - `mouseDown`
+    - 画布决定起始位置 设置 `showArea = true`
+  - `mouseMove`
+    - 更新区域大小 根据 `offet-start` 正负情况修改 定位样式
+  - `mouseUp`
+    - 判断选中的组件 显示选中区域
+      - 根据左上角和宽高 是否完全包裹组件的左上角和宽高 符合条件就加入数组
+      - 遍历数组更新四个顶点 根据顶点构建选中区域样式
+    - 移除事件绑定 设置 `showArea = false`
+  - 问题
+    - 移动的时候 offsetY 有的时候会变成一半，起初以为是冒泡导致，发现阻止冒泡也没效果
+      - 原因是 mousemove 过程中，触发的事件源元素可能会变成区域元素导致相对位置变化
+      - 解决：在区域元素样式上添加 `pointer-events: none;` 使得区域元素永远不会成为鼠标事件的 `target`
+- 组合后的移动、~~旋转~~
+- 组合后的放大缩小
+- 拆分后子组件样式的恢复
+
+组合后，把组件信息从数组中刪除，把选中的组件信息重新生成组合组件，再加入数组
+拆分后，把组合组件的每个组件信息重新计算，再添加进组件数组
+
+::: demo
+
+```vue
+<template>
+  <!-- 画板 -->
+  <div
+    class="content"
+    ref="content"
+    @click="selected = null"
+    @mousedown="contentMouseDown"
+  >
+    <!-- 模拟外层包裹组件 -->
+    <div
+      v-for="(item, index) in componentData"
+      :key="index"
+      class="component"
+      :style="item.style"
+      :data-index="index"
+      @mousedown="handleMouseDown"
+    >
+      <!-- 自定义组件 -->
+    </div>
+
+    <!-- 区域 -->
+    <div class="area" v-show="showArea" :style="areaStyle"></div>
+
+    <!-- 选中区域 -->
+    <div class="area" v-show="showSelectArea" :style="selectAreaStyle"></div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      componentData: [
+        {
+          style: {
+            top: "30px",
+            left: "30px",
+            width: "50px",
+            height: "50px",
+            background: "lightblue"
+          }
+        },
+        {
+          style: {
+            top: "30px",
+            left: "100px",
+            width: "50px",
+            height: "50px",
+            background: "lightgrey"
+          }
+        }
+      ],
+      currentComponent: null,
+      showArea: false,
+      showSelectArea: false,
+      areaStyle: {},
+      selectAreaStyle: {},
+      result: []
+    };
+  },
+  methods: {
+    handleMouseDown() {},
+    contentMouseDown(e) {
+      this.result = [];
+      const startX = e.offsetX;
+      const startY = e.offsetY;
+
+      // 画布宽高
+      const width = this.$refs.content.clientWidth;
+      const height = this.$refs.content.clientHeight;
+      const move = e => {
+        const curX = e.offsetX;
+        const curY = e.offsetY;
+
+        this.areaStyle = Object.assign(
+          {},
+          {
+            position: "absolute",
+            width: Math.abs(curX - startX) + "px",
+            height: Math.abs(curY - startY) + "px"
+          },
+          curX - startX >= 0
+            ? { left: startX + "px" }
+            : { right: width - startX + "px" },
+          curY - startY >= 0
+            ? { top: startY + "px" }
+            : { bottom: height - startY + "px" }
+        );
+        this.showArea = true;
+      };
+      const up = e => {
+        console.log(e);
+        const style = Object.assign({}, this.areaStyle);
+        for (let k in style) {
+          style[k] = +style[k].replace("px", "");
+        }
+        const x = style.left || width - (style.right + style.width);
+        const y = style.top || height - (style.bottom + style.height);
+        const awidth = style.width;
+        const aheight = style.height;
+        this.componentData.forEach(component => {
+          let { left, top } = component.style;
+          let cwidth = component.style.width;
+          let cheight = component.style.height;
+          left = +left.replace("px", "");
+          top = +top.replace("px", "");
+          cwidth = +cwidth.replace("px", "");
+          cheight = +cheight.replace("px", "");
+          if (
+            x <= left &&
+            y <= top &&
+            left + cwidth <= x + awidth &&
+            top + cheight <= y + aheight
+          ) {
+            this.result.push(component);
+          }
+        });
+
+        this.showArea = false;
+        this.areaStyle = {};
+        this.$refs.content.removeEventListener("mousemove", move);
+        this.$refs.content.removeEventListener("mouseup", up);
+      };
+
+      this.$refs.content.addEventListener("mousemove", move);
+      this.$refs.content.addEventListener("mouseup", up);
+    }
+  },
+  watch: {
+    result(val) {
+      if (val.length) {
+        let aleft = Infinity,
+          atop = Infinity,
+          aright = -Infinity,
+          abottom = -Infinity;
+        val.forEach(v => {
+          let { left, top, width, height } = v.style;
+          left = +left.replace("px", "");
+          top = +top.replace("px", "");
+          height = +height.replace("px", "");
+          width = +width.replace("px", "");
+          if (left < aleft) aleft = left;
+          if (top < atop) atop = top;
+          if (left + width > aright) aright = left + width;
+          if (top + height > abottom) abottom = top + height;
+        });
+        this.selectAreaStyle = {
+          position: "absolute",
+          top: atop + "px",
+          left: aleft + "px",
+          width: aright - aleft + "px",
+          height: abottom - atop + "px"
+        };
+        this.showSelectArea = true;
+      } else {
+        this.showSelectArea = false;
+        this.selectAreaStyle = {};
+      }
+    }
+  }
+};
+</script>
+
+<style>
+.content {
+  height: 200px;
+  flex: 1;
+  border: 1px solid lightblue;
+  margin-left: 10px;
+  position: relative;
+}
+
+.component {
+  position: absolute;
+  height: fit-content;
+  width: fit-content;
+  text-align: center;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: none;
+}
+.area {
+  border: 1px solid lightseagreen;
+  pointer-events: none;
+}
+</style>
+```
+
+:::
