@@ -37,7 +37,9 @@ module.exports = {
           { text: "排序", link: "/sort/" },
           { text: "图", link: "/graph/" },
           { text: "树", link: "/tree/" },
-          { text: "字符串", link: "/string/" }
+          { text: "字符串", link: "/string/" },
+          { text: "链表", link: "/linkedlist/" },
+          { text: "GIS", link: "/gis/" }
         ]
       }
     ],
@@ -392,6 +394,12 @@ module.exports = {
         {
           collapsable: false,
           children: ["", "kmp"]
+        }
+      ],
+      "/gis/": [
+        {
+          collapsable: false,
+          children: ["", "tp"]
         }
       ],
       "/linkedlist/": [
