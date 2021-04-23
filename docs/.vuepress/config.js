@@ -142,7 +142,17 @@ module.exports = {
       "/explorer/": [
         {
           collapsable: false,
-          children: ["", "render", "document_fragment", "svg"]
+          children: [
+            "",
+            {
+              title: "基础",
+              children: ["render", "document_fragment", "svg"]
+            },
+            {
+              title: "应用",
+              children: ["canvas_table"]
+            }
+          ]
         }
       ],
 
@@ -168,7 +178,8 @@ module.exports = {
                 "route",
                 "upload",
                 "vdrag",
-                "loader_plugin"
+                "loader_plugin",
+                "preview"
               ]
             },
             {
