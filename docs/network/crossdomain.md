@@ -57,8 +57,8 @@ function jsonp({ url, param, cb }) {
 jsonp({
   url: "http://localhost:3000/say",
   params: { wd: "haoxl" },
-  cb: "show"
-}).then(data => {
+  cb: "show",
+}).then((data) => {
   console.log(data);
 });
 
@@ -117,4 +117,67 @@ app.listen(3000);
     - `Width`
   - `POST` 不含简单请求的 `Content-Type`
 
-### postMessage
+### 反向代理
+
+- 正向代理：客户端知道最终访问的服务器，服务器无法感知具体的客户端，例子：科学上网
+- 反向代理：客户端不知道最终访问的服务器，通过代理服务器转发请求，例子：解决跨域
+
+`nodejs`:
+
+```js
+/* 前端 */
+var xhr = new XMLHttpRequest();
+
+// 前端开关：浏览器是否读写cookie
+xhr.withCredentials = true;
+
+// 访问http-proxy-middleware代理服务器
+xhr.open("get", "http://www.domain1.com:3000/login?user=admin", true);
+xhr.send();
+
+/* nodejs */
+var express = require("express");
+var proxy = require("http-proxy-middleware");
+var app = express();
+
+app.use(
+  "/",
+  proxy({
+    // 代理跨域目标接口
+    target: "http://www.domain2.com:8080",
+    changeOrigin: true,
+
+    // 修改响应头信息，实现跨域并允许带cookie
+    onProxyRes: function(proxyRes, req, res) {
+      res.header("Access-Control-Allow-Origin", "http://www.domain1.com");
+      res.header("Access-Control-Allow-Credentials", "true");
+    },
+
+    // 修改响应信息中的cookie域名
+    cookieDomainRewrite: "www.domain1.com", // 可以为false，表示不修改
+  })
+);
+
+app.listen(3000);
+console.log("Proxy server is listen at port 3000...");
+```
+
+修改配置 `nginx.conf`:
+
+```txt
+// proxy服务器
+server {
+    listen       81;
+    server_name  www.domain1.com;
+    location / {
+        proxy_pass   http://www.domain2.com:8080;  #反向代理
+        proxy_cookie_domain www.domain2.com www.domain1.com; #修改cookie里域名
+        index  index.html index.htm;
+
+        # 当用webpack-dev-server等中间件代理接口访问nignx时，此时无浏览器参与，故没有同源限制，下面的跨域配置可不启用
+        add_header Access-Control-Allow-Origin http://www.domain1.com;  #当前端只跨域不带cookie时，可为*
+        add_header Access-Control-Allow-Credentials true;
+    }
+}
+
+```
