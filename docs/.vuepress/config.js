@@ -132,7 +132,8 @@ module.exports = {
                 "resizediv",
                 "roll",
                 "triangle",
-                "dragdiv"
+                "dragdiv",
+                "amazing"
               ]
             }
           ]
