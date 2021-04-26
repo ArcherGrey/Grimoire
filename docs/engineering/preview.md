@@ -166,3 +166,7 @@
 
 - `sheetjs` 解析数据
 - `canvas-datagrid` 展示 [绘制表格](/explorer/canvas_table.html)
+
+## video
+
+`<video>` 标签
