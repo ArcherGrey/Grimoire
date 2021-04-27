@@ -162,17 +162,17 @@
       return {
         componentList: [
           {
-            label: "文本1"
+            label: "文本1",
           },
           {
-            label: "文本2"
+            label: "文本2",
           },
           {
-            label: "文本3"
-          }
+            label: "文本3",
+          },
         ],
         componentData: [],
-        operation: ""
+        operation: "",
       };
     },
     methods: {
@@ -190,7 +190,7 @@
         const component = JSON.parse(JSON.stringify(selected));
         component.style = {
           top: e.offsetY + "px",
-          left: e.offsetX + "px"
+          left: e.offsetX + "px",
         };
         const tmp = [...this.componentData, component];
         // 把组件信息加入到画布组件信息队列中
@@ -220,7 +220,7 @@
         const startLeft = Number(pos.left.replace("px", ""));
 
         // mousemove 修改位置
-        const move = moveEvent => {
+        const move = (moveEvent) => {
           const currX = moveEvent.clientX;
           const currY = moveEvent.clientY;
           pos.top = currY - startY + startTop;
@@ -228,7 +228,7 @@
           // 修改当前组件样式
           selected.style = {
             top: pos.top + "px",
-            left: pos.left + "px"
+            left: pos.left + "px",
           };
         };
 
@@ -240,8 +240,8 @@
 
         document.addEventListener("mousemove", move);
         document.addEventListener("mouseup", up);
-      }
-    }
+      },
+    },
   };
 </script>
 
@@ -347,30 +347,30 @@ export default {
           style: {
             top: "0",
             left: "0",
-            background: "lightblue"
+            background: "lightblue",
           },
-          label: "文本1"
+          label: "文本1",
         },
         {
           style: {
             top: "20px",
             left: "10px",
-            background: "lightgrey"
+            background: "lightgrey",
           },
-          label: "文本2"
+          label: "文本2",
         },
         {
           style: {
             top: "40px",
             left: "20px",
-            background: "lightgreen"
+            background: "lightgreen",
           },
-          label: "文本3"
-        }
+          label: "文本3",
+        },
       ],
       showMenu: false,
       menuPos: {},
-      currentComponent: null
+      currentComponent: null,
     };
   },
   methods: {
@@ -388,7 +388,7 @@ export default {
       const startLeft = Number(pos.left.replace("px", ""));
 
       // mousemove 修改位置
-      const move = moveEvent => {
+      const move = (moveEvent) => {
         const currX = moveEvent.clientX;
         const currY = moveEvent.clientY;
         pos.top = currY - startY + startTop;
@@ -397,7 +397,7 @@ export default {
         selected.style = {
           top: pos.top + "px",
           left: pos.left + "px",
-          background: pos.background
+          background: pos.background,
         };
       };
 
@@ -415,7 +415,7 @@ export default {
       this.currentComponent = e.currentTarget.dataset.index;
       this.menuPos = {
         top: e.offsetY + "px",
-        left: e.offsetX + "px"
+        left: e.offsetX + "px",
       };
       this.showMenu = true;
     },
@@ -429,7 +429,7 @@ export default {
           if (curIndex != len) {
             [tmp[curIndex + 1], tmp[curIndex]] = [
               tmp[curIndex],
-              tmp[curIndex + 1]
+              tmp[curIndex + 1],
             ];
             this.$set(this, "componentData", tmp);
           }
@@ -438,7 +438,7 @@ export default {
           if (curIndex != 0) {
             [tmp[curIndex - 1], tmp[curIndex]] = [
               tmp[curIndex],
-              tmp[curIndex - 1]
+              tmp[curIndex - 1],
             ];
             this.$set(this, "componentData", tmp);
           }
@@ -460,8 +460,8 @@ export default {
           this.$set(this, "componentData", tmp);
           break;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -581,7 +581,7 @@ export default {
 ```vue
 <template>
   <!-- 画板 -->
-  <div class="content" @click="selected = null">
+  <div class="content" @click="contentClick">
     <!-- 模拟外层包裹组件 -->
     <div
       v-for="(item, index) in componentData"
@@ -590,7 +590,7 @@ export default {
       :style="item.style"
       :data-index="index"
       @click="
-        e => {
+        (e) => {
           e.stopPropagation();
           selected = index;
         }
@@ -607,7 +607,7 @@ export default {
           top: dot[1] + 'px',
           width: dotSize + 'px',
           height: dotSize + 'px',
-          cursor: dot[2]
+          cursor: dot[2],
         }"
         @mousedown="handleMouseDown"
         :data-type="dot[2].split('-')[0]"
@@ -627,19 +627,28 @@ export default {
             left: "30px",
             height: "100px",
             width: "100px",
-            background: "lightblue"
-          }
-        }
+            background: "lightblue",
+          },
+        },
       ],
       selected: null,
-      dotSize: 4
+      dotSize: 4,
     };
   },
   methods: {
+    contentClick() {
+      this.selected = null;
+    },
+    // componentClick(index) {
+    //   return function(e) {
+    //     e.stopPropagation();
+    //     this.selected = index;
+    //   };
+    // },
     handleMouseDown(e) {
       const component = this.componentData[this.selected];
       const type = e.target.dataset.type;
-      const move = me => {
+      const move = (me) => {
         let t = { ...component.style };
         // 东西方向能修改宽度
         if (type.indexOf("e") > -1)
@@ -664,7 +673,7 @@ export default {
       };
       document.addEventListener("mousemove", move);
       document.addEventListener("mouseup", up);
-    }
+    },
   },
   computed: {
     dots() {
@@ -680,12 +689,12 @@ export default {
           [width / 2, 0 - this.dotSize, "n-resize"],
           [width / 2, height, "s-resize"],
           [0 - this.dotSize, height / 2, "w-resize"],
-          [width, height / 2, "e-resize"]
+          [width, height / 2, "e-resize"],
         ];
       }
       return [];
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -844,8 +853,8 @@ export default {
             left: "0",
             width: "75px",
             height: "75px",
-            background: "lightblue"
-          }
+            background: "lightblue",
+          },
         },
         {
           style: {
@@ -853,9 +862,9 @@ export default {
             left: "100px",
             width: "100px",
             height: "100px",
-            background: "lightgrey"
-          }
-        }
+            background: "lightgrey",
+          },
+        },
       ],
       currentComponent: null,
       lines: ["xt", "xc", "xb", "yl", "yc", "yr"], // 分别对应三条横线和三条竖线
@@ -866,13 +875,13 @@ export default {
         xb: false, // 水平底部
         yl: false, // 垂直左边
         yc: false, // 垂直中间
-        yr: false // 垂直右边
-      }
+        yr: false, // 垂直右边
+      },
     };
   },
   methods: {
     hideLine() {
-      Object.keys(this.lineStatus).forEach(line => {
+      Object.keys(this.lineStatus).forEach((line) => {
         this.lineStatus[line] = false;
       });
     },
@@ -895,13 +904,13 @@ export default {
             condition: top + height < rtop && top + height + this.diff >= rtop,
             line: "xb",
             ltop: rtop,
-            top: rtop - height
+            top: rtop - height,
           },
           {
             condition: top < rtop && top + this.diff >= rtop,
             line: "xt",
             ltop: rtop,
-            top: rtop
+            top: rtop,
           },
           {
             condition:
@@ -909,7 +918,7 @@ export default {
               top + height / 2 + this.diff >= rtop + rheight / 2,
             line: "xc",
             ltop: rtop + rheight / 2,
-            top: rtop + rheight / 2 - height / 2
+            top: rtop + rheight / 2 - height / 2,
           },
           {
             condition:
@@ -917,15 +926,15 @@ export default {
               top + height + this.diff >= rtop + rheight,
             line: "xb",
             ltop: rtop + rheight,
-            top: rtop + rheight - height
+            top: rtop + rheight - height,
           },
           {
             condition:
               top < rtop + rheight && top + this.diff >= rtop + rheight,
             line: "xt",
             ltop: rtop + rheight,
-            top: rtop + rheight
-          }
+            top: rtop + rheight,
+          },
         ],
         leftright: [
           {
@@ -933,13 +942,13 @@ export default {
               left + width < rleft && left + width + this.diff >= rleft,
             line: "yr",
             lleft: rleft,
-            left: rleft - width
+            left: rleft - width,
           },
           {
             condition: left < rleft && left + this.diff >= rleft,
             line: "yl",
             lleft: rleft,
-            left: rleft
+            left: rleft,
           },
           {
             condition:
@@ -947,7 +956,7 @@ export default {
               left + width / 2 + this.diff >= rleft + rwidth / 2,
             line: "yc",
             lleft: rleft + rwidth / 2,
-            left: rleft + rwidth / 2 - width / 2
+            left: rleft + rwidth / 2 - width / 2,
           },
           {
             condition:
@@ -955,16 +964,16 @@ export default {
               left + width + this.diff >= rleft + rwidth,
             line: "yr",
             lleft: rleft + rwidth,
-            left: rleft + rwidth - width
+            left: rleft + rwidth - width,
           },
           {
             condition:
               left < rleft + rwidth && left + this.diff >= rleft + rwidth,
             line: "yl",
             lleft: rleft + rwidth,
-            left: rleft + rwidth
-          }
-        ]
+            left: rleft + rwidth,
+          },
+        ],
       };
 
       // 向上顺序相反
@@ -998,14 +1007,14 @@ export default {
 
       this.$set(this.componentData, index, {
         style: Object.assign(style, {
-          left: changeLeft + "px"
-        })
+          left: changeLeft + "px",
+        }),
       });
 
       this.$set(this.componentData, index, {
         style: Object.assign(style, {
-          top: changeTop + "px"
-        })
+          top: changeTop + "px",
+        }),
       });
     },
     handleMouseDown(e) {
@@ -1021,7 +1030,7 @@ export default {
       const startLeft = Number(pos.left.replace("px", ""));
 
       // mousemove 修改位置
-      const move = moveEvent => {
+      const move = (moveEvent) => {
         const currX = moveEvent.clientX;
         const currY = moveEvent.clientY;
         const toDown = currY - startY > 0 ? true : false;
@@ -1042,7 +1051,7 @@ export default {
           left: pos.left + "px",
           background: pos.background,
           width: pos.width,
-          height: pos.height
+          height: pos.height,
         };
       };
 
@@ -1055,8 +1064,8 @@ export default {
 
       document.addEventListener("mousemove", move);
       document.addEventListener("mouseup", up);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -1156,8 +1165,8 @@ export default {
             left: "20px",
             background: "lightblue",
             height: "100px",
-            width: "100px"
-          }
+            width: "100px",
+          },
         },
         {
           style: {
@@ -1165,11 +1174,11 @@ export default {
             left: "110px",
             background: "lightgrey",
             height: "100px",
-            width: "100px"
-          }
-        }
+            width: "100px",
+          },
+        },
       ],
-      currentComponent: null
+      currentComponent: null,
     };
   },
   methods: {
@@ -1177,8 +1186,8 @@ export default {
       e.stopPropagation();
       console.log(e.target);
       this.currentComponent = this.componentData[e.target.dataset.index];
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -1292,7 +1301,7 @@ export default {
     <div
       v-for="(item, index) in componentData"
       :key="index"
-      class="component"
+      class="combine-component"
       :style="item.style"
       :data-index="index"
       @mousedown="handleMouseDown"
@@ -1319,8 +1328,8 @@ export default {
             left: "30px",
             width: "50px",
             height: "50px",
-            background: "lightblue"
-          }
+            background: "lightblue",
+          },
         },
         {
           style: {
@@ -1328,16 +1337,16 @@ export default {
             left: "100px",
             width: "50px",
             height: "50px",
-            background: "lightgrey"
-          }
-        }
+            background: "lightgrey",
+          },
+        },
       ],
       currentComponent: null,
       showArea: false,
       showSelectArea: false,
       areaStyle: {},
       selectAreaStyle: {},
-      result: []
+      result: [],
     };
   },
   methods: {
@@ -1350,7 +1359,7 @@ export default {
       // 画布宽高
       const width = this.$refs.content.clientWidth;
       const height = this.$refs.content.clientHeight;
-      const move = e => {
+      const move = (e) => {
         const curX = e.offsetX;
         const curY = e.offsetY;
 
@@ -1359,7 +1368,7 @@ export default {
           {
             position: "absolute",
             width: Math.abs(curX - startX) + "px",
-            height: Math.abs(curY - startY) + "px"
+            height: Math.abs(curY - startY) + "px",
           },
           curX - startX >= 0
             ? { left: startX + "px" }
@@ -1370,7 +1379,7 @@ export default {
         );
         this.showArea = true;
       };
-      const up = e => {
+      const up = (e) => {
         console.log(e);
         const style = Object.assign({}, this.areaStyle);
         for (let k in style) {
@@ -1380,7 +1389,7 @@ export default {
         const y = style.top || height - (style.bottom + style.height);
         const awidth = style.width;
         const aheight = style.height;
-        this.componentData.forEach(component => {
+        this.componentData.forEach((component) => {
           let { left, top } = component.style;
           let cwidth = component.style.width;
           let cheight = component.style.height;
@@ -1406,7 +1415,7 @@ export default {
 
       this.$refs.content.addEventListener("mousemove", move);
       this.$refs.content.addEventListener("mouseup", up);
-    }
+    },
   },
   watch: {
     result(val) {
@@ -1415,7 +1424,7 @@ export default {
           atop = Infinity,
           aright = -Infinity,
           abottom = -Infinity;
-        val.forEach(v => {
+        val.forEach((v) => {
           let { left, top, width, height } = v.style;
           left = +left.replace("px", "");
           top = +top.replace("px", "");
@@ -1431,15 +1440,15 @@ export default {
           top: atop + "px",
           left: aleft + "px",
           width: aright - aleft + "px",
-          height: abottom - atop + "px"
+          height: abottom - atop + "px",
         };
         this.showSelectArea = true;
       } else {
         this.showSelectArea = false;
         this.selectAreaStyle = {};
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -1452,7 +1461,7 @@ export default {
   position: relative;
 }
 
-.component {
+.combine-component {
   position: absolute;
   height: fit-content;
   width: fit-content;
