@@ -189,6 +189,11 @@ img {
 - 滚动平滑：使用 `scroll-behavior: smooth` 让滚动丝滑
 - 滚动位置：使用 `scroll-snap-type` 优化滚动效果，让滚动操作结束后，元素停止在适合的位置
 
+### before & after
+
+- `before after` 默认是一个行内元素，直接设置 `width height` 无效，需要设置 `display:block or inline-block`
+- `content` 大小不受 `width height` 影响
+
 ## 资源列表
 
 - 响应式
