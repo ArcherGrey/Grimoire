@@ -3,13 +3,16 @@
 ## 资源
 
 - [react hook](https://overreacted.io/zh-hans/a-complete-guide-to-useeffect/)
+- `customize-cra` 修改 `create react app` 配置
+  - 生效需要修改 `package.json`
+    - `"start": "react-scripts start" => "react-app-rewired start"`
 
 ## 常见问题
 
 ### 图片批量导入
 
 ```js
-items.map((i) => {
+items.map(i => {
   i.icon = require(`../../../../assets/images/point-${i.icon}.png`).default;
   return i;
 });
@@ -30,6 +33,11 @@ items.map((i) => {
 - map 生成序列常会用到
 - 最好是数据的 id
 - 不需要全局唯一，同级唯一即可
+
+### class
+
+- 监听 `state` 状态改变类似 `vue watch`
+  - 使用生命周期监听 `componentDidUpdate(prevProps, prevState)` 比较 `prevState this.state` 的具体数据差异，不一样就说明变化了
 
 ## 面试
 
