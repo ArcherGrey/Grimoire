@@ -241,7 +241,7 @@ module.exports = {
             },
             {
               title: "应用",
-              children: []
+              children: ["cra_webpack"]
             }
           ]
         }
