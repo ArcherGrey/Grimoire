@@ -20,6 +20,9 @@
   - 发布订阅
 - diff
 - v-dom
+- keep-alive
+- nexttick
+- watch computed
 
 ## react
 
@@ -49,12 +52,11 @@
   - forEach 循环不能遍历字符串、对象,可以遍历 Set/Map
 - web worker 多线程 复杂计算/ service worker 离线存储 / shared work 共享进程
 - 大量 div 渲染 - 虚拟列表 fiber
-- call bind apply
 - es6
   - 块级作用域
     - let const
   - 扩展数组
-  - 箭头函数
+  - 箭头函数 优缺点
   - 扩展运算符 ...
   - 解构
   - 模板字符串
@@ -71,6 +73,16 @@
 - 页面渲染中遇到复杂计算造成的卡顿怎么解决？
   - 在引入 js 文件的 script 标签中加 defer 或者 async 实现异步加载
   - 开启一个 web worker 子线程来计算
+- 定位
+- 盒模型
+- 浮动
+
+## html
+
+- 行内 块级标签
+- doctype
+- 语义
+- 输入地址到加载流程
 
 ## 工程
 
@@ -99,6 +111,11 @@
 - git
   - git reset
   - git revert
+- webpack
+  - loader 顺序
+  - plugin
+  - 打包 优化
+- 图片懒加载
 
 ## 网络
 
@@ -149,7 +166,7 @@
 - sessionstorage
 - indexDB、memory cache、disk cache
 
-## 算法
+## 手写
 
 - 青蛙跳台阶问题 尾递归
 - 旋转数组 189
@@ -162,9 +179,31 @@
 - 数组链表区别
 - 实现 Array.reduce()
 - 实现 Promise/Promise.all()
+- call bind apply
+- 深拷贝
+- 数组 并集 交集
+- 冒泡 优化
 - 快排
+- 科里化
+
+```js
+function multiplication() {
+  let args = Array.from(arguments);
+  return function() {
+    if (arguments[0] == undefined) {
+      return args.reduce((pre, next) => pre * next);
+    } else {
+      return multiplication(...args.concat(Array.from(arguments)));
+    }
+  };
+}
+```
+
 - 连续子数组的最大和
 - 20. 有效的括号
+- 2. 两数相加
+- 415. 字符串相加
+- 剑指 Offer 04. 二维数组中的查找
 - n 叉树求最大深度
 - 优先队列
 - 多人编辑冲突
