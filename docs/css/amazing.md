@@ -1,6 +1,6 @@
 # 特效合集
 
-## 按钮
+## `Hover`
 
 ### 立体按压
 
@@ -12,10 +12,10 @@
 ::: demo
 
 ```html
-<div class="button-1"></div>
+<div class="hover-1"></div>
 
 <style>
-  .button-1 {
+  .hover-1 {
     height: 100px;
     width: 300px;
     background: green;
@@ -25,7 +25,7 @@
     transition: all 0.3s;
     border-radius: 50px;
   }
-  .button-1:hover {
+  .hover-1:hover {
     box-shadow: 0 0 0px gray;
     transform: scale(0.9);
   }
@@ -33,8 +33,6 @@
 ```
 
 :::
-
-## 提示
 
 ### 亮框提示
 
@@ -45,13 +43,13 @@
 ::: demo
 
 ```html
-<ul class="tip-1">
+<ul class="hover-2">
   <li></li>
   <li></li>
   <li></li>
 </ul>
 <style>
-  .tip-1 li {
+  .hover-2 li {
     display: inline-block;
     height: 200px;
     width: 150px;
@@ -63,7 +61,7 @@
     cursor: pointer;
     transition: all 0.2s;
   }
-  .tip-1 li:hover {
+  .hover-2 li:hover {
     box-shadow: 0 0 30px yellow;
     border: 2px solid yellow;
     transform: translate(0, -10%);
@@ -122,6 +120,32 @@
     color: rgb(253, 219, 94);
     font-size: 3rem;
     text-shadow: 1px 2px 2px black;
+  }
+</style>
+```
+
+:::
+
+### 氖光效果（Neon）
+
+设置 `3~n` 层阴影效果，每一层的模糊半径（文字阴影的第三个参数）间隔较大，并且每一层的阴影颜色相同即可。
+
+::: demo
+
+```html
+<div class="font-2-bg">
+  <p class="font-2">氖光效果 Neon</p>
+</div>
+<style>
+  .font-2-bg {
+    background: #000;
+  }
+  .font-2 {
+    font-size: 50px;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 0 10px #0ebeff, 0 0 20px #0ebeff, 0 0 50px #0ebeff, 0 0 100px
+        #0ebeff, 0 0 200px #0ebeff;
   }
 </style>
 ```
@@ -269,3 +293,7 @@
 ```
 
 :::
+
+## 参考
+
+- [CSS 奇思妙想边框动画](https://juejin.cn/post/6918921604160290830#)

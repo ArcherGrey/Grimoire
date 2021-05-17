@@ -124,10 +124,10 @@ module.exports = {
 const baseSize = 32;
 // 设置 rem 函数
 function setRem() {
-  // 当前页面宽度相对于 1080 宽的缩放比例，可根据自己需要修改。
+  // 当前页面宽度相对于 1080 高的缩放比例，可根据自己需要修改。
   // 这个宽度就是实际设置 px 按照的分辨率
   // documentElement 就是 html 元素，也就是根元素
-  const scale = document.documentElement.clientWidth / 1080;
+  const scale = document.documentElement.clientHeight / 1080;
   // 设置页面根节点字体大小
   document.documentElement.style.fontSize =
     baseSize * Math.min(scale, 2) + "px";
