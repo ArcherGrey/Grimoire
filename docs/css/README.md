@@ -205,6 +205,7 @@ img {
   - [在线生成雪碧图](https://www.toptal.com/developers/css/sprite-generator)
 - 网站
   - [codepen-前端各种特效，在线实时渲染](https://codepen.io/)
+  - [渐变颜色集合](https://uigradients.com/)
 - 图标
   - [阿里巴巴矢量图标库](https://www.iconfont.cn/)
 - css
