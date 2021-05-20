@@ -72,6 +72,81 @@
 
 :::
 
+### 悬停显示内容
+
+- `transition` 提供动画效果
+- `opacity height` 控制显隐
+
+::: demo
+
+```html
+<div class="hover-3-card">
+  <div class="hover-3-info">
+    <h2>Hover cat</h2>
+    <p>
+      测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档
+      测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档
+      测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档
+      测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档
+      测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档
+      测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档
+      测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档
+      测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档
+      测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档测试文档
+    </p>
+  </div>
+</div>
+<style>
+  /* Transitions */
+  .hover-3-info {
+    transition: all 0.5s cubic-bezier(0.48, -0.28, 0.41, 1.4);
+  }
+
+  .hover-3-info p {
+    transition: all 0.4s ease-out;
+    margin: 0;
+  }
+
+  .hover-3-card {
+    background: #fff;
+    box-shadow: 0 0 5em rgba(0, 0, 0, 0.4);
+    width: 18em;
+    height: 22em;
+    position: relative;
+  }
+
+  .hover-3-card:hover .hover-3-info {
+    height: 12em;
+  }
+
+  .hover-3-card:hover .hover-3-info p {
+    opacity: 1;
+    transform: translateY(0);
+    overflow: auto;
+    height: 100%;
+  }
+
+  .hover-3-info {
+    background: #fff;
+    margin: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1em 1.5em;
+    overflow: hidden;
+    height: 4em;
+  }
+
+  .hover-3-info p {
+    opacity: 0;
+    transform: translateY(2em);
+  }
+</style>
+```
+
+:::
+
 ## 标题
 
 ### 标题前置短竖线

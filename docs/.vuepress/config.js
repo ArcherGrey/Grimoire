@@ -19,6 +19,7 @@ module.exports = {
           { text: "Css", link: "/css/" },
           { text: "浏览器", link: "/explorer/" },
           { text: "工程化", link: "/engineering/" },
+          { text: "可视化", link: "/visual/" },
           {
             text: "框架",
             items: [
@@ -247,6 +248,29 @@ module.exports = {
         }
       ],
       /* 框架 */
+
+      /* 可视化 */
+      "/visual/": [
+        {
+          collapsable: false,
+          children: [
+            "",
+            {
+              title: "基础/原理",
+              children: []
+            },
+            {
+              title: "Canvas",
+              children: ["canvas_tutorial"]
+            },
+            {
+              title: "WebGL",
+              children: []
+            }
+          ]
+        }
+      ],
+      /* 可视化 */
 
       /* 前端 */
 
