@@ -261,7 +261,7 @@ module.exports = {
             },
             {
               title: "Canvas",
-              children: ["canvas_tutorial"]
+              children: ["canvas_tutorial", "canvas_chart", "canvas_plane"]
             },
             {
               title: "WebGL",

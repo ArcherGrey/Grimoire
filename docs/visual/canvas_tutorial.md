@@ -363,6 +363,457 @@ export default {
 
 :::
 
+### `Path2D` 对象
+
+> 为了简化代码和提高性能，可以使用 `Path2D` 用来缓存或记录绘画命令
+
+常用 `API`：
+
+- `Path2D(path)`：返回一个 `Path2D` 对象，用一个路径或者一个 `svg path` 的字符串来初始化
+- `Path2D.addPath(path,transform)`：添加一条路径或者变换矩阵
+
+示例：
+
+::: demo
+
+```vue
+<template>
+  <canvas id="canvas-t-2-path2d"> </canvas>
+</template>
+
+<script>
+export default {
+  methods: {
+    drawPath2D() {
+      let canvas = document.getElementById("canvas-t-2-path2d");
+      if (canvas.getContext) {
+        let ctx = canvas.getContext("2d");
+
+        // 缓存正方形
+        let rectIns = new Path2D();
+        rectIns.rect(10, 10, 50, 50);
+        ctx.strokeStyle = "green";
+        ctx.stroke(rectIns);
+
+        // 缓存圆形
+        let circle = new Path2D();
+        circle.moveTo(125, 35);
+        circle.arc(100, 35, 25, 0, 2 * Math.PI);
+        ctx.fillStyle = "red";
+        ctx.fill(circle);
+
+        // 缓存 svg path 字符串
+        let p = new Path2D("M5 5 h 80 v 80 h -80 Z");
+        ctx.strokeStyle = "blue";
+        ctx.stroke(p);
+      }
+    }
+  },
+  mounted() {
+    this.drawPath2D();
+  }
+};
+</script>
+```
+
+:::
+
+## 设置样式
+
+> 通过设置 **绘制上下文** 对应属性来修改样式，绘制图形的样式由最近一次设置决定
+
+### 颜色
+
+通过两个属性来设置：
+
+- `fillStyle = color`：填充颜色
+- `strokeStyle = color`：描边颜色
+
+`color` 可以是：
+
+- `orange`
+- `#fff`
+- `rgb(255,255,0)`
+- `rgba(255,255,0,0.1)`
+
+`fillStyle` 示例：
+::: demo
+
+```vue
+<template>
+  <canvas id="canvas-t-3-fill"></canvas>
+</template>
+
+<script>
+export default {
+  methods: {
+    drawFillStyle() {
+      var ctx = document.getElementById("canvas-t-3-fill").getContext("2d");
+      for (var i = 0; i < 6; i++) {
+        for (var j = 0; j < 6; j++) {
+          ctx.fillStyle =
+            "rgb(" +
+            Math.floor(255 - 42.5 * i) +
+            "," +
+            Math.floor(255 - 42.5 * j) +
+            ",0)";
+          ctx.fillRect(j * 25, i * 25, 25, 25);
+        }
+      }
+    }
+  },
+  mounted() {
+    this.drawFillStyle();
+  }
+};
+</script>
+```
+
+:::
+
+`strokeStyle` 示例：
+
+::: demo
+
+```vue
+<template>
+  <canvas id="canvas-t-3-stroke"></canvas>
+</template>
+
+<script>
+export default {
+  methods: {
+    drawStrokeStyle() {
+      var ctx = document.getElementById("canvas-t-3-stroke").getContext("2d");
+      for (var i = 0; i < 6; i++) {
+        for (var j = 0; j < 6; j++) {
+          ctx.strokeStyle =
+            "rgb(0," +
+            Math.floor(255 - 42.5 * i) +
+            "," +
+            Math.floor(255 - 42.5 * j) +
+            ")";
+          ctx.beginPath();
+          ctx.arc(12.5 + j * 25, 12.5 + i * 25, 10, 0, Math.PI * 2, true);
+          ctx.stroke();
+        }
+      }
+    }
+  },
+  mounted() {
+    this.drawStrokeStyle();
+  }
+};
+</script>
+```
+
+:::
+
+### 透明度
+
+> `globalAlpha = transparencyValue` 设置透明度
+
+这样设置更灵活，可以单独设置轮廓和填充透明度：
+
+```js
+// 指定透明颜色，用于描边和填充样式
+ctx.strokeStyle = "rgba(255,0,0,0.5)";
+ctx.fillStyle = "rgba(255,0,0,0.5)";
+```
+
+例子：
+
+::: demo
+
+```vue
+<template>
+  <canvas id="canvas-t-3-globalAlpha"></canvas>
+</template>
+
+<script>
+export default {
+  methods: {
+    drawGlobalAlpha() {
+      var ctx = document
+        .getElementById("canvas-t-3-globalAlpha")
+        .getContext("2d");
+      // 画背景
+      ctx.fillStyle = "#FD0";
+      ctx.fillRect(0, 0, 75, 75);
+      ctx.fillStyle = "#6C0";
+      ctx.fillRect(75, 0, 75, 75);
+      ctx.fillStyle = "#09F";
+      ctx.fillRect(0, 75, 75, 75);
+      ctx.fillStyle = "#F30";
+      ctx.fillRect(75, 75, 75, 75);
+      ctx.fillStyle = "#FFF";
+
+      // 设置透明度值
+      ctx.globalAlpha = 0.2;
+
+      // 画半透明圆
+      for (var i = 0; i < 7; i++) {
+        ctx.beginPath();
+        ctx.arc(75, 75, 10 + 10 * i, 0, Math.PI * 2, true);
+        ctx.fill();
+      }
+    }
+  },
+  mounted() {
+    this.drawGlobalAlpha();
+  }
+};
+</script>
+```
+
+:::
+
+### 线
+
+线的样式属性：
+
+- `lineWidth`：线条宽度
+- `lineCap`：线条末端样式
+- `lineJoin`：线条之间结合处样式
+- `miterLimit`：限制当两条线相交时交接处最大长度
+
+虚线：
+
+- `getLineDash()`：获取当前虚线样式
+- `setLineDash()`：设置当前虚线样式
+- `lineDashOffset`：设置虚线样式的起始偏移
+
+像素边缘：
+
+::: demo
+
+```vue
+<template>
+  <canvas id="canvas-t-3-line"></canvas>
+</template>
+
+<script>
+export default {
+  methods: {
+    drawLine() {
+      var ctx = document.getElementById("canvas-t-3-line").getContext("2d");
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      // 边界不在像素边缘上
+      ctx.moveTo(5, 5);
+      ctx.lineTo(5, 100);
+
+      // 边界在像素边缘上
+      ctx.moveTo(25.5, 5);
+      ctx.lineTo(25.5, 100);
+      ctx.stroke();
+    }
+  },
+  mounted() {
+    this.drawLine();
+  }
+};
+</script>
+```
+
+:::
+
+<img :src="$withBase('/canvas_t_2.png')" alt="线">
+
+如果线条的边缘不在像素边界上，如左图就会导致渲染不精确，在像素边缘上就如右图，上面例子第一个线条边缘不在边界上，第二个在，明显第一个绘制不精确
+
+### 渐变
+
+- `createLinearGradient(x1, y1, x2, y2)` 线性渐变
+- `createRadialGradient(x1, y1, r1, x2, y2, r2)` 径向渐变
+- `gradient.addColorStop(position, color)` 添加色标
+
+`createLinearGradient` 例子:
+
+::: demo
+
+```vue
+<template>
+  <canvas id="canvas-t-3-linerGradients"></canvas>
+</template>
+
+<script>
+export default {
+  methods: {
+    drawLinerGradients() {
+      var ctx = document
+        .getElementById("canvas-t-3-linerGradients")
+        .getContext("2d");
+      // Create gradients
+      var lingrad = ctx.createLinearGradient(0, 0, 0, 150);
+      lingrad.addColorStop(0, "#00ABEB");
+      lingrad.addColorStop(0.5, "#fff");
+      lingrad.addColorStop(0.5, "#26C000");
+      lingrad.addColorStop(1, "#fff");
+
+      var lingrad2 = ctx.createLinearGradient(0, 50, 0, 95);
+      lingrad2.addColorStop(0.5, "#000");
+      lingrad2.addColorStop(1, "rgba(0,0,0,0)");
+
+      // assign gradients to fill and stroke styles
+      ctx.fillStyle = lingrad;
+      ctx.strokeStyle = lingrad2;
+
+      // draw shapes
+      ctx.fillRect(10, 10, 130, 130);
+      ctx.strokeRect(50, 50, 50, 50);
+    }
+  },
+  mounted() {
+    this.drawLinerGradients();
+  }
+};
+</script>
+```
+
+:::
+
+`createRadialGradient` 例子:
+
+::: demo
+
+```vue
+<template>
+  <canvas id="canvas-t-3-radialGradient"></canvas>
+</template>
+
+<script>
+export default {
+  methods: {
+    drawRadialGradient() {
+      var ctx = document
+        .getElementById("canvas-t-3-radialGradient")
+        .getContext("2d");
+      // Create gradients
+      var radgrad = ctx.createRadialGradient(45, 45, 10, 52, 50, 30);
+      radgrad.addColorStop(0, "#A7D30C");
+      radgrad.addColorStop(0.9, "#019F62");
+      radgrad.addColorStop(1, "rgba(1,159,98,0)");
+
+      var radgrad2 = ctx.createRadialGradient(105, 105, 20, 112, 120, 50);
+      radgrad2.addColorStop(0, "#FF5F98");
+      radgrad2.addColorStop(0.75, "#FF0188");
+      radgrad2.addColorStop(1, "rgba(255,1,136,0)");
+
+      var radgrad3 = ctx.createRadialGradient(95, 15, 15, 102, 20, 40);
+      radgrad3.addColorStop(0, "#00C9FF");
+      radgrad3.addColorStop(0.8, "#00B5E2");
+      radgrad3.addColorStop(1, "rgba(0,201,255,0)");
+
+      var radgrad4 = ctx.createRadialGradient(0, 150, 50, 0, 140, 90);
+      radgrad4.addColorStop(0, "#F4F201");
+      radgrad4.addColorStop(0.8, "#E4C700");
+      radgrad4.addColorStop(1, "rgba(228,199,0,0)");
+
+      // 画图形
+      ctx.fillStyle = radgrad4;
+      ctx.fillRect(0, 0, 150, 150);
+      ctx.fillStyle = radgrad3;
+      ctx.fillRect(0, 0, 150, 150);
+      ctx.fillStyle = radgrad2;
+      ctx.fillRect(0, 0, 150, 150);
+      ctx.fillStyle = radgrad;
+      ctx.fillRect(0, 0, 150, 150);
+    }
+  },
+  mounted() {
+    this.drawRadialGradient();
+  }
+};
+</script>
+```
+
+:::
+
+### 图案
+
+`createPattern(image, type)`:
+
+- `Image` 可以是一个 `Image` 对象的引用，或者另一个 `canvas` 对象
+- `Type`：`repeat，repeat-x，repeat-y 和 no-repeat`
+
+例：
+
+::: demo
+
+```vue
+<template>
+  <canvas id="canvas-t-3-Patterns"></canvas>
+</template>
+
+<script>
+export default {
+  methods: {
+    drawPatterns() {
+      var ctx = document.getElementById("canvas-t-3-Patterns").getContext("2d");
+      // 创建新 image 对象，用作图案
+      var img = new Image();
+      img.src = "/Grimoire/css_amazing_1.png";
+      img.onload = function() {
+        // 创建图案
+        var ptrn = ctx.createPattern(img, "repeat");
+        ctx.fillStyle = ptrn;
+        ctx.fillRect(0, 0, 150, 150);
+      };
+    }
+  },
+  mounted() {
+    this.drawPatterns();
+  }
+};
+</script>
+```
+
+:::
+
+### 阴影
+
+- `shadowOffsetX = float` x 轴延伸距离
+- `shadowOffsetY = float` y 轴延伸距离
+- `shadowBlur = float` 阴影模糊程度
+- `shadowColor = color` 阴影颜色
+
+文字阴影：
+
+::: demo
+
+```vue
+<template>
+  <canvas id="canvas-t-3-Shadows"></canvas>
+</template>
+
+<script>
+export default {
+  methods: {
+    drawShadows() {
+      var ctx = document.getElementById("canvas-t-3-Shadows").getContext("2d");
+      ctx.shadowOffsetX = 2;
+      ctx.shadowOffsetY = 2;
+      ctx.shadowBlur = 2;
+      ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
+
+      ctx.font = "20px Times New Roman";
+      ctx.fillStyle = "Black";
+      ctx.fillText("Sample String", 5, 30);
+      ctx.strokeText("Sample String", 150, 30);
+    }
+  },
+  mounted() {
+    this.drawShadows();
+  }
+};
+</script>
+```
+
+:::
+
+## 绘制文本
+
 ## 参考
 
 - [mdn canvas 教程](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial)
