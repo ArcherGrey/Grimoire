@@ -50,5 +50,11 @@
 ## 小问题
 
 - 图片加载失败会显示裂图，这里可以优化
+
   - 设置 `onerror` 请求失败替换 `src` 为错误提示图片路径 `onerror="this.src='default.jpg'"`
   - 注意可能导致无限循环 `onerror="this.src='default.jpg'; this.onerror=null"`
+
+- webpack
+  - devserve
+    - proxy 修改不生效
+      - 可能是缓存导致 请求显示`from disk cache`
