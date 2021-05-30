@@ -1,11 +1,28 @@
-# 简历模板
+# 面试总结
+
+## 简历模板
 
 - [全栈前端](https://hacknical.com/csvwolf/resume?locale=zh)
 
-# 常见问题
-
 ## vue
 
+### 原理
+
+- [响应式](/vue/reactivity.html)
+  - defineProperty 和 proxy
+  - nextTick 宏任务 微任务
+    - [事件循环](/js/run.html)
+- 事件绑定
+  - 原生事件绑定是通过 `addEventListener` 绑定给真实元素的
+  - 组件事件绑定是通过 Vue 自定义的 `$on` 实现的
+- 模版编译
+  - 解析生成 ast 遍历进行处理，将处理后的 ast 树转化微可执行代码
+- [vdom diff](/vue/vdom.html)
+- [路由](/engineering/route.html)
+
+### api
+
+- [生命周期](/vue/life.html)
 - v-if v-show 使用场景和区别
   - v-if
     - 是真正的条件渲染，会确保在切换过程中条件块内的事件监听器和组件被适当的销毁和重建
@@ -19,14 +36,36 @@
   - computed 缓存 依赖值变化才重新计算
     - 场景 计算开销大
   - watch 监听 每次变化都执行回调
-- 响应式 响应式就是在修改数据对象的时候会触发视图更新
-  - Object.defineProperty
-  - 发布订阅
-- diff
-- v-dom
-- keep-alive
-- nexttick
-- watch computed
+- data 组件里面返回一个函数
+  - 组件复用多次，data 是对象可能会造成冲突，避免被共享，创建多个实例
+- v-model 语法糖
+  - 默认会利用名为 value 的 prop 和名为 input 的事件
+- keep-alive 缓存组件状态 [文档](https://cn.vuejs.org/v2/api/#keep-alive)
+- [组件通信](/vue/componentCom.html)
+
+### 优化
+
+- 编码
+  - data 数据尽可能少，这样对应的数据劫持代价小
+  - 循环渲染的子元素数据绑定使用事件代理 使用 key 减少 diff 开销
+  - 需要缓存状态的使用 keep-alive
+  - 尽可能使用 v-if 替代 v-show 避免首次渲染消耗
+  - 路由懒加载 异步组件
+  - 防抖截流
+  - 第三方按需导入
+  - 图片懒加载
+  - 使用 `addEventListene` 绑定的事件销毁需要在 `beforeDestroy` 手动销毁，避免内存泄漏
+  - 长列表数据，纯展示不会有数据变化的不需要数据劫持来动态渲染可以使用 `object.freeze` 冻结对象
+- 打包
+  - gzip 压缩
+  - 图片压缩
+  - tree shaking
+  - cdn 加载第三方模块
+  - sourcemap 优化
+  - 设置缓存
+- 用户体验
+  - pwa
+  - 骨架屏
 
 ## react
 

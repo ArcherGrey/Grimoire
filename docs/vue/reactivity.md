@@ -23,8 +23,8 @@ Vue 会遍历 data 选项中所有 `property`，然后使用 `Object.definePrope
 ```js
 var vm = new Vue({
   data: {
-    a: 1
-  }
+    a: 1,
+  },
 });
 
 // `vm.a` 是响应式的
@@ -75,3 +75,17 @@ this.someObject = Object.assign({}, this.someObject, { a: 1, b: 2 });
 `Vue.nextTick` 一般情况下是微任务,在处理事件绑定的时候是宏任务(事件冒泡可能导致顺序错误)
 
 最新的冒泡做了特殊处理,所有都是微任务
+
+## `proxy` 和 `defineproperty` 相比优势
+
+优势：
+
+- 可以直接监听对象而非属性
+- 可以直接监听数组变化
+- 有 13 种拦截方法
+- 返回一个新对象，对新对象操作，而 `defineproperty` 只能遍历对象属性直接修改
+- 作为新标准将会收到浏览器厂商重点持续的性能优化
+
+劣势:
+
+- `defineproperty` 兼容性好，`ie9`，无法通过 `polyfill` 实现

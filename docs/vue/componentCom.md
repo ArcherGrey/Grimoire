@@ -1,6 +1,6 @@
 # 组件通信
 
-## 父组件 -> 子组件
+## 父组件 <-> 子组件
 
 ### props
 
@@ -14,7 +14,7 @@
 Vue.component("blog-post", {
   // 在 JavaScript 中是 camelCase 的
   props: ["postTitle"],
-  template: "<h3>{{ postTitle }}</h3>"
+  template: "<h3>{{ postTitle }}</h3>",
 });
 ```
 
@@ -130,8 +130,8 @@ provide 和 inject 绑定并不是可响应的。这是刻意为之的。然而�
 // 父级组件提供 'foo'
 var Provider = {
   provide: {
-    foo: "bar"
-  }
+    foo: "bar",
+  },
   // ...
 };
 
@@ -140,12 +140,10 @@ var Child = {
   inject: ["foo"],
   created() {
     console.log(this.foo); // => "bar"
-  }
+  },
   // ...
 };
 ```
-
-## 子组件 -> 父组件
 
 ### `$emit`
 
@@ -159,7 +157,7 @@ Vue.component("welcome-button", {
     <button v-on:click="$emit('welcome')">
       Click me to be welcomed
     </button>
-  `
+  `,
 });
 ```
 
@@ -177,8 +175,8 @@ new Vue({
   methods: {
     sayHi: function() {
       alert("Hi!");
-    }
-  }
+    },
+  },
 });
 ```
 
@@ -192,12 +190,6 @@ mounted(){
   console.log(this.$refs.home) //即可拿到子组件的实例,就可以直接操作 data 和 methods
 }
 ```
-
-## 全局
-
-### vuex
-
-集中式存储管理应用的所有组件的状态
 
 ### parent 和 children
 
@@ -218,6 +210,12 @@ mounted(){
 
 ```
 
+## 全局
+
+### vuex
+
+集中式存储管理应用的所有组件的状态
+
 ### EventBus
 
 1. 就是声明一个全局 `Vue` 实例变量 `EventBus` , 把所有的通信数据，事件监听都存储到这个变量上;
@@ -231,7 +229,7 @@ mounted(){
 
 ```js
 this.$router.push({
-  path: `/describe/${id}`
+  path: `/describe/${id}`,
 });
 ```
 
@@ -241,8 +239,8 @@ this.$router.push({
 this.$router.push({
   name: "Describe",
   params: {
-    id: id
-  }
+    id: id,
+  },
 });
 ```
 

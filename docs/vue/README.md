@@ -73,10 +73,10 @@ const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location, onResolve, onReject) {
   if (onResolve || onReject)
     return originalPush.call(this, location, onResolve, onReject);
-  return originalPush.call(this, location).catch(err => err);
+  return originalPush.call(this, location).catch((err) => err);
 };
 const originalReplace = Router.prototype.replace;
 Router.prototype.replace = function replace(location) {
-  return originalReplace.call(this, location).catch(err => err);
+  return originalReplace.call(this, location).catch((err) => err);
 };
 ```

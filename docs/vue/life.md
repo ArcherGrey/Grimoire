@@ -33,3 +33,33 @@ vue 生命周期在真实场景下的业务应用：
 |  6   |                      完成 dom 更新（服务器渲染期间不被调用）必避免在此阶段修改状态 ，使用 `watch computed`                       |
 |  7   |                                     实例销毁之前，这里实例依然可用（服务器渲染期间不被调用）                                     | `beforeDestroy` |
 |  8   |                              实例销毁后，所有事件监听所有子组件都被销毁 （服务器渲染期间不被调用）                               |   `destroyed`   |
+
+## 调用顺序
+
+类似事件触发：捕获-目标-冒泡 `=>` 父组件-子组件-父组件
+
+父组件 `P`
+子组件 `S`
+
+- 加载过程：
+  1. P-beforeCreate
+  2. P-created
+  3. P-beforeMount
+  4. S-beforeCreate
+  5. S-created
+  6. S-beforeMount
+  7. S-mounted
+  8. P-mounted
+- 子组件更新
+  1. P-beforeUpdate
+  2. S-beforeUpdate
+  3. S-updated
+  4. P-updated
+- 父组件更新
+  1. P-beforeUpdate
+  2. P-updated
+- 销毁过程
+  1. P-beforeDestroy
+  2. S-beforeDestroy
+  3. S-destroyed
+  4. P-destroyed
