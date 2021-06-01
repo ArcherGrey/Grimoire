@@ -221,7 +221,8 @@ module.exports = {
                 "vhook",
                 "filter",
                 "slot",
-                "componentCom"
+                "componentCom",
+                "computed"
               ]
             },
             {
@@ -376,6 +377,7 @@ module.exports = {
             "802",
             "832",
             "867",
+            "875",
             "888",
             "889",
             "896",

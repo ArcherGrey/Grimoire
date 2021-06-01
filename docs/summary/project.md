@@ -58,3 +58,28 @@
 ## 旅游
 
 - `customize-cra` 修改 `create react app` 配置
+
+## 难点
+
+- antd 上传组件 上传图片
+  - 需求：
+    - 拖拽排序
+      - react-dnd
+    - 上传图片方式
+      - 表单
+        - 需要 form 设置 encode-type form-data
+        - 会刷新页面，无法处理后台返回
+      - formData rc-upload 对 filelist 循环使用
+        - 额外参数和文件数据通过 formData.append 添加
+          - 如果 axios 封装默认 contenttype 不是 multipart/form-data 需要修改
+        - xmlhttprequest
+    - 上传需要附参数
+      - 设置 data
+    - 需要选中图片，点击按钮设置封面背景
+      - 点击图片设置选中 使用 border 来标识选中
+      - 使用 before after + 绝对定位 内外圈来标识封面背景
+      - 接口需要图片 id
+        - 组件默认是非受控组件，文件列表状态内部管理
+        - 需要用后台返回的文件列表来设置组件状态，受控组件
+    - 图片列表变化 执行上传
+      - onchange 执行操作
