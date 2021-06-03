@@ -1,0 +1,489 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20210603.155928.10120.0.001.json",
+    "dumpEventTime": "2021-06-03T15:59:28Z",
+    "dumpEventTimeStamp": "1622707168850",
+    "processId": 10120,
+    "cwd": "D:\\gr\\github\\Grimoire",
+    "commandLine": [
+      "D:\\ide\\nodejs\\node.exe",
+      "D:\\gr\\github\\Grimoire\\node_modules\\.bin\\\\..\\vuepress\\cli.js",
+      "dev",
+      "docs"
+    ],
+    "nodejsVersion": "v12.13.0",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "12.13.0",
+      "v8": "7.7.299.13-node.12",
+      "uv": "1.32.0",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "72",
+      "nghttp2": "1.39.2",
+      "napi": "5",
+      "llhttp": "1.1.4",
+      "http_parser": "2.8.0",
+      "openssl": "1.1.1d",
+      "cldr": "35.1",
+      "icu": "64.2",
+      "tz": "2019a",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.13.0/node-v12.13.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.13.0/node-v12.13.0.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v12.13.0/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.19041",
+    "osVersion": "Windows 10 Home",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz",
+        "speed": 1992,
+        "user": 12259109,
+        "nice": 0,
+        "sys": 9906921,
+        "idle": 89086328,
+        "irq": 1127500
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz",
+        "speed": 1992,
+        "user": 6255328,
+        "nice": 0,
+        "sys": 3658734,
+        "idle": 101337718,
+        "irq": 81703
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz",
+        "speed": 1992,
+        "user": 27697343,
+        "nice": 0,
+        "sys": 12459875,
+        "idle": 71094562,
+        "irq": 172343
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz",
+        "speed": 1992,
+        "user": 11978406,
+        "nice": 0,
+        "sys": 4106765,
+        "idle": 95166609,
+        "irq": 91531
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz",
+        "speed": 1992,
+        "user": 19216718,
+        "nice": 0,
+        "sys": 12533312,
+        "idle": 79501734,
+        "irq": 162031
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz",
+        "speed": 1992,
+        "user": 9549390,
+        "nice": 0,
+        "sys": 4198031,
+        "idle": 97504343,
+        "irq": 88312
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz",
+        "speed": 1992,
+        "user": 15534203,
+        "nice": 0,
+        "sys": 6912703,
+        "idle": 88804859,
+        "irq": 127843
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz",
+        "speed": 1992,
+        "user": 11799031,
+        "nice": 0,
+        "sys": 5235718,
+        "idle": 94217015,
+        "irq": 97171
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "vEthernet (WSL)",
+        "internal": false,
+        "mac": "00:15:5d:7a:47:3b",
+        "address": "fe80::fdd7:938c:a5c5:5ac3",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 47
+      },
+      {
+        "name": "vEthernet (WSL)",
+        "internal": false,
+        "mac": "00:15:5d:7a:47:3b",
+        "address": "172.27.48.1",
+        "netmask": "255.255.240.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "WLAN",
+        "internal": false,
+        "mac": "98:3b:8f:0f:41:91",
+        "address": "fe80::6c8a:5391:71cf:c05a",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 9
+      },
+      {
+        "name": "WLAN",
+        "internal": false,
+        "mac": "98:3b:8f:0f:41:91",
+        "address": "192.168.0.147",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      }
+    ],
+    "host": "WIN-8JB9H644V4N"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x00007ff62ed01389",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+10873"
+    },
+    {
+      "pc": "0x00007ff62ed057cc",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+28348"
+    },
+    {
+      "pc": "0x00007ff62ed04778",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+24168"
+    },
+    {
+      "pc": "0x00007ff62edf332b",
+      "symbol": "v8::base::CPU::has_sse+37723"
+    },
+    {
+      "pc": "0x00007ff62f5f6f4e",
+      "symbol": "v8::Isolate::ReportExternalAllocationLimitReached+94"
+    },
+    {
+      "pc": "0x00007ff62f5def91",
+      "symbol": "v8::SharedArrayBuffer::Externalize+833"
+    },
+    {
+      "pc": "0x00007ff62f4ac85c",
+      "symbol": "v8::internal::Heap::EphemeronKeyWriteBarrierFromCode+1436"
+    },
+    {
+      "pc": "0x00007ff62f4b7c00",
+      "symbol": "v8::internal::Heap::ProtectUnprotectedMemoryChunks+1312"
+    },
+    {
+      "pc": "0x00007ff62f4b4734",
+      "symbol": "v8::internal::Heap::PageFlagsAreConsistent+3204"
+    },
+    {
+      "pc": "0x00007ff62f4a9fc3",
+      "symbol": "v8::internal::Heap::CollectGarbage+1283"
+    },
+    {
+      "pc": "0x00007ff62f4a8794",
+      "symbol": "v8::internal::Heap::AddRetainedMap+2356"
+    },
+    {
+      "pc": "0x00007ff62f4c9a65",
+      "symbol": "v8::internal::Factory::NewFillerObject+53"
+    },
+    {
+      "pc": "0x00007ff62f236239",
+      "symbol": "v8::internal::interpreter::JumpTableTargetOffsets::iterator::operator=+4057"
+    },
+    {
+      "pc": "0x00007ff62fa22c6d",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+567949"
+    },
+    {
+      "pc": "0x00007ff62f9df67d",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+291997"
+    },
+    {
+      "pc": "0x00007ff62f99c7c6",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+17894"
+    },
+    {
+      "pc": "0x0000033d795ed956",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 2166136832,
+    "totalCommittedMemory": 2166136832,
+    "usedMemory": 2135192344,
+    "availableMemory": 56847400,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 262144,
+        "capacity": 261872,
+        "used": 32296,
+        "available": 229576
+      },
+      "new_space": {
+        "memorySize": 15728640,
+        "committedMemory": 15728640,
+        "capacity": 7856160,
+        "used": 729664,
+        "available": 7126496
+      },
+      "old_space": {
+        "memorySize": 1954131968,
+        "committedMemory": 1954131968,
+        "capacity": 1951231536,
+        "used": 1941274832,
+        "available": 9956704
+      },
+      "code_space": {
+        "memorySize": 3047424,
+        "committedMemory": 3047424,
+        "capacity": 2725184,
+        "used": 2725184,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 4198400,
+        "committedMemory": 4198400,
+        "capacity": 2853840,
+        "used": 2853840,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 186466304,
+        "committedMemory": 186466304,
+        "capacity": 185430736,
+        "used": 185430736,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 2301952,
+        "committedMemory": 2301952,
+        "capacity": 2145792,
+        "used": 2145792,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 7856160,
+        "used": 0,
+        "available": 7856160
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 1108.19,
+    "kernelCpuSeconds": 906.046,
+    "cpuConsumptionPercent": 0.717915,
+    "maxRss": 4745863168,
+    "pageFaults": {
+      "IORequired": 7630940,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 8801,
+      "writes": 278
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "": "C:=C:\\",
+    "": "D:=D:\\gr\\github\\Grimoire",
+    "ALLUSERSPROFILE": "C:\\ProgramData",
+    "APPDATA": "C:\\Users\\EDZ\\AppData\\Roaming",
+    "ChocolateyInstall": "C:\\ProgramData\\chocolatey",
+    "ChocolateyLastPathUpdate": "132179171575734626",
+    "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_10600_GHPEBUIDHYTJVUYQ",
+    "COLORTERM": "truecolor",
+    "COMMONPROGRAMFILES": "C:\\Program Files\\Common Files",
+    "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
+    "CommonProgramW6432": "C:\\Program Files\\Common Files",
+    "COMPUTERNAME": "WIN-8JB9H644V4N",
+    "COMSPEC": "C:\\WINDOWS\\system32\\cmd.exe",
+    "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
+    "EXEPATH": "D:\\ide\\Git\\bin",
+    "FLUTTER_STORAGE_BASE_URL": "https://storage.flutter-io.cn",
+    "FPS_BROWSER_APP_PROFILE_STRING": "Internet Explorer",
+    "FPS_BROWSER_USER_PROFILE_STRING": "Default",
+    "GIT_ASKPASS": "d:\\ide\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass.sh",
+    "HOME": "C:\\Users\\EDZ",
+    "HOMEDRIVE": "C:",
+    "HOMEPATH": "\\Users\\EDZ",
+    "INIT_CWD": "D:\\gr\\github\\Grimoire",
+    "LANG": "zh_CN.UTF-8",
+    "LOCALAPPDATA": "C:\\Users\\EDZ\\AppData\\Local",
+    "LOGONSERVER": "\\\\WIN-8JB9H644V4N",
+    "MSYSTEM": "MINGW64",
+    "NODE": "D:\\ide\\nodejs\\node.exe",
+    "NODE_ENV": "development",
+    "npm_config_argv": "{\"remain\":[],\"cooked\":[\"run\",\"docs:dev\"],\"original\":[\"docs:dev\"]}",
+    "npm_config_bin_links": "true",
+    "npm_config_ignore_optional": "",
+    "npm_config_ignore_scripts": "",
+    "npm_config_init_license": "MIT",
+    "npm_config_init_version": "1.0.0",
+    "npm_config_registry": "https://registry.yarnpkg.com",
+    "npm_config_save_prefix": "^",
+    "npm_config_strict_ssl": "true",
+    "npm_config_user_agent": "yarn/1.19.1 npm/? node/v12.13.0 win32 x64",
+    "npm_config_version_commit_hooks": "true",
+    "npm_config_version_git_message": "v%s",
+    "npm_config_version_git_sign": "",
+    "npm_config_version_git_tag": "true",
+    "npm_config_version_tag_prefix": "v",
+    "npm_execpath": "C:\\Program Files (x86)\\Yarn\\bin\\yarn.js",
+    "npm_lifecycle_event": "docs:dev",
+    "npm_lifecycle_script": "vuepress dev docs",
+    "npm_node_execpath": "D:\\ide\\nodejs\\node.exe",
+    "npm_package_author_email": "498792539@qq.com",
+    "npm_package_author_name": "ArcherGrey",
+    "npm_package_description": "Magic Book",
+    "npm_package_devDependencies_vuepress": "^1.8.0",
+    "npm_package_devDependencies_vuepress_plugin_demo_container": "^0.2.0",
+    "npm_package_devDependencies__vuepress_plugin_back_to_top": "^1.8.0",
+    "npm_package_devDependencies__vuepress_plugin_nprogress": "^1.8.0",
+    "npm_package_devDependencies__vuepress_plugin_pwa": "^1.8.2",
+    "npm_package_license": "MIT",
+    "npm_package_main": "index.js",
+    "npm_package_name": "Grimoire",
+    "npm_package_readmeFilename": "README.md",
+    "npm_package_repository_type": "git",
+    "npm_package_repository_url": "git@github.com:ArcherGrey/Grimoire.git",
+    "npm_package_scripts_deploy": "bash deploy.sh",
+    "npm_package_scripts_docs_build": "vuepress build docs",
+    "npm_package_scripts_docs_dev": "vuepress dev docs",
+    "npm_package_version": "1.0.0",
+    "NUMBER_OF_PROCESSORS": "8",
+    "OneDrive": "C:\\Users\\EDZ\\OneDrive",
+    "OneDriveConsumer": "C:\\Users\\EDZ\\OneDrive",
+    "ORIGINAL_XDG_CURRENT_DESKTOP": "undefined",
+    "OS": "Windows_NT",
+    "PATH": "C:\\Users\\EDZ\\AppData\\Local\\Temp\\yarn--1622426640005-0.4743162135975991;D:\\gr\\github\\Grimoire\\node_modules\\.bin;C:\\Users\\EDZ\\AppData\\Local\\Yarn\\Data\\link\\node_modules\\.bin;D:\\ide\\libexec\\lib\\node_modules\\npm\\bin\\node-gyp-bin;D:\\ide\\lib\\node_modules\\npm\\bin\\node-gyp-bin;D:\\ide\\nodejs\\node_modules\\npm\\bin\\node-gyp-bin;D:\\ide\\Git\\mingw64\\bin;D:\\ide\\Git\\usr\\bin;C:\\Users\\EDZ\\bin;C:\\Python27;C:\\Python27\\Scripts;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0;C:\\WINDOWS\\System32\\OpenSSH;D:\\ide\\nodejs;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files (x86)\\Yarn\\bin;D:\\ide\\Git\\cmd;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\ProgramData\\DockerDesktop\\version-bin;C:\\Users\\EDZ\\AppData\\Local\\Microsoft\\WindowsApps;D:\\ide\\Microsoft VS Code\\bin;C:\\Users\\EDZ\\AppData\\Roaming\\npm;C:\\Users\\EDZ\\AppData\\Local\\Yarn\\bin;D:\\software\\xampp\\php",
+    "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JSE;.WSF;.WSH;.MSC",
+    "PLINK_PROTOCOL": "ssh",
+    "PROCESSOR_ARCHITECTURE": "AMD64",
+    "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 142 Stepping 10, GenuineIntel",
+    "PROCESSOR_LEVEL": "6",
+    "PROCESSOR_REVISION": "8e0a",
+    "ProgramData": "C:\\ProgramData",
+    "PROGRAMFILES": "C:\\Program Files",
+    "ProgramFiles(x86)": "C:\\Program Files (x86)",
+    "ProgramW6432": "C:\\Program Files",
+    "PROMPT": "$P$G",
+    "PSModulePath": "C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules",
+    "PUBLIC": "C:\\Users\\Public",
+    "PUB_HOSTED_URL": "https://pub.flutter-io.cn",
+    "PWD": "/d/gr/github/Grimoire",
+    "SESSIONNAME": "Console",
+    "SHLVL": "2",
+    "SYSTEMDRIVE": "C:",
+    "SYSTEMROOT": "C:\\WINDOWS",
+    "TEMP": "C:\\Users\\EDZ\\AppData\\Local\\Temp",
+    "TERM_PROGRAM": "vscode",
+    "TERM_PROGRAM_VERSION": "1.56.1",
+    "TMP": "C:\\Users\\EDZ\\AppData\\Local\\Temp",
+    "USERDOMAIN": "WIN-8JB9H644V4N",
+    "USERDOMAIN_ROAMINGPROFILE": "WIN-8JB9H644V4N",
+    "USERNAME": "EDZ",
+    "USERPROFILE": "C:\\Users\\EDZ",
+    "VSCODE_GIT_ASKPASS_MAIN": "d:\\ide\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass-main.js",
+    "VSCODE_GIT_ASKPASS_NODE": "D:\\ide\\Microsoft VS Code\\Code.exe",
+    "VSCODE_GIT_IPC_HANDLE": "\\\\.\\pipe\\vscode-git-673fbb821b-sock",
+    "VUE_CLI_TRANSPILE_BABEL_RUNTIME": "true",
+    "VUE_ENV": "server",
+    "WEBPACK_DEV_SERVER": "true",
+    "WINDIR": "C:\\WINDOWS",
+    "YARN_WRAP_OUTPUT": "false",
+    "_": "/usr/bin/winpty"
+  },
+  "sharedObjects": [
+    "D:\\ide\\nodejs\\node.exe",
+    "C:\\WINDOWS\\SYSTEM32\\ntdll.dll",
+    "C:\\WINDOWS\\System32\\KERNEL32.DLL",
+    "C:\\WINDOWS\\System32\\KERNELBASE.dll",
+    "C:\\WINDOWS\\System32\\WS2_32.dll",
+    "C:\\WINDOWS\\System32\\RPCRT4.dll",
+    "C:\\WINDOWS\\SYSTEM32\\dbghelp.dll",
+    "C:\\WINDOWS\\System32\\ADVAPI32.dll",
+    "C:\\WINDOWS\\System32\\ucrtbase.dll",
+    "C:\\WINDOWS\\System32\\msvcrt.dll",
+    "C:\\WINDOWS\\System32\\sechost.dll",
+    "C:\\WINDOWS\\System32\\USER32.dll",
+    "C:\\WINDOWS\\System32\\win32u.dll",
+    "C:\\WINDOWS\\System32\\GDI32.dll",
+    "C:\\WINDOWS\\System32\\gdi32full.dll",
+    "C:\\WINDOWS\\System32\\msvcp_win.dll",
+    "C:\\WINDOWS\\System32\\PSAPI.DLL",
+    "C:\\WINDOWS\\System32\\CRYPT32.dll",
+    "C:\\WINDOWS\\System32\\bcrypt.dll",
+    "C:\\WINDOWS\\SYSTEM32\\IPHLPAPI.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\USERENV.dll",
+    "C:\\WINDOWS\\SYSTEM32\\WINMM.dll",
+    "C:\\WINDOWS\\System32\\IMM32.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\powrprof.dll",
+    "C:\\WINDOWS\\SYSTEM32\\UMPDC.dll",
+    "C:\\WINDOWS\\system32\\uxtheme.dll",
+    "C:\\WINDOWS\\System32\\combase.dll",
+    "C:\\WINDOWS\\system32\\mswsock.dll",
+    "C:\\WINDOWS\\SYSTEM32\\kernel.appcore.dll",
+    "C:\\WINDOWS\\System32\\bcryptprimitives.dll",
+    "C:\\WINDOWS\\System32\\NSI.dll",
+    "C:\\WINDOWS\\SYSTEM32\\dhcpcsvc6.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\dhcpcsvc.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\DNSAPI.dll",
+    "C:\\WINDOWS\\SYSTEM32\\CRYPTBASE.DLL",
+    "C:\\WINDOWS\\system32\\napinsp.dll",
+    "C:\\WINDOWS\\system32\\pnrpnsp.dll",
+    "C:\\WINDOWS\\system32\\wshbth.dll",
+    "C:\\WINDOWS\\system32\\NLAapi.dll",
+    "C:\\WINDOWS\\System32\\winrnr.dll"
+  ]
+}

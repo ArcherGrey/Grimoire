@@ -26,7 +26,51 @@ items.map(i => {
 - `Cannot update during an existing state transition`
   - `react hook` 方式 路由跳转直接在函数内导致，要放到 `useEffect` 里面，因为函数内部属于 `render` 过程如果修改路由可能会导致不可控，只能在加载完成后跳转
 - `Can't perform a React state update on an unmounted component`
+
   - `react class` 方式 在构造函数内 路由跳转导致，放到 `componentDidMount` 加载完成后执行（同上面）
+  - 在已卸载的组件上执行 `setState` 造成
+
+    - 在卸载的时候对所有的操作执行清除
+    - 设置一个 flag，当卸载的时候重置这个 flag
+    - class
+
+    ```js
+    componentDidMount = () => {
+      $.ajax("请求", {})
+        .then(res => {
+          this.setState({
+            data: datas
+          });
+        })
+        .catch(error => {});
+    };
+    componentWillUnmount = () => {
+      this.setState = (state, callback) => {
+        return;
+      };
+    };
+    ```
+
+    - hook
+
+    ```js
+    import { useCallback, useEffect, useRef, useState } from "react";
+
+    function useFetchState(...props) {
+      const focus = useRef();
+      const [state, setState] = useState(...props);
+      useEffect(() => {
+        focus.current = true;
+        return () => (focus.current = false);
+      }, []);
+      const setFetchState = useCallback((...params) => {
+        focus.current && setState(...params);
+      }, []);
+      return [state, setFetchState];
+    }
+
+    export default useFetchState;
+    ```
 
 ### key
 
