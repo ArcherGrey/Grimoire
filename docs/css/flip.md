@@ -9,7 +9,7 @@
 
 ## 利用布局
 
-需要让正面和反面重叠在一起，很容易想到外层 `card` 用相对定位，内层正反都使用绝对定位都相对于外层 `card`，使其重叠，然后需要设置反面翻转 180°。
+需要让正面和反面重叠在一起，很容易想到外层 `card` 用相对定位，内层正反都使用绝对定位都相对于外层 `card`，使其重叠，然后需要设置反面翻转 180°，翻转隐藏背面需要添加 `backface-visibility:hidden`。
 
 **注意：都是绝对定位元素后来居上，所以正面需要放到反面后面，或者直接设置正面 `z-index` 大于反面**
 
@@ -29,8 +29,13 @@
 
 - 动画效果：添加 `transition` 过度
 - 正反重叠：最外层相对定位，内部正反两面绝对定位，反面先翻转 180°
+- 隐藏背面：正反面添加 `backface-visibility:hidden`
 - `hover` 翻转：卡片 `hover` 翻转 180°
 - 3D 效果：卡片添加 `transform-style` 使子元素 3D 空间呈现
+
+## 可能出现的问题
+
+- `backface-visibility` 不能正常生效：外层需要添加一个专门用来翻转的块
 
 ## 具体代码实现
 
@@ -38,8 +43,8 @@
 
 ```html
 <div class="card-filp">
-  <div class="back"></div>
-  <div class="front"></div>
+  <div class="back">123</div>
+  <div class="front">312</div>
 </div>
 
 <style>
@@ -58,15 +63,14 @@
     position: absolute;
     left: 0;
     top: 0;
+    backface-visibility: hidden;
   }
   .front {
     background: lightgreen;
   }
   .back {
     background: lightblue;
-  }
-  .back {
-    transform: rotateX(180deg);
+    transform: rotateX(-180deg);
   }
   .card-filp:hover {
     transform: rotateX(180deg);
