@@ -4,7 +4,7 @@ module.exports = {
   title: "Grimoire", // 标题
   description: "Magic Book",
   markdown: {
-    lineNumbers: true
+    lineNumbers: true,
   },
   themeConfig: {
     nav: [
@@ -24,10 +24,10 @@ module.exports = {
             text: "框架",
             items: [
               { text: "Vue", link: "/vue/" },
-              { text: "React", link: "/react/" }
-            ]
-          }
-        ]
+              { text: "React", link: "/react/" },
+            ],
+          },
+        ],
       },
       { text: "网络", link: "/network/" },
       {
@@ -40,9 +40,9 @@ module.exports = {
           { text: "树", link: "/tree/" },
           { text: "字符串", link: "/string/" },
           { text: "链表", link: "/linkedlist/" },
-          { text: "GIS", link: "/gis/" }
-        ]
-      }
+          { text: "GIS", link: "/gis/" },
+        ],
+      },
     ],
     sidebarDepth: 3,
     sidebar: {
@@ -50,8 +50,8 @@ module.exports = {
       "/summary/": [
         {
           collapsable: false,
-          children: ["", "interview", "project"]
-        }
+          children: ["", "interview", "project"],
+        },
       ],
       /* 总结 */
 
@@ -59,8 +59,8 @@ module.exports = {
       "/lint/": [
         {
           collapsable: false,
-          children: ["", "css", "js", "js_colon"]
-        }
+          children: ["", "css", "js", "js_colon"],
+        },
       ],
       /* 代码规范 */
 
@@ -68,8 +68,8 @@ module.exports = {
       "/git/": [
         {
           collapsable: false,
-          children: ["", "doc", "githook", "ssh", "commitLint"]
-        }
+          children: ["", "doc", "githook", "ssh", "commitLint"],
+        },
       ],
       /* git */
 
@@ -94,15 +94,22 @@ module.exports = {
                 "hoisting",
                 "promise",
                 "declare",
-                "event"
-              ]
+                "event",
+              ],
             },
             {
               title: "应用",
-              children: ["json", "copy", "typeof", "arrayunique", "tag", "flat"]
-            }
-          ]
-        }
+              children: [
+                "json",
+                "copy",
+                "typeof",
+                "arrayunique",
+                "tag",
+                "flat",
+              ],
+            },
+          ],
+        },
       ],
 
       "/css/": [
@@ -118,12 +125,12 @@ module.exports = {
                 "box",
                 "word",
                 "offset",
-                "border_radius"
-              ]
+                "border_radius",
+              ],
             },
             {
               title: "布局",
-              children: ["flex", "holy_wing", "center", "rdad"]
+              children: ["flex", "holy_wing", "center", "rdad"],
             },
             { title: "工具", children: ["postcss_rem"] },
             {
@@ -135,11 +142,11 @@ module.exports = {
                 "triangle",
                 "dragdiv",
                 "amazing",
-                "flip"
-              ]
-            }
-          ]
-        }
+                "flip",
+              ],
+            },
+          ],
+        },
       ],
 
       "/explorer/": [
@@ -149,14 +156,14 @@ module.exports = {
             "",
             {
               title: "基础",
-              children: ["render", "document_fragment", "svg"]
+              children: ["render", "document_fragment", "svg"],
             },
             {
               title: "应用",
-              children: ["canvas_table"]
-            }
-          ]
-        }
+              children: ["canvas_table"],
+            },
+          ],
+        },
       ],
 
       "/engineering/": [
@@ -166,7 +173,7 @@ module.exports = {
             "",
             {
               title: "基础/原理",
-              children: ["module", "write_module", "minipack", "mvx"]
+              children: ["module", "write_module", "minipack", "mvx"],
             },
             {
               title: "应用",
@@ -182,12 +189,13 @@ module.exports = {
                 "upload",
                 "vdrag",
                 "loader_plugin",
-                "preview"
-              ]
+                "preview",
+                "monitor",
+              ],
             },
             {
               title: "性能优化",
-              children: ["preload", "async"]
+              children: ["preload", "async"],
             },
             {
               title: "工具",
@@ -199,11 +207,11 @@ module.exports = {
                 "package_axios",
                 "html2canvas",
                 "anywhere",
-                "nrm"
-              ]
-            }
-          ]
-        }
+                "nrm",
+              ],
+            },
+          ],
+        },
       ],
 
       /* 框架 */
@@ -223,15 +231,15 @@ module.exports = {
                 "filter",
                 "slot",
                 "componentCom",
-                "computed"
-              ]
+                "computed",
+              ],
             },
             {
               title: "应用",
-              children: ["devtools", "performance"]
-            }
-          ]
-        }
+              children: ["devtools", "performance"],
+            },
+          ],
+        },
       ],
       "/react/": [
         {
@@ -240,14 +248,14 @@ module.exports = {
             "",
             {
               title: "基础/原理",
-              children: ["fiber"]
+              children: ["fiber"],
             },
             {
               title: "应用",
-              children: ["cra_webpack"]
-            }
-          ]
-        }
+              children: ["cra_webpack"],
+            },
+          ],
+        },
       ],
       /* 框架 */
 
@@ -259,18 +267,18 @@ module.exports = {
             "",
             {
               title: "基础/原理",
-              children: []
+              children: [],
             },
             {
               title: "Canvas",
-              children: ["canvas_tutorial", "canvas_chart", "canvas_plane"]
+              children: ["canvas_tutorial", "canvas_chart", "canvas_plane"],
             },
             {
               title: "WebGL",
-              children: []
-            }
-          ]
-        }
+              children: [],
+            },
+          ],
+        },
       ],
       /* 可视化 */
 
@@ -391,15 +399,15 @@ module.exports = {
             "1052",
             "1208",
             "1423",
-            "1438"
-          ]
-        }
+            "1438",
+          ],
+        },
       ],
       "/graph/": [
         {
           collapsable: false,
-          children: ["", "euler"]
-        }
+          children: ["", "euler"],
+        },
       ],
       "/sort/": [
         {
@@ -413,39 +421,39 @@ module.exports = {
             "heap",
             "quick",
             "merge",
-            "radix"
-          ]
-        }
+            "radix",
+          ],
+        },
       ],
       "/find/": [
         {
           collapsable: false,
-          children: ["", "bs"]
-        }
+          children: ["", "bs"],
+        },
       ],
       "/tree/": [
         {
           collapsable: false,
-          children: ["", "backtrack", "btQs", "btTravers", "dfs"]
-        }
+          children: ["", "backtrack", "btQs", "btTravers", "dfs"],
+        },
       ],
       "/string/": [
         {
           collapsable: false,
-          children: ["", "kmp"]
-        }
+          children: ["", "kmp"],
+        },
       ],
       "/gis/": [
         {
           collapsable: false,
-          children: ["", "tp"]
-        }
+          children: ["", "tp"],
+        },
       ],
       "/linkedlist/": [
         {
           collapsable: false,
-          children: [""]
-        }
+          children: [""],
+        },
       ],
 
       /* 算法 */
@@ -463,12 +471,12 @@ module.exports = {
             "storage",
             "crossdomain",
             "dns",
-            "xss"
-          ]
-        }
-      ]
+            "xss",
+          ],
+        },
+      ],
       /* 网络 */
-    }
+    },
   },
   head: [
     ["link", { rel: "icon", href: "/logo.png" }],
@@ -477,12 +485,12 @@ module.exports = {
     ["meta", { name: "apple-mobile-web-app-capable", content: "yes" }],
     [
       "meta",
-      { name: "apple-mobile-web-app-status-bar-style", content: "black" }
+      { name: "apple-mobile-web-app-status-bar-style", content: "black" },
     ],
     [
       // 苹果桌面图标
       "link",
-      { rel: "apple-touch-icon", href: "/icons/apple-touch-icon-152x152.png" }
+      { rel: "apple-touch-icon", href: "/icons/apple-touch-icon-152x152.png" },
     ],
     [
       // safari 标签图标
@@ -490,9 +498,9 @@ module.exports = {
       {
         rel: "mask-icon",
         href: "/icons/safari-pinned-tab.svg",
-        color: "#3eaf7c"
-      }
-    ]
+        color: "#3eaf7c",
+      },
+    ],
     // [
     //   "meta",
     //   {
@@ -509,10 +517,10 @@ module.exports = {
       "@vuepress/pwa",
       {
         serviceWorker: true,
-        updatePopup: true
-      }
+        updatePopup: true,
+      },
     ],
-    ["demo-container"]
+    ["demo-container"],
     // [
     //   "demo-code",
     //   {
@@ -554,5 +562,5 @@ module.exports = {
     //     // copyOptions: { ... },
     //   },
     // ],
-  ]
+  ],
 };

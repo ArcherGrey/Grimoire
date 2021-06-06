@@ -12,9 +12,7 @@
   - defineProperty 和 proxy
   - nextTick 宏任务 微任务
     - [事件循环](/js/run.html)
-- 事件绑定
-  - 原生事件绑定是通过 `addEventListener` 绑定给真实元素的
-  - 组件事件绑定是通过 Vue 自定义的 `$on` 实现的
+  - [双向绑定](/engineering/databind.html)
 - 模版编译
   - 解析生成 ast 遍历进行处理，将处理后的 ast 树转化微可执行代码
 - [vdom diff](/vue/vdom.html)
@@ -73,13 +71,7 @@
 
 ## js
 
-- 事件循环
-  - 页面中引入两个 js 文件，其中一个里面有报错的话，另一个还会继续执行吗？
-    - 非阻塞 会继续执行
-- 事件委托
-  - 利用事件冒泡
-  - event.target 获取子元素
-  - event.currentTarget 父元素
+- [事件](/js/event.html)
 - 类型判断
   - typeof
     - typeof null=object
@@ -129,23 +121,7 @@
 
 ## 工程
 
-- 前端路由
-  - hash
-    - 单页面 spa
-    - 兼容 ie8
-    - 变化不会导致浏览器向服务器请求，会出发 hashchange
-    - 实现
-      - 构造一个 hashrouter 类
-        - 构造函数绑定 hashchange 事件
-        - 一个数组保存对应 hash 执行的操作
-        - 添加监听器 hash 变化的时候执行 load
-      - load 根据 hash 执行对应操作，操作就是修改页面
-  - history
-    - 基于 html5 提供的 History API
-    - 实现基本和 hash 一样 由于触发条件和 hash 不一样要多监听下面情况
-      - 点击 a 标签
-      - popstate
-    - 代码修改 url 不会刷新页面，如果手动修改 url 或者刷新会向后台请求，需要后台有相应配置，路由未匹配返回 index （所以 vue 都是 index 页面局部修改）
+- [前端路由](/engineering/route.html)
 - 框架
   - 单向数据流 父组件向子组件传递 prop 反之不行，防止子组件意外改变父组件状态，导致数据流难以理解
   - vue react 区别 优缺点
@@ -159,6 +135,7 @@
   - plugin
   - 打包 优化
 - 图片懒加载
+- [前端监控]()
 
 ## 移动端
 
