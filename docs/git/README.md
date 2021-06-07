@@ -118,3 +118,4 @@ git branch --set-upstream-to=origin/<branch> master
 - github
   - shields.io ：说明文档中各种小图标 [网址](https://shields.io/)
   - [github emoji](https://github.com/caiyongji/emoji-list)
+  - [测试国内最快节点](http://ping.chinaz.com/github.com)

@@ -67,6 +67,7 @@
 
 ## react
 
+- [受控和非受控](/react/controlled.html)
 - fiber
 
 ## js
@@ -134,8 +135,10 @@
   - loader 顺序
   - plugin
   - 打包 优化
+  - [原理 ast](/engineering/minipack.html)
 - 图片懒加载
 - [前端监控]()
+- [sourcemap](/engineering/sourcemap.html)
 
 ## 移动端
 

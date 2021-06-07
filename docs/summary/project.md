@@ -55,6 +55,27 @@
 - [前端文件预览](/engineering/preview.html)
 - [前端下载](/engineering/download.html)
 
+- vue
+  - vuex 状态管理
+  - vue-router 路由管理
+- axios 封装 http
+- echarts 封装图表组件
+- code mirror 编辑器
+- element ui
+- eslint 配置语法规则
+- githook 配置提交规范
+
+- 仪表盘 可视化产品 管理制作分享
+- 大屏模板 产品模板
+- 图表库
+  - 内置图表
+  - 自定义图表 类似 Codepen
+    封装了一个加载函数，动态添加 `script` 的方式引入需要的插件，在回调函数里面执行操作
+- 素材管理 色标选项配置数据
+- 数据源 数据源配置
+  - python 返回结果二次处理
+- 用户管理
+
 ## 旅游
 
 - `customize-cra` 修改 `create react app` 配置

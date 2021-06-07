@@ -2,6 +2,8 @@
 
 ## 概念
 
+同源策略是一个重要的安全策略，它用于限制一个 origin 的文档或者它加载的脚本如何能与另一个源的资源进行交互。它能帮助阻隔恶意文档，减少可能被攻击的媒介。
+
 浏览器的同源策略限制了从同一个源加载的文档或脚本如何与来自另一个源的资源进行交互。
 
 同源指：协议、域名、端口号必须一致，跨域也就是非同源请求。
@@ -57,8 +59,8 @@ function jsonp({ url, param, cb }) {
 jsonp({
   url: "http://localhost:3000/say",
   params: { wd: "haoxl" },
-  cb: "show",
-}).then((data) => {
+  cb: "show"
+}).then(data => {
   console.log(data);
 });
 
@@ -154,7 +156,7 @@ app.use(
     },
 
     // 修改响应信息中的cookie域名
-    cookieDomainRewrite: "www.domain1.com", // 可以为false，表示不修改
+    cookieDomainRewrite: "www.domain1.com" // 可以为false，表示不修改
   })
 );
 
