@@ -12,7 +12,7 @@
 ### 图片批量导入
 
 ```js
-items.map((i) => {
+items.map(i => {
   i.icon = require(`../../../../assets/images/point-${i.icon}.png`).default;
   return i;
 });
@@ -37,12 +37,12 @@ items.map((i) => {
     ```js
     componentDidMount = () => {
       $.ajax("请求", {})
-        .then((res) => {
+        .then(res => {
           this.setState({
-            data: datas,
+            data: datas
           });
         })
-        .catch((error) => {});
+        .catch(error => {});
     };
     componentWillUnmount = () => {
       this.setState = (state, callback) => {
@@ -87,7 +87,7 @@ items.map((i) => {
 
 - 跑马灯
   - 多个 echarts 轮播最后一个不显示
-    - 最后一个 id 选择的 dom 错误 **暂未解决**
+    - 最后一个 dom 未正确选中：使用 `querySelectorAll` 选择所有相同 `id` 的 `dom` 全部渲染
 
 ## 面试
 

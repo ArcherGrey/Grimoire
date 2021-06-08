@@ -137,8 +137,9 @@
   - 打包 优化
   - [原理 ast](/engineering/minipack.html)
 - 图片懒加载
-- [前端监控]()
+- [前端监控](/engineering/monitor.html)
 - [sourcemap](/engineering/sourcemap.html)
+- [性能优化]()
 
 ## 移动端
 
@@ -181,7 +182,7 @@
 - 缓存策略
   - 强制缓存
   - 协商缓存
-- xss csrf 攻击
+- [xss csrf](/network/xss.html)
 - tcp 三次握手 四次挥手
 - 跨域
   - jsonp 原理
@@ -189,8 +190,7 @@
   - 反向代理
   - postMessage
 - 离线缓存
-- cookie
-- session
+- [cookie session](/network/cookie.html)
 - localstorage
 - sessionstorage
 - indexDB、memory cache、disk cache
