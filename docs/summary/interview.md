@@ -17,6 +17,7 @@
   - 解析生成 ast 遍历进行处理，将处理后的 ast 树转化微可执行代码
 - [vdom diff](/vue/vdom.html)
 - [路由](/engineering/route.html)
+- [vuex](/vue/vuex.html)
 
 ### api
 
@@ -132,14 +133,14 @@
   - git reset
   - git revert
 - webpack
-  - loader 顺序
-  - plugin
-  - 打包 优化
+  - [loader plugin](/engineering/loader_plugin.html)
+  - [打包 优化](/engineering/webpack_build.html)
   - [原理 ast](/engineering/minipack.html)
 - 图片懒加载
 - [前端监控](/engineering/monitor.html)
 - [sourcemap](/engineering/sourcemap.html)
 - [性能优化]()
+- [mvc mvvm](/engineering/mvx.html)
 
 ## 移动端
 
@@ -178,12 +179,14 @@
     - 404 页面不存在
     - 500 服务器错误
 - https
-- websocket
+- [websocket](/network/socket.html)
+- [dns](/network/dns.html)
 - 缓存策略
   - 强制缓存
   - 协商缓存
 - [xss csrf](/network/xss.html)
 - tcp 三次握手 四次挥手
+- [网络安全汇总](/network/)
 - 跨域
   - jsonp 原理
   - cors
@@ -240,3 +243,8 @@ function multiplication() {
 - n 叉树求最大深度
 - 优先队列
 - 多人编辑冲突
+
+## 云计算
+
+- serverless
+  - faas 事件驱动

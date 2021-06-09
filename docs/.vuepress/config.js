@@ -189,7 +189,8 @@ module.exports = {
                 "vdrag",
                 "loader_plugin",
                 "preview",
-                "monitor"
+                "monitor",
+                "webpack_build"
               ]
             },
             {
@@ -230,7 +231,8 @@ module.exports = {
                 "filter",
                 "slot",
                 "componentCom",
-                "computed"
+                "computed",
+                "vuex"
               ]
             },
             {
@@ -463,6 +465,7 @@ module.exports = {
           title: "网络",
           collapsable: false,
           children: [
+            "",
             "http",
             "socket",
             "get_post",
