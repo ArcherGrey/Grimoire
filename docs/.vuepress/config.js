@@ -125,7 +125,7 @@ module.exports = {
               title: "布局",
               children: ["flex", "holy_wing", "center", "rdad"]
             },
-            { title: "工具", children: ["postcss_rem"] },
+            { title: "工具/框架", children: ["postcss_rem"] },
             {
               title: "应用",
               children: [
@@ -253,7 +253,7 @@ module.exports = {
             },
             {
               title: "应用",
-              children: ["cra_webpack"]
+              children: ["cra_webpack", "performance"]
             }
           ]
         }
@@ -277,7 +277,8 @@ module.exports = {
             {
               title: "WebGL",
               children: []
-            }
+            },
+            { title: "GIS", children: ["geojson_compress"] }
           ]
         }
       ],

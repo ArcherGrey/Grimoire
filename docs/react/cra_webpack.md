@@ -54,6 +54,8 @@ $ create-react-app foo --scripts-version 自定义包
 
 ## `customize-cra`
 
+[地址](https://github.com/arackaf/customize-cra)
+
 根据文档扩展配置：
 
 ```js
@@ -72,3 +74,42 @@ module.exports = {};
   }
 
 ```
+
+## `CRACO`
+
+[地址](https://github.com/gsoft-inc/craco)
+
+无需 `eject`，通过 `craco.config` 就能自定义配置
+
+1. 安装：
+
+```shell
+$ yarn add @craco/craco
+
+# OR
+
+$ npm install @craco/craco --save
+```
+
+2. 根目录下创建 `craco.config.js`
+3. 修改 `package.json` 里面的 `script`:
+
+```json
+/* package.json */
+
+"scripts": {
+-   "start": "react-scripts start",
++   "start": "craco start",
+-   "build": "react-scripts build",
++   "build": "craco build"
+-   "test": "react-scripts test",
++   "test": "craco test"
+}
+```
+
+## 比较
+
+- `eject` 不可逆，而且无法随着官方升级
+- `react-script` 需自己发布维护自定义包，适合长期维护的项目
+- `custom-cra` 2020 5 月就没更新了，配置较复杂，许多 `plugin loader` 无法配置
+- `craco` 还在维护 感觉功能也比 `custom-cra` 强，`antd` 推荐使用

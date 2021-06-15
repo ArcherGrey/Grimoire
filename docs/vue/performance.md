@@ -1,4 +1,4 @@
-# 性能优化
+# vue 性能优化
 
 ## 原理
 
@@ -27,7 +27,7 @@ const LazyLoad = {
         } else {
           LazyLoad.listenerScroll(el);
         }
-      },
+      }
     });
   },
   // 初始化
@@ -37,7 +37,7 @@ const LazyLoad = {
   },
   // 利用IntersectionObserver监听el
   observe(el) {
-    var io = new IntersectionObserver((entries) => {
+    var io = new IntersectionObserver(entries => {
       const realSrc = el.dataset.src;
       if (entries[0].isIntersecting) {
         if (realSrc) {
@@ -92,7 +92,7 @@ const LazyLoad = {
         fn.apply(context, args);
       }, delay);
     };
-  },
+  }
 };
 
 export default LazyLoad;
@@ -107,13 +107,13 @@ export default LazyLoad;
 ```js
 export default {
   data: () => ({
-    users: {},
+    users: {}
   }),
   async created() {
     const users = await axios.get("/api/users");
     // 这里使用 Object.freeze 来冻结对象
     this.users = Object.freeze(users);
-  },
+  }
 };
 ```
 
@@ -198,6 +198,6 @@ Vue.use(Select);
 ```js
 const Foo = () => import("./Foo.vue");
 const router = new VueRouter({
-  routes: [{ path: "/foo", component: Foo }],
+  routes: [{ path: "/foo", component: Foo }]
 });
 ```

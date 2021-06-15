@@ -87,7 +87,7 @@ https://mp.weixin.qq.com/s/af-F2goqnfMEo_yT_yFUMw
   - 体积优化 1.09 M gzip
     - echarts 300kb -> 158kb
       - echarts 5.0 以后 示例添加 option 完整代码自动显示按需引用
-    - geojson 216kb
+    - geojson 216kb->36kb echarts 压缩解码 ZigZag
     - mock.js 49kb -> 0 只有开发时需要
 
 ## 难点

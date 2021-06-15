@@ -78,6 +78,10 @@ items.map(i => {
 - 最好是数据的 id
 - 不需要全局唯一，同级唯一即可
 
+### render
+
+严格模式会执行两次 render
+
 ### class
 
 - 监听 `state` 状态改变类似 `vue watch`
