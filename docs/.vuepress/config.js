@@ -195,7 +195,7 @@ module.exports = {
             },
             {
               title: "性能优化",
-              children: ["preload", "async"]
+              children: ["preload", "async", "performance"]
             },
             {
               title: "工具",

@@ -2,6 +2,11 @@
 
 ## 常见问题
 
+### iconfont
+
+- 更新图标后 替换地址 `scriptUrl` 报错：Uncaught SyntaxError: Invalid or unexpected token
+  - 错用了 `font-class` 地址 应该使用 `symbol` 地址
+
 ### font
 
 - chrome 支持最小字体 12px
