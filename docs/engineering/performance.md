@@ -13,3 +13,8 @@
 ## 编码
 
 - [简洁 JavaScript 代码](/lint/js_clean.html)
+
+## 渲染
+
+- 动画
+  - setTimeout -> [requestAnimationFrame](/explorer/requestAnimationFrame.html)

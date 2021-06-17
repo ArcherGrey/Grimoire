@@ -89,6 +89,8 @@ https://mp.weixin.qq.com/s/af-F2goqnfMEo_yT_yFUMw
       - echarts 5.0 以后 示例添加 option 完整代码自动显示按需引用
     - geojson 216kb->36kb echarts 压缩解码 ZigZag
     - mock.js 49kb -> 0 只有开发时需要
+- 动画多卡顿
+  - setTimeout 改为 requestAnimationFrame
 
 ## 难点
 

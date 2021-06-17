@@ -149,7 +149,12 @@ module.exports = {
             "",
             {
               title: "基础",
-              children: ["render", "document_fragment", "svg"]
+              children: [
+                "render",
+                "document_fragment",
+                "svg",
+                "requestAnimationFrame"
+              ]
             },
             {
               title: "应用",
