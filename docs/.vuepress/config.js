@@ -59,7 +59,7 @@ module.exports = {
       "/lint/": [
         {
           collapsable: false,
-          children: ["", "css", "js", "js_colon"]
+          children: ["", "css", "js", "js_colon", "js_clean"]
         }
       ],
       /* 代码规范 */
@@ -474,7 +474,8 @@ module.exports = {
             "storage",
             "crossdomain",
             "dns",
-            "xss"
+            "xss",
+            "cdn"
           ]
         }
       ]

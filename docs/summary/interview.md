@@ -187,7 +187,7 @@
 - [xss csrf](/network/xss.html)
 - tcp 三次握手 四次挥手
 - [网络安全汇总](/network/)
-- 跨域
+- [跨域](/network/crossdomain.html)
   - jsonp 原理
   - cors
   - 反向代理
