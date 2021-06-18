@@ -247,6 +247,153 @@ function showEmployeeList(employees) {
 }
 ```
 
+### 不要在函数内做有副作用的操作
+
+也就是尽量使用纯函数
+
+### 不要重写全局函数
+
+比如 `Array.prototype`：
+
+```js
+// bad
+Array.prototype.diff = function diff(comparisonArray) {
+  const hash = new Set(comparisonArray);
+  return this.filter(elem => !hash.has(elem));
+};
+
+// good 继承然后扩展
+class SuperArray extends Array {
+  diff(comparisonArray) {
+    const hash = new Set(comparisonArray);
+    return this.filter(elem => !hash.has(elem));
+  }
+}
+```
+
+### 尽可能使用函数式而不是命令式
+
+```js
+// bad
+const programmerOutput = [
+  {
+    name: "Uncle Bobby",
+    linesOfCode: 500
+  },
+  {
+    name: "Suzie Q",
+    linesOfCode: 1500
+  },
+  {
+    name: "Jimmy Gosling",
+    linesOfCode: 150
+  },
+  {
+    name: "Gracie Hopper",
+    linesOfCode: 1000
+  }
+];
+
+let totalOutput = 0;
+
+for (let i = 0; i < programmerOutput.length; i++) {
+  totalOutput += programmerOutput[i].linesOfCode;
+}
+
+// good
+const programmerOutput = [
+  {
+    name: "Uncle Bobby",
+    linesOfCode: 500
+  },
+  {
+    name: "Suzie Q",
+    linesOfCode: 1500
+  },
+  {
+    name: "Jimmy Gosling",
+    linesOfCode: 150
+  },
+  {
+    name: "Gracie Hopper",
+    linesOfCode: 1000
+  }
+];
+
+const totalOutput = programmerOutput.reduce(
+  (totalLines, output) => totalLines + output.linesOfCode,
+  0
+);
+```
+
+### 封装条件判断
+
+```js
+// bad
+if (fsm.state === "fetching" && isEmpty(listNode)) {
+  // ...
+}
+
+// good
+function shouldShowSpinner(fsm, listNode) {
+  return fsm.state === "fetching" && isEmpty(listNode);
+}
+
+if (shouldShowSpinner(fsmInstance, listNodeInstance)) {
+  // ...
+}
+```
+
+### 避免使用否定条件
+
+```js
+// bad
+function isDOMNodeNotPresent(node) {
+  // ...
+}
+
+if (!isDOMNodeNotPresent(node)) {
+  // ...
+}
+
+// good
+function isDOMNodePresent(node) {
+  // ...
+}
+
+if (isDOMNodePresent(node)) {
+  // ...
+}
+```
+
+### 避免类型检查
+
+```js
+// bad
+function travelToTexas(vehicle) {
+  if (vehicle instanceof Bicycle) {
+    vehicle.pedal(this.currentLocation, new Location("texas"));
+  } else if (vehicle instanceof Car) {
+    vehicle.drive(this.currentLocation, new Location("texas"));
+  }
+}
+
+// good
+function travelToTexas(vehicle) {
+  vehicle.move(this.currentLocation, new Location("texas"));
+}
+```
+
+## 对象和数据结构
+
+- 使用 getter setter
+- 使用私有成员
+
+## 类
+
+- 使用 class 而不是旧的方式
+- 使用链式调用
+
 ## 参考
 
 - [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)
