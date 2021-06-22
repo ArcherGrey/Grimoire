@@ -83,12 +83,16 @@ https://mp.weixin.qq.com/s/af-F2goqnfMEo_yT_yFUMw
 - `customize-cra` 修改 `create react app` 配置
 
 - webpack
+
   - 工具 `webpack-bundle-analyzer`
   - 体积优化 1.09 M gzip
+
     - echarts 300kb -> 158kb
       - echarts 5.0 以后 示例添加 option 完整代码自动显示按需引用
     - geojson 216kb->36kb echarts 压缩解码 ZigZag
     - mock.js 49kb -> 0 只有开发时需要
+    - [路由懒加载](/engineering/router_lazy.html) 导致每个页面单独打包 -> 相同文件多次引用重复打包 SplitChunksPlugin 体积减小 60kb
+
 - 动画多卡顿
   - setTimeout 改为 requestAnimationFrame
 

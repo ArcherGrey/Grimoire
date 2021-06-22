@@ -58,3 +58,5 @@
   - devserve
     - proxy 修改不生效
       - 可能是缓存导致 请求显示`from disk cache`
+  - 相同文件多次引用重复打包
+    - [路由懒加载](/engineering/router_lazy.html) 造成每个页面单独打包

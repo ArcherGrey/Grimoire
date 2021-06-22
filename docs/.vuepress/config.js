@@ -195,7 +195,8 @@ module.exports = {
                 "loader_plugin",
                 "preview",
                 "monitor",
-                "webpack_build"
+                "webpack_build",
+                "router_lazy"
               ]
             },
             {
