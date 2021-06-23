@@ -44,27 +44,7 @@
 
 ### 优化
 
-- 编码
-  - data 数据尽可能少，这样对应的数据劫持代价小
-  - 循环渲染的子元素数据绑定使用事件代理 使用 key 减少 diff 开销
-  - 需要缓存状态的使用 keep-alive
-  - 尽可能使用 v-if 替代 v-show 避免首次渲染消耗
-  - 路由懒加载 异步组件
-  - 防抖截流
-  - 第三方按需导入
-  - 图片懒加载
-  - 使用 `addEventListene` 绑定的事件销毁需要在 `beforeDestroy` 手动销毁，避免内存泄漏
-  - 长列表数据，纯展示不会有数据变化的不需要数据劫持来动态渲染可以使用 `object.freeze` 冻结对象
-- 打包
-  - gzip 压缩
-  - 图片压缩
-  - tree shaking
-  - cdn 加载第三方模块
-  - sourcemap 优化
-  - 设置缓存
-- 用户体验
-  - pwa
-  - 骨架屏
+[性能优化](/engineering/performance.html)
 
 ## react
 
