@@ -60,3 +60,10 @@
       - 可能是缓存导致 请求显示`from disk cache`
   - 相同文件多次引用重复打包
     - [路由懒加载](/engineering/router_lazy.html) 造成每个页面单独打包
+  - image-webpack-loader
+    - `disable: process.env.NODE_ENV == 'development' ? true : false` 配置需要按照环境变化而不是网上默认配置 `true`
+    - 开发环境 base64 图片不显示
+    - `Cannot find module 'gifsicle'`
+      - 暂时没解决
+      - 刪除 `node_module` 重新安装 `npm rebuild`
+      - `cnpm` 重新安装

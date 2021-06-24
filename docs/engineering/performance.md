@@ -9,6 +9,8 @@
 - 图片
   - 雪碧图
   - 图片图标替换为 `iconfont`:体积更小，缩放不失真
+  - image-webpack-loader 图片压缩
+  - url-loader 小图片转 base64 减少 http 请求
 - 压缩
   - gzip
   - 代码混淆
