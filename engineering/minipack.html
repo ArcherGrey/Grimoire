@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Minipack (简易打包器实现) | Grimoire</title>
+    <meta name="generator" content="VuePress 1.8.0">
+    <link rel="icon" href="/Grimoire/logo.png">
+    <link rel="manifest" href="/Grimoire/manifest.json">
+    <link rel="apple-touch-icon" href="/Grimoire/icons/apple-touch-icon-152x152.png">
+    <link rel="mask-icon" href="/Grimoire/icons/safari-pinned-tab.svg" color="#3eaf7c">
+    <meta name="description" content="Magic Book">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <link rel="preload" href="/Grimoire/assets/css/0.styles.95ca9682.css" as="style"><link rel="preload" href="/Grimoire/assets/js/app.fcd81a0f.js" as="script"><link rel="preload" href="/Grimoire/assets/js/2.0cda6e6c.js" as="script"><link rel="preload" href="/Grimoire/assets/js/44.8728d33f.js" as="script"><link rel="preload" href="/Grimoire/assets/js/15.b8087621.js" as="script"><link rel="prefetch" href="/Grimoire/assets/js/10.13f6a25c.js"><link rel="prefetch" href="/Grimoire/assets/js/100.a17997f5.js"><link rel="prefetch" href="/Grimoire/assets/js/101.a02a8f3a.js"><link rel="prefetch" href="/Grimoire/assets/js/102.ba14dab5.js"><link rel="prefetch" href="/Grimoire/assets/js/103.dfd8557e.js"><link rel="prefetch" href="/Grimoire/assets/js/104.b205a394.js"><link rel="prefetch" href="/Grimoire/assets/js/105.6b48132c.js"><link rel="prefetch" href="/Grimoire/assets/js/106.38bbca6c.js"><link rel="prefetch" href="/Grimoire/assets/js/107.19905d4c.js"><link rel="prefetch" href="/Grimoire/assets/js/108.ac0ccf00.js"><link rel="prefetch" href="/Grimoire/assets/js/109.fb828488.js"><link rel="prefetch" href="/Grimoire/assets/js/11.a1aadf84.js"><link rel="prefetch" href="/Grimoire/assets/js/110.052b7114.js"><link rel="prefetch" href="/Grimoire/assets/js/111.97c7dc5d.js"><link rel="prefetch" href="/Grimoire/assets/js/112.5832dea4.js"><link rel="prefetch" href="/Grimoire/assets/js/113.db2a178a.js"><link rel="prefetch" href="/Grimoire/assets/js/114.13c76d86.js"><link rel="prefetch" href="/Grimoire/assets/js/115.37335a8a.js"><link rel="prefetch" href="/Grimoire/assets/js/116.5705155a.js"><link rel="prefetch" href="/Grimoire/assets/js/117.42d30d19.js"><link rel="prefetch" href="/Grimoire/assets/js/118.6a8e0375.js"><link rel="prefetch" href="/Grimoire/assets/js/119.eadff3d7.js"><link rel="prefetch" href="/Grimoire/assets/js/12.87c0c167.js"><link rel="prefetch" href="/Grimoire/assets/js/120.9c1992c6.js"><link rel="prefetch" href="/Grimoire/assets/js/121.59340c42.js"><link rel="prefetch" href="/Grimoire/assets/js/122.291d3421.js"><link rel="prefetch" href="/Grimoire/assets/js/123.3baab3ce.js"><link rel="prefetch" href="/Grimoire/assets/js/124.83aec012.js"><link rel="prefetch" href="/Grimoire/assets/js/125.8f1e9ec7.js"><link rel="prefetch" href="/Grimoire/assets/js/126.4f9e2b1d.js"><link rel="prefetch" href="/Grimoire/assets/js/127.99b6aa0c.js"><link rel="prefetch" href="/Grimoire/assets/js/128.98119fbf.js"><link rel="prefetch" href="/Grimoire/assets/js/129.c3887af7.js"><link rel="prefetch" href="/Grimoire/assets/js/13.5e4d6ad8.js"><link rel="prefetch" href="/Grimoire/assets/js/130.2a650f8e.js"><link rel="prefetch" href="/Grimoire/assets/js/131.35fa76e4.js"><link rel="prefetch" href="/Grimoire/assets/js/132.8525eb9c.js"><link rel="prefetch" href="/Grimoire/assets/js/133.825931e7.js"><link rel="prefetch" href="/Grimoire/assets/js/134.305ff1df.js"><link rel="prefetch" href="/Grimoire/assets/js/135.4944c8e4.js"><link rel="prefetch" href="/Grimoire/assets/js/136.8c7fcb79.js"><link rel="prefetch" href="/Grimoire/assets/js/137.0af71467.js"><link rel="prefetch" href="/Grimoire/assets/js/138.a8eea3f2.js"><link rel="prefetch" href="/Grimoire/assets/js/139.08b701c8.js"><link rel="prefetch" href="/Grimoire/assets/js/14.d3287ae1.js"><link rel="prefetch" href="/Grimoire/assets/js/140.b6f4a1c4.js"><link rel="prefetch" href="/Grimoire/assets/js/141.a7215120.js"><link rel="prefetch" href="/Grimoire/assets/js/142.a09875cf.js"><link rel="prefetch" href="/Grimoire/assets/js/143.12a2c008.js"><link rel="prefetch" href="/Grimoire/assets/js/144.62007964.js"><link rel="prefetch" href="/Grimoire/assets/js/145.1bef072a.js"><link rel="prefetch" href="/Grimoire/assets/js/146.f3a7e1a5.js"><link rel="prefetch" href="/Grimoire/assets/js/147.b0e72fb1.js"><link rel="prefetch" href="/Grimoire/assets/js/148.ece80192.js"><link rel="prefetch" href="/Grimoire/assets/js/149.189cab7c.js"><link rel="prefetch" href="/Grimoire/assets/js/150.1969e306.js"><link rel="prefetch" href="/Grimoire/assets/js/151.e66bb269.js"><link rel="prefetch" href="/Grimoire/assets/js/152.986d4ccc.js"><link rel="prefetch" href="/Grimoire/assets/js/153.f56dd94a.js"><link rel="prefetch" href="/Grimoire/assets/js/154.f13a9dc2.js"><link rel="prefetch" href="/Grimoire/assets/js/155.073dc25a.js"><link rel="prefetch" href="/Grimoire/assets/js/156.2d9f892f.js"><link rel="prefetch" href="/Grimoire/assets/js/157.fec4da46.js"><link rel="prefetch" href="/Grimoire/assets/js/158.709d5b9c.js"><link rel="prefetch" href="/Grimoire/assets/js/159.e3c1f503.js"><link rel="prefetch" href="/Grimoire/assets/js/16.6f95a895.js"><link rel="prefetch" href="/Grimoire/assets/js/160.89b1a28b.js"><link rel="prefetch" href="/Grimoire/assets/js/161.ea3c759c.js"><link rel="prefetch" href="/Grimoire/assets/js/162.754b5007.js"><link rel="prefetch" href="/Grimoire/assets/js/163.5200acfa.js"><link rel="prefetch" href="/Grimoire/assets/js/164.2cac914f.js"><link rel="prefetch" href="/Grimoire/assets/js/165.d2b261f6.js"><link rel="prefetch" href="/Grimoire/assets/js/166.9a188b61.js"><link rel="prefetch" href="/Grimoire/assets/js/167.c9bbae28.js"><link rel="prefetch" href="/Grimoire/assets/js/168.593fc3fc.js"><link rel="prefetch" href="/Grimoire/assets/js/169.9d7f0bd3.js"><link rel="prefetch" href="/Grimoire/assets/js/17.07a95582.js"><link rel="prefetch" href="/Grimoire/assets/js/170.629c0bba.js"><link rel="prefetch" href="/Grimoire/assets/js/171.dd6bfe80.js"><link rel="prefetch" href="/Grimoire/assets/js/172.bea8825a.js"><link rel="prefetch" href="/Grimoire/assets/js/173.e08bac6c.js"><link rel="prefetch" href="/Grimoire/assets/js/174.e754ccb7.js"><link rel="prefetch" href="/Grimoire/assets/js/175.2550c14c.js"><link rel="prefetch" href="/Grimoire/assets/js/176.6443f8e2.js"><link rel="prefetch" href="/Grimoire/assets/js/177.7ecfc58e.js"><link rel="prefetch" href="/Grimoire/assets/js/178.a99e58b7.js"><link rel="prefetch" href="/Grimoire/assets/js/179.89e52d36.js"><link rel="prefetch" href="/Grimoire/assets/js/18.75d4ecfa.js"><link rel="prefetch" href="/Grimoire/assets/js/180.a344603e.js"><link rel="prefetch" href="/Grimoire/assets/js/181.23dde0f5.js"><link rel="prefetch" href="/Grimoire/assets/js/182.d5488672.js"><link rel="prefetch" href="/Grimoire/assets/js/183.9ba9d84a.js"><link rel="prefetch" href="/Grimoire/assets/js/184.138280de.js"><link rel="prefetch" href="/Grimoire/assets/js/185.cb7f6c4c.js"><link rel="prefetch" href="/Grimoire/assets/js/186.c554a609.js"><link rel="prefetch" href="/Grimoire/assets/js/187.e419fd79.js"><link rel="prefetch" href="/Grimoire/assets/js/188.830d35b0.js"><link rel="prefetch" href="/Grimoire/assets/js/189.40651b1b.js"><link rel="prefetch" href="/Grimoire/assets/js/19.ee3e67c9.js"><link rel="prefetch" href="/Grimoire/assets/js/190.3cfe898d.js"><link rel="prefetch" href="/Grimoire/assets/js/191.b7c4f676.js"><link rel="prefetch" href="/Grimoire/assets/js/192.a2a2ae6e.js"><link rel="prefetch" href="/Grimoire/assets/js/193.c2b34e8e.js"><link rel="prefetch" href="/Grimoire/assets/js/194.0e22957b.js"><link rel="prefetch" href="/Grimoire/assets/js/195.c3837c70.js"><link rel="prefetch" href="/Grimoire/assets/js/196.701b3bec.js"><link rel="prefetch" href="/Grimoire/assets/js/197.a0ad1586.js"><link rel="prefetch" href="/Grimoire/assets/js/198.0df819ef.js"><link rel="prefetch" href="/Grimoire/assets/js/199.9173218a.js"><link rel="prefetch" href="/Grimoire/assets/js/20.7d0ddcf3.js"><link rel="prefetch" href="/Grimoire/assets/js/200.c991dd0e.js"><link rel="prefetch" href="/Grimoire/assets/js/201.887c30d7.js"><link rel="prefetch" href="/Grimoire/assets/js/202.1f945ba4.js"><link rel="prefetch" href="/Grimoire/assets/js/203.0e4de284.js"><link rel="prefetch" href="/Grimoire/assets/js/204.dcc9b604.js"><link rel="prefetch" href="/Grimoire/assets/js/205.8a9c7b95.js"><link rel="prefetch" href="/Grimoire/assets/js/206.4f0e0f47.js"><link rel="prefetch" href="/Grimoire/assets/js/207.42ae5637.js"><link rel="prefetch" href="/Grimoire/assets/js/208.c496e881.js"><link rel="prefetch" href="/Grimoire/assets/js/209.dedc9627.js"><link rel="prefetch" href="/Grimoire/assets/js/21.689dfdd2.js"><link rel="prefetch" href="/Grimoire/assets/js/210.a27e211d.js"><link rel="prefetch" href="/Grimoire/assets/js/211.ea020455.js"><link rel="prefetch" href="/Grimoire/assets/js/212.90758d81.js"><link rel="prefetch" href="/Grimoire/assets/js/213.b7394cb7.js"><link rel="prefetch" href="/Grimoire/assets/js/214.2baf770d.js"><link rel="prefetch" href="/Grimoire/assets/js/215.82facc73.js"><link rel="prefetch" href="/Grimoire/assets/js/216.4b5df56d.js"><link rel="prefetch" href="/Grimoire/assets/js/217.dbc39d11.js"><link rel="prefetch" href="/Grimoire/assets/js/218.057f46c0.js"><link rel="prefetch" href="/Grimoire/assets/js/219.6ac56a38.js"><link rel="prefetch" href="/Grimoire/assets/js/22.13006394.js"><link rel="prefetch" href="/Grimoire/assets/js/220.55a0a9bd.js"><link rel="prefetch" href="/Grimoire/assets/js/221.98b0b9bb.js"><link rel="prefetch" href="/Grimoire/assets/js/222.82a9379f.js"><link rel="prefetch" href="/Grimoire/assets/js/223.37f00eb2.js"><link rel="prefetch" href="/Grimoire/assets/js/224.5a635fad.js"><link rel="prefetch" href="/Grimoire/assets/js/225.82539911.js"><link rel="prefetch" href="/Grimoire/assets/js/226.e17cce5c.js"><link rel="prefetch" href="/Grimoire/assets/js/227.7bb7f332.js"><link rel="prefetch" href="/Grimoire/assets/js/228.4de4180f.js"><link rel="prefetch" href="/Grimoire/assets/js/229.902462ea.js"><link rel="prefetch" href="/Grimoire/assets/js/23.17c80c78.js"><link rel="prefetch" href="/Grimoire/assets/js/230.799221d8.js"><link rel="prefetch" href="/Grimoire/assets/js/231.6ec1ebb3.js"><link rel="prefetch" href="/Grimoire/assets/js/232.17d6ae65.js"><link rel="prefetch" href="/Grimoire/assets/js/233.b3bdd487.js"><link rel="prefetch" href="/Grimoire/assets/js/234.17dc5ec4.js"><link rel="prefetch" href="/Grimoire/assets/js/235.6ffe69a9.js"><link rel="prefetch" href="/Grimoire/assets/js/236.f56f0e20.js"><link rel="prefetch" href="/Grimoire/assets/js/237.3b2680e2.js"><link rel="prefetch" href="/Grimoire/assets/js/238.3da5a263.js"><link rel="prefetch" href="/Grimoire/assets/js/239.69ed3d18.js"><link rel="prefetch" href="/Grimoire/assets/js/24.f8c2b1a7.js"><link rel="prefetch" href="/Grimoire/assets/js/240.21ae0d82.js"><link rel="prefetch" href="/Grimoire/assets/js/241.f81440fa.js"><link rel="prefetch" href="/Grimoire/assets/js/242.57e9c0d2.js"><link rel="prefetch" href="/Grimoire/assets/js/243.ff6aa233.js"><link rel="prefetch" href="/Grimoire/assets/js/244.7a143719.js"><link rel="prefetch" href="/Grimoire/assets/js/245.c936beab.js"><link rel="prefetch" href="/Grimoire/assets/js/246.cafe60bb.js"><link rel="prefetch" href="/Grimoire/assets/js/247.ae0cb40d.js"><link rel="prefetch" href="/Grimoire/assets/js/248.0d6e2776.js"><link rel="prefetch" href="/Grimoire/assets/js/249.603d0e9d.js"><link rel="prefetch" href="/Grimoire/assets/js/25.b698ad53.js"><link rel="prefetch" href="/Grimoire/assets/js/250.5d042f51.js"><link rel="prefetch" href="/Grimoire/assets/js/251.a0530b3b.js"><link rel="prefetch" href="/Grimoire/assets/js/252.b022735b.js"><link rel="prefetch" href="/Grimoire/assets/js/253.78fa1402.js"><link rel="prefetch" href="/Grimoire/assets/js/254.947c219c.js"><link rel="prefetch" href="/Grimoire/assets/js/255.7b4d2e08.js"><link rel="prefetch" href="/Grimoire/assets/js/256.85a46988.js"><link rel="prefetch" href="/Grimoire/assets/js/257.1eadad44.js"><link rel="prefetch" href="/Grimoire/assets/js/258.9c2b49a5.js"><link rel="prefetch" href="/Grimoire/assets/js/259.d01514c9.js"><link rel="prefetch" href="/Grimoire/assets/js/26.f7e348be.js"><link rel="prefetch" href="/Grimoire/assets/js/260.db92975f.js"><link rel="prefetch" href="/Grimoire/assets/js/261.53f4f8ff.js"><link rel="prefetch" href="/Grimoire/assets/js/262.dc168695.js"><link rel="prefetch" href="/Grimoire/assets/js/263.28980c9d.js"><link rel="prefetch" href="/Grimoire/assets/js/264.25241bdb.js"><link rel="prefetch" href="/Grimoire/assets/js/265.dcb4ab7e.js"><link rel="prefetch" href="/Grimoire/assets/js/266.3f91d6f9.js"><link rel="prefetch" href="/Grimoire/assets/js/267.d113dee5.js"><link rel="prefetch" href="/Grimoire/assets/js/268.940d7a97.js"><link rel="prefetch" href="/Grimoire/assets/js/27.4fd28b75.js"><link rel="prefetch" href="/Grimoire/assets/js/28.d763024c.js"><link rel="prefetch" href="/Grimoire/assets/js/29.6d499c6e.js"><link rel="prefetch" href="/Grimoire/assets/js/3.2fef6794.js"><link rel="prefetch" href="/Grimoire/assets/js/30.564176b2.js"><link rel="prefetch" href="/Grimoire/assets/js/31.53f8fa9b.js"><link rel="prefetch" href="/Grimoire/assets/js/32.b3ab7bd8.js"><link rel="prefetch" href="/Grimoire/assets/js/33.70185bf4.js"><link rel="prefetch" href="/Grimoire/assets/js/34.f66f325c.js"><link rel="prefetch" href="/Grimoire/assets/js/35.bb65448f.js"><link rel="prefetch" href="/Grimoire/assets/js/36.75171888.js"><link rel="prefetch" href="/Grimoire/assets/js/37.5bc7b4d6.js"><link rel="prefetch" href="/Grimoire/assets/js/38.4f58ddc3.js"><link rel="prefetch" href="/Grimoire/assets/js/39.bde6baf4.js"><link rel="prefetch" href="/Grimoire/assets/js/4.8c7aa336.js"><link rel="prefetch" href="/Grimoire/assets/js/40.45c870ae.js"><link rel="prefetch" href="/Grimoire/assets/js/41.c03f9248.js"><link rel="prefetch" href="/Grimoire/assets/js/42.4ae4d169.js"><link rel="prefetch" href="/Grimoire/assets/js/43.ac495911.js"><link rel="prefetch" href="/Grimoire/assets/js/45.35e18222.js"><link rel="prefetch" href="/Grimoire/assets/js/46.d73d8e54.js"><link rel="prefetch" href="/Grimoire/assets/js/47.c32b6798.js"><link rel="prefetch" href="/Grimoire/assets/js/48.bc1343c8.js"><link rel="prefetch" href="/Grimoire/assets/js/49.f18af0ec.js"><link rel="prefetch" href="/Grimoire/assets/js/5.fc1e3e56.js"><link rel="prefetch" href="/Grimoire/assets/js/50.17852f7b.js"><link rel="prefetch" href="/Grimoire/assets/js/51.89146969.js"><link rel="prefetch" href="/Grimoire/assets/js/52.1276c1ae.js"><link rel="prefetch" href="/Grimoire/assets/js/53.543f8eaa.js"><link rel="prefetch" href="/Grimoire/assets/js/54.45b03c92.js"><link rel="prefetch" href="/Grimoire/assets/js/55.62fb3f24.js"><link rel="prefetch" href="/Grimoire/assets/js/56.4c9e26f1.js"><link rel="prefetch" href="/Grimoire/assets/js/57.7fde3c0b.js"><link rel="prefetch" href="/Grimoire/assets/js/58.bcfd8c9d.js"><link rel="prefetch" href="/Grimoire/assets/js/59.cd8d94c0.js"><link rel="prefetch" href="/Grimoire/assets/js/6.cf2a21ea.js"><link rel="prefetch" href="/Grimoire/assets/js/60.a5d874de.js"><link rel="prefetch" href="/Grimoire/assets/js/61.38d400dd.js"><link rel="prefetch" href="/Grimoire/assets/js/62.8a8be4b4.js"><link rel="prefetch" href="/Grimoire/assets/js/63.9826e058.js"><link rel="prefetch" href="/Grimoire/assets/js/64.98c9ed22.js"><link rel="prefetch" href="/Grimoire/assets/js/65.01526027.js"><link rel="prefetch" href="/Grimoire/assets/js/66.b76f4de5.js"><link rel="prefetch" href="/Grimoire/assets/js/67.d5e5c496.js"><link rel="prefetch" href="/Grimoire/assets/js/68.1a7b5dc0.js"><link rel="prefetch" href="/Grimoire/assets/js/69.714d4da6.js"><link rel="prefetch" href="/Grimoire/assets/js/7.16f42890.js"><link rel="prefetch" href="/Grimoire/assets/js/70.3eb86bce.js"><link rel="prefetch" href="/Grimoire/assets/js/71.001fbb18.js"><link rel="prefetch" href="/Grimoire/assets/js/72.440f27ca.js"><link rel="prefetch" href="/Grimoire/assets/js/73.5ffe2e0b.js"><link rel="prefetch" href="/Grimoire/assets/js/74.26b604e2.js"><link rel="prefetch" href="/Grimoire/assets/js/75.11aa2423.js"><link rel="prefetch" href="/Grimoire/assets/js/76.7907ffc6.js"><link rel="prefetch" href="/Grimoire/assets/js/77.2edb798c.js"><link rel="prefetch" href="/Grimoire/assets/js/78.ac77e79a.js"><link rel="prefetch" href="/Grimoire/assets/js/79.7c6977d4.js"><link rel="prefetch" href="/Grimoire/assets/js/8.e6ca58cf.js"><link rel="prefetch" href="/Grimoire/assets/js/80.16336976.js"><link rel="prefetch" href="/Grimoire/assets/js/81.dc27d0c5.js"><link rel="prefetch" href="/Grimoire/assets/js/82.fdef8ad1.js"><link rel="prefetch" href="/Grimoire/assets/js/83.5ff25c01.js"><link rel="prefetch" href="/Grimoire/assets/js/84.7225a95e.js"><link rel="prefetch" href="/Grimoire/assets/js/85.17fa96f9.js"><link rel="prefetch" href="/Grimoire/assets/js/86.5825439b.js"><link rel="prefetch" href="/Grimoire/assets/js/87.692ee16f.js"><link rel="prefetch" href="/Grimoire/assets/js/88.e035d1a0.js"><link rel="prefetch" href="/Grimoire/assets/js/89.1c7f926f.js"><link rel="prefetch" href="/Grimoire/assets/js/9.b088b6b5.js"><link rel="prefetch" href="/Grimoire/assets/js/90.d33aceb3.js"><link rel="prefetch" href="/Grimoire/assets/js/91.edecc97d.js"><link rel="prefetch" href="/Grimoire/assets/js/92.5f6dc8c7.js"><link rel="prefetch" href="/Grimoire/assets/js/93.feebc904.js"><link rel="prefetch" href="/Grimoire/assets/js/94.8da6a009.js"><link rel="prefetch" href="/Grimoire/assets/js/95.0ce192fb.js"><link rel="prefetch" href="/Grimoire/assets/js/96.d72b9fe7.js"><link rel="prefetch" href="/Grimoire/assets/js/97.b1326fe7.js"><link rel="prefetch" href="/Grimoire/assets/js/98.7b0654b9.js"><link rel="prefetch" href="/Grimoire/assets/js/99.201e2fad.js">
+    <link rel="stylesheet" href="/Grimoire/assets/css/0.styles.95ca9682.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/Grimoire/" class="home-link router-link-active"><!----> <span class="site-name">Grimoire</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/Grimoire/annals/" class="nav-link">
+  编年史
+</a></div><div class="nav-item"><a href="/Grimoire/summary/" class="nav-link">
+  总结
+</a></div><div class="nav-item"><a href="/Grimoire/lint/" class="nav-link">
+  代码规范
+</a></div><div class="nav-item"><a href="/Grimoire/git/" class="nav-link">
+  Git
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="前端" class="dropdown-title"><span class="title">前端</span> <span class="arrow down"></span></button> <button type="button" aria-label="前端" class="mobile-dropdown-title"><span class="title">前端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/Grimoire/js/" class="nav-link">
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/css/" class="nav-link">
+  Css
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/explorer/" class="nav-link">
+  浏览器
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/engineering/" class="nav-link router-link-active">
+  工程化
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/visual/" class="nav-link">
+  可视化
+</a></li><li class="dropdown-item"><h4>
+          框架
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/Grimoire/vue/" class="nav-link">
+  Vue
+</a></li><li class="dropdown-subitem"><a href="/Grimoire/react/" class="nav-link">
+  React
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/Grimoire/network/" class="nav-link">
+  网络
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="算法" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="算法" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/Grimoire/leetcode/" class="nav-link">
+  leetcode
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/find/" class="nav-link">
+  查找
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/sort/" class="nav-link">
+  排序
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/graph/" class="nav-link">
+  图
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/tree/" class="nav-link">
+  树
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/string/" class="nav-link">
+  字符串
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/linkedlist/" class="nav-link">
+  链表
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/gis/" class="nav-link">
+  GIS
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/Grimoire/annals/" class="nav-link">
+  编年史
+</a></div><div class="nav-item"><a href="/Grimoire/summary/" class="nav-link">
+  总结
+</a></div><div class="nav-item"><a href="/Grimoire/lint/" class="nav-link">
+  代码规范
+</a></div><div class="nav-item"><a href="/Grimoire/git/" class="nav-link">
+  Git
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="前端" class="dropdown-title"><span class="title">前端</span> <span class="arrow down"></span></button> <button type="button" aria-label="前端" class="mobile-dropdown-title"><span class="title">前端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/Grimoire/js/" class="nav-link">
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/css/" class="nav-link">
+  Css
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/explorer/" class="nav-link">
+  浏览器
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/engineering/" class="nav-link router-link-active">
+  工程化
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/visual/" class="nav-link">
+  可视化
+</a></li><li class="dropdown-item"><h4>
+          框架
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/Grimoire/vue/" class="nav-link">
+  Vue
+</a></li><li class="dropdown-subitem"><a href="/Grimoire/react/" class="nav-link">
+  React
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/Grimoire/network/" class="nav-link">
+  网络
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="算法" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="算法" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/Grimoire/leetcode/" class="nav-link">
+  leetcode
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/find/" class="nav-link">
+  查找
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/sort/" class="nav-link">
+  排序
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/graph/" class="nav-link">
+  图
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/tree/" class="nav-link">
+  树
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/string/" class="nav-link">
+  字符串
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/linkedlist/" class="nav-link">
+  链表
+</a></li><li class="dropdown-item"><!----> <a href="/Grimoire/gis/" class="nav-link">
+  GIS
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span></span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/Grimoire/engineering/" aria-current="page" class="sidebar-link">工程化</a></li><li><section class="sidebar-group collapsable is-sub-group depth-1"><p class="sidebar-heading open"><span>基础/原理</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/Grimoire/engineering/module.html" class="sidebar-link">模块化</a></li><li><a href="/Grimoire/engineering/write_module.html" class="sidebar-link">原生 JavaScript 模块化</a></li><li><a href="/Grimoire/engineering/minipack.html" aria-current="page" class="active sidebar-link">Minipack (简易打包器实现)</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Grimoire/engineering/minipack.html#目录结构" class="sidebar-link">目录结构</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Grimoire/engineering/minipack.html#example-代码" class="sidebar-link">example 代码</a></li><li class="sidebar-sub-header"><a href="/Grimoire/engineering/minipack.html#minipack-代码" class="sidebar-link">minipack 代码</a></li><li class="sidebar-sub-header"><a href="/Grimoire/engineering/minipack.html#package-json" class="sidebar-link">package.json</a></li></ul></li><li class="sidebar-sub-header"><a href="/Grimoire/engineering/minipack.html#使用说明" class="sidebar-link">使用说明</a></li></ul></li><li><a href="/Grimoire/engineering/mvx.html" class="sidebar-link">MVX 模型</a></li><li><a href="/Grimoire/engineering/sourcemap.html" class="sidebar-link">sourcemap</a></li></ul></section></li><li><section class="sidebar-group collapsable is-sub-group depth-1"><p class="sidebar-heading"><span>应用</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable is-sub-group depth-1"><p class="sidebar-heading"><span>性能优化</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable is-sub-group depth-1"><p class="sidebar-heading"><span>工具</span> <span class="arrow right"></span></p> <!----></section></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="minipack-简易打包器实现"><a href="#minipack-简易打包器实现" class="header-anchor">#</a> Minipack (简易打包器实现)</h1> <p>参考 <a href="https://github.com/ronami/minipack" target="_blank" rel="noopener noreferrer">minipack<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <h2 id="目录结构"><a href="#目录结构" class="header-anchor">#</a> 目录结构</h2> <div class="language-auto line-numbers-mode"><pre class="language-text"><code>├─example
+│      entry.js
+│      message.js
+│      name.js
+│
+└─src
+        minipack.js
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h3 id="example-代码"><a href="#example-代码" class="header-anchor">#</a> example 代码</h3> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// entry.js</span>
+<span class="token keyword">import</span> message <span class="token keyword">from</span> <span class="token string">&quot;./message.js&quot;</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// message.js</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> name <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./name.js&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">hello </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">!</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+
+<span class="token comment">// name.js</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> name <span class="token operator">=</span> <span class="token string">&quot;world&quot;</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><h3 id="minipack-代码"><a href="#minipack-代码" class="header-anchor">#</a> minipack 代码</h3> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;fs&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 文件读取</span>
+<span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 文件路径</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> parse <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;@babel/parser&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 解析代码生成 AST</span>
+<span class="token keyword">const</span> transformFromAst <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;@babel/core&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>transformFromAst<span class="token punctuation">;</span> <span class="token comment">// 将 AST 解析生成代码</span>
+<span class="token keyword">const</span> traverse <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;@babel/traverse&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>default<span class="token punctuation">;</span> <span class="token comment">// 对 AST 进行遍历</span>
+
+<span class="token keyword">let</span> <span class="token constant">ID</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * @description: 生成文件依赖信息
+ * @param {*} filename 文件的绝对路径
+ * @return {*}
+ */</span>
+<span class="token keyword">function</span> <span class="token function">createAsset</span><span class="token punctuation">(</span><span class="token parameter">filename</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">/* 读取文件内容 */</span>
+  <span class="token comment">// 字符串形式读取文件内容.</span>
+  <span class="token keyword">const</span> content <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>filename<span class="token punctuation">,</span> <span class="token string">&quot;utf-8&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 现在我们需要搞清楚文件的依赖关系，可以通过寻找文件内容中的 import 字符串，为此我们就需要一个 JavaScript 解析器</span>
+
+  <span class="token comment">/* 生成 AST */</span>
+  <span class="token comment">// JavaScript 解析器可以帮助我们来理解代码，生成一个抽象的数据结构称为 AST(抽象语法树)</span>
+
+  <span class="token comment">// 可以在这里看看抽象语法树是什么样子</span>
+  <span class="token comment">// AST Explorer (https://astexplorer.net)</span>
+  <span class="token comment">//</span>
+  <span class="token comment">// 一个 AST 包含了代码中的大量信息，我们可以通过它来了解代码想要做什么</span>
+  <span class="token keyword">const</span> ast <span class="token operator">=</span> <span class="token function">parse</span><span class="token punctuation">(</span>content<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    sourceType<span class="token operator">:</span> <span class="token string">&quot;module&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 这个数组用来保存当前模块依赖的其他模块的路径</span>
+  <span class="token keyword">const</span> dependencies <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+  <span class="token comment">/* 遍历 AST */</span>
+  <span class="token comment">// 遍历 AST 来查询当前模块依赖哪些模块，也就是检查 AST 上每个 import 语句</span>
+  <span class="token function">traverse</span><span class="token punctuation">(</span>ast<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token comment">// ES 模块都很简单，因为它们都是静态的，所以看到 import 语句可以直接把值作为依赖</span>
+    <span class="token function-variable function">ImportDeclaration</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> node <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      dependencies<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>source<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 用 ID 来标识当前模块</span>
+  <span class="token keyword">const</span> id <span class="token operator">=</span> <span class="token constant">ID</span><span class="token operator">++</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// ES 模块和其他 js 特性可能不是所有浏览器都支持，为了能够在所有浏览器上运行，我们使用 Babel 来转译</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> code <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">transformFromAst</span><span class="token punctuation">(</span>ast<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    presets<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;@babel/preset-env&quot;</span><span class="token punctuation">]</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 返回该模块的所有信息.</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    id<span class="token punctuation">,</span>
+    filename<span class="token punctuation">,</span>
+    dependencies<span class="token punctuation">,</span>
+    code
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/**
+ * @description: 创建依赖结构图
+ * @param {*} entry 入口文件的相对路径
+ * @return {*}
+ */</span>
+<span class="token keyword">function</span> <span class="token function">createGraph</span><span class="token punctuation">(</span><span class="token parameter">entry</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 先解析入口文件的依赖信息.</span>
+  <span class="token keyword">const</span> mainAsset <span class="token operator">=</span> <span class="token function">createAsset</span><span class="token punctuation">(</span>entry<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 用一个队列来保存所有的依赖信息</span>
+  <span class="token keyword">const</span> queue <span class="token operator">=</span> <span class="token punctuation">[</span>mainAsset<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 遍历队列</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> asset <span class="token keyword">of</span> queue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 每个 asset 都有一组它依赖模块的相对路径</span>
+    <span class="token comment">// 我们用 createAsset 来迭代解析</span>
+    asset<span class="token punctuation">.</span>mapping <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 当前模块的目录.</span>
+    <span class="token keyword">const</span> dirname <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>asset<span class="token punctuation">.</span>filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 迭代访问依赖的相对路径.</span>
+    asset<span class="token punctuation">.</span>dependencies<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">relativePath</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 生成绝对路径</span>
+      <span class="token keyword">const</span> absolutePath <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>dirname<span class="token punctuation">,</span> relativePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      <span class="token comment">// 提取依赖信息.</span>
+      <span class="token keyword">const</span> child <span class="token operator">=</span> <span class="token function">createAsset</span><span class="token punctuation">(</span>absolutePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      <span class="token comment">// asset 保存 id 和 相对路径 的映射关系</span>
+      asset<span class="token punctuation">.</span>mapping<span class="token punctuation">[</span>relativePath<span class="token punctuation">]</span> <span class="token operator">=</span> child<span class="token punctuation">.</span>id<span class="token punctuation">;</span>
+
+      <span class="token comment">// 加入队列</span>
+      queue<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>child<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// queue 保存的就是当前应用的所有模块的依赖结构图</span>
+  <span class="token keyword">return</span> queue<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/**
+ * @description: 文件打包
+ * @param {*} graph 依赖结构图
+ * @return {*}
+ */</span>
+<span class="token keyword">function</span> <span class="token function">bundle</span><span class="token punctuation">(</span><span class="token parameter">graph</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> modules <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+
+  graph<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">mod</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 每个模块用 id 来标识都是数组类型</span>
+    <span class="token comment">// 每个模块有两个值</span>
+    <span class="token comment">// 第一个是用函数包装每个模块的代码，是为了限定每个模块的作用域</span>
+    <span class="token comment">// 第二个是模块的 相对路径和id 的依赖关系</span>
+    modules <span class="token operator">+=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>mod<span class="token punctuation">.</span>id<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">: [
+      function (require, module, exports) {
+        </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>mod<span class="token punctuation">.</span>code<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">
+      },
+      </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>mod<span class="token punctuation">.</span>mapping<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">,
+    ],</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 最后实现自动执行函数的主题</span>
+  <span class="token comment">// 1. 创建 require 函数接收模块 id</span>
+  <span class="token comment">// 2. 通过 id 来获取模块代码和映射关系</span>
+  <span class="token comment">// 3. 根据不同的模块导入方式生成代码</span>
+  <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+    (function(modules) {
+      function require(id) {
+        const [fn, mapping] = modules[id];
+
+        function localRequire(name) {
+          return require(mapping[name]);
+        }
+
+        const module = { exports : {} };
+
+        fn(localRequire, module, module.exports);
+
+        return module.exports;
+      }
+
+      require(0);
+    })({</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>modules<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">})
+  </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 返回的结果就是打包完成的内容了</span>
+  <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> graph <span class="token operator">=</span> <span class="token function">createGraph</span><span class="token punctuation">(</span><span class="token string">&quot;./example/entry.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token function">bundle</span><span class="token punctuation">(</span>graph<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+fs<span class="token punctuation">.</span><span class="token function">writeFile</span><span class="token punctuation">(</span><span class="token string">&quot;dist.js&quot;</span><span class="token punctuation">,</span> result<span class="token punctuation">,</span> <span class="token parameter">e</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token keyword">throw</span> e<span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;打包完成&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br><span class="line-number">118</span><br><span class="line-number">119</span><br><span class="line-number">120</span><br><span class="line-number">121</span><br><span class="line-number">122</span><br><span class="line-number">123</span><br><span class="line-number">124</span><br><span class="line-number">125</span><br><span class="line-number">126</span><br><span class="line-number">127</span><br><span class="line-number">128</span><br><span class="line-number">129</span><br><span class="line-number">130</span><br><span class="line-number">131</span><br><span class="line-number">132</span><br><span class="line-number">133</span><br><span class="line-number">134</span><br><span class="line-number">135</span><br><span class="line-number">136</span><br><span class="line-number">137</span><br><span class="line-number">138</span><br><span class="line-number">139</span><br><span class="line-number">140</span><br><span class="line-number">141</span><br><span class="line-number">142</span><br><span class="line-number">143</span><br><span class="line-number">144</span><br><span class="line-number">145</span><br><span class="line-number">146</span><br><span class="line-number">147</span><br><span class="line-number">148</span><br><span class="line-number">149</span><br><span class="line-number">150</span><br><span class="line-number">151</span><br><span class="line-number">152</span><br><span class="line-number">153</span><br><span class="line-number">154</span><br><span class="line-number">155</span><br><span class="line-number">156</span><br><span class="line-number">157</span><br><span class="line-number">158</span><br><span class="line-number">159</span><br></div></div><h3 id="package-json"><a href="#package-json" class="header-anchor">#</a> package.json</h3> <div class="language-json line-numbers-mode"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;webpack&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;version&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1.0.0&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;description&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;main&quot;</span><span class="token operator">:</span> <span class="token string">&quot;index.js&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;test&quot;</span><span class="token operator">:</span> <span class="token string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;author&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;license&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ISC&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;dependencies&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;@babel/core&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^7.12.3&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;@babel/generator&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^7.12.1&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;@babel/parser&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^7.12.3&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;@babel/preset-env&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^7.12.1&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;@babel/traverse&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^7.12.1&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><h2 id="使用说明"><a href="#使用说明" class="header-anchor">#</a> 使用说明</h2> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># 安装依赖</span>
+<span class="token function">yarn</span> <span class="token function">install</span>
+
+<span class="token comment"># 执行</span>
+node src/minipack.js
+
+<span class="token comment"># 会在最外层目录下生成 dist.js，执行该文件</span>
+node dist.js
+
+<span class="token comment"># 输出 hello world!</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/Grimoire/engineering/write_module.html" class="prev">
+        原生 JavaScript 模块化
+      </a></span> <span class="next"><a href="/Grimoire/engineering/mvx.html">
+        MVX 模型
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/Grimoire/assets/js/app.fcd81a0f.js" defer></script><script src="/Grimoire/assets/js/2.0cda6e6c.js" defer></script><script src="/Grimoire/assets/js/44.8728d33f.js" defer></script><script src="/Grimoire/assets/js/15.b8087621.js" defer></script>
+  </body>
+</html>
